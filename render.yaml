@@ -1,0 +1,17 @@
+# One-tap trial deployment on Render's free plan.
+# Free instances sleep when idle and lose their files on restart, so this
+# is for trying the dashboard with demo data only, not for real client data.
+services:
+  - type: web
+    name: leadpilot-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: SEED_DEMO
+        value: "1"
+      - key: APP_PASSWORD
+        generateValue: true

@@ -263,3 +263,18 @@ def test_ai_analysis_request_and_fallback(monkeypatch):
     with db.connect() as con:
         lead = get(con, lid)
         assert lead["ai_probability"] == 100 and lead["ai_next_action"] == "Send the payment plan."
+
+
+def test_demo_seed_runs_once_and_ranks_leads():
+    from app import demo
+    assert demo.seed() > 0
+    assert demo.seed() == 0  # never doubles up
+    with db.connect() as con:
+        top = db.one(con, "SELECT name FROM leads WHERE stage NOT IN ('won','lost') ORDER BY score DESC LIMIT 1")
+        assert top["name"] in {"Fatima Al Mansoori", "Layla Haddad"}
+
+
+def test_seed_demo_env_on_startup(monkeypatch):
+    monkeypatch.setenv("SEED_DEMO", "1")
+    with TestClient(app) as client:  # runs the startup hook
+        assert len(client.get("/api/leads?stage=").json()) > 5

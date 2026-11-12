@@ -15,7 +15,7 @@ from fastapi import FastAPI, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, PlainTextResponse, Response
 from pydantic import BaseModel
 
-from . import ai, config, db, engine, importer, scoring
+from . import ai, config, db, demo, engine, importer, scoring
 
 config.load_env_file()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -27,6 +27,8 @@ STATIC = Path(__file__).parent / "static"
 async def lifespan(app):
     db.init()
     engine.seed_default_sequence()
+    if config.get("SEED_DEMO"):  # for trial deployments with a throwaway database
+        demo.seed()
     stop = threading.Event()
     if not config.get("DISABLE_SCHEDULER"):
         threading.Thread(target=engine.run_scheduler, args=(stop,), daemon=True).start()

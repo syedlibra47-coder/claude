@@ -91,6 +91,25 @@ Fill in the `SMTP_*` values (Gmail: `smtp.gmail.com`, port 587, an app
 password). Inbound email is not read automatically: log a reply from the
 lead's page ("Lead replied by email"), which also stops their sequence.
 
+## Trial deployment on Render (free, demo data only)
+
+`render.yaml` deploys the app to Render's free plan in a few taps, including
+from an iPad:
+
+1. Sign in at render.com with your GitHub account.
+2. **New** -> **Blueprint**, pick this repository and the branch to deploy.
+3. Wait for the build, then open the service's **Environment** tab and copy
+   the generated `APP_PASSWORD`.
+4. Open the service URL. Your browser asks for a login: any username, and
+   that password.
+
+The free plan sleeps after ~15 minutes without traffic (the first request
+then takes about a minute) and wipes its files on every restart. The demo
+leads are re-created each time, and anything you add is lost. Because the
+app is asleep, scheduled follow-ups don't fire; use **Run due follow-ups
+now** on the Sequences page. Don't enter real client data here, and keep
+Send mode on Dry run.
+
 ## Security
 
 The database holds your clients' contact details. The app listens only on
