@@ -198,7 +198,7 @@ async function viewLeads(stats) {
       </select>
       <span class="grow"></span>
       <button class="btn" id="enrollAll" title="Start a sequence for every open lead that isn't in one">Start follow-ups…</button>
-      <button class="btn" id="analyzeAll" ${ai ? "" : "disabled title='Add ANTHROPIC_API_KEY to enable'"}>AI-analyse all</button>
+      <button class="btn" id="analyzeAll" ${ai ? "" : "disabled title='Add ANTHROPIC_API_KEY in your host's Environment settings (or .env) to enable'"}>AI-analyse all</button>
       <label class="btn">Import CSV<input id="file" type="file" accept=".csv,.tsv,.txt" hidden></label>
       <button class="btn primary" id="add">Add lead</button>
     </div>
@@ -278,7 +278,7 @@ async function openLead(id) {
     ${l.ai_summary ? `<div class="aibox"><p>${esc(l.ai_summary)}</p><p><b>Next step:</b> ${esc(l.ai_next_action)}</p>
       ${l.ai_signals.length ? `<p class="dim">Signals: ${esc(l.ai_signals.join("; "))}</p>` : ""}
       ${l.ai_objections.length ? `<p class="dim">Objections: ${esc(l.ai_objections.join("; "))}</p>` : ""}
-      <p class="dim">Analysed ${ago(l.ai_scored_at)}</p></div>` : `<div class="dim">${ai ? "Not analysed yet." : "Add ANTHROPIC_API_KEY to .env to get an AI summary, conversion estimate and next step for each lead."}</div>`}
+      <p class="dim">Analysed ${ago(l.ai_scored_at)}</p></div>` : `<div class="dim">${ai ? "Not analysed yet." : "Add ANTHROPIC_API_KEY (in .env, or in your host's Environment settings) to get an AI summary, conversion estimate and next step for each lead."}</div>`}
     <div class="row" style="margin-top:8px"><button class="btn small" id="analyze" ${ai ? "" : "disabled"}>${l.ai_summary ? "Re-analyse" : "Analyse with AI"}</button></div>
 
     <h3>Message</h3>

@@ -266,7 +266,7 @@ def draft_message(lead_id: int, data: DraftIn):
 @app.post("/api/leads/{lead_id}/analyze")
 def analyze_lead(lead_id: int):
     if not config.ai_configured():
-        raise HTTPException(400, "Add ANTHROPIC_API_KEY to .env to enable AI analysis")
+        raise HTTPException(400, "Set ANTHROPIC_API_KEY (.env, or your host's environment settings) to enable AI analysis")
     if not engine.analyze(lead_id):
         raise HTTPException(502, "AI analysis did not complete; check the server log")
     return {"ok": True}
@@ -275,7 +275,7 @@ def analyze_lead(lead_id: int):
 @app.post("/api/analyze-all")
 def analyze_all():
     if not config.ai_configured():
-        raise HTTPException(400, "Add ANTHROPIC_API_KEY to .env to enable AI analysis")
+        raise HTTPException(400, "Set ANTHROPIC_API_KEY (.env, or your host's environment settings) to enable AI analysis")
     with db.connect() as con:
         ids = [r["id"] for r in db.rows(con, "SELECT id FROM leads WHERE stage NOT IN ('won','lost') AND opted_out=0")]
     engine.analyze_in_background(ids)
