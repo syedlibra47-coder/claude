@@ -161,6 +161,19 @@ async function render() {
 }
 document.querySelectorAll("nav button").forEach(b => b.onclick = () => { state.view = b.dataset.view; render(); });
 
+/* Open the user's own WhatsApp / mail app with the message prefilled. */
+function openInApp(target, channel, body, subject) {
+  if (target.opted_out) { toast("This lead opted out of messages"); return false; }
+  if (channel === "whatsapp") {
+    if (!target.phone) { toast("This lead has no phone number"); return false; }
+    window.open(`https://wa.me/${target.phone}` + (body.trim() ? `?text=${encodeURIComponent(body)}` : ""), "_blank");
+  } else {
+    if (!target.email) { toast("This lead has no email address"); return false; }
+    window.location.href = `mailto:${encodeURIComponent(target.email)}?subject=${encodeURIComponent(subject || "")}&body=${encodeURIComponent(body)}`;
+  }
+  return true;
+}
+
 /* ---------------- Leads ---------------- */
 async function viewLeads(stats) {
   const [leads, seqs] = await Promise.all([
@@ -275,7 +288,7 @@ async function openLead(id) {
       <button class="btn small" id="draft">${ai ? "Draft with AI" : "Insert template"}</button>
     </div>
     <textarea id="msg" placeholder="Write a message…"></textarea>
-    <div class="row" style="margin-top:8px"><button class="btn primary" id="send">Send</button>
+    <div class="row" style="margin-top:8px"><button class="btn primary" id="openApp">Open in WhatsApp</button><button class="btn" id="send">${state.settings.connections.whatsapp ? "Send automatically" : "Send (simulated)"}</button>
       <span class="dim">${state.settings.send_mode === "dry_run" ? "Dry run: logged, not actually sent." : ""}</span></div>
 
     <h3>Follow-up sequence</h3>
@@ -304,7 +317,15 @@ async function openLead(id) {
   `);
   const again = () => openLead(id);
   $("#x").onclick = closeDrawer;
-  $("#channel").onchange = e => $("#subject").hidden = e.target.value !== "email";
+  $("#channel").onchange = e => {
+    $("#subject").hidden = e.target.value !== "email";
+    $("#openApp").textContent = e.target.value === "email" ? "Open in email app" : "Open in WhatsApp";
+  };
+  $("#openApp").onclick = async () => {
+    const ch = $("#channel").value, body = $("#msg").value, subject = $("#subject").value;
+    if (!openInApp(l, ch, body, subject)) return;
+    if (body.trim()) { await api(`/api/leads/${id}/manual-send`, {json:{channel: ch, body, subject}}); toast("Opened. Logged in this lead's history."); again(); }
+  };
   $("#analyze").onclick = async e => { e.target.disabled = true; e.target.textContent = "Analysing…"; try { await api(`/api/leads/${id}/analyze`, {method:"POST"}); } finally { again(); } };
   $("#draft").onclick = async e => {
     e.target.disabled = true; const label = e.target.textContent; e.target.textContent = "Writing…";
@@ -403,7 +424,7 @@ async function viewOutbox() {
         ${o.ai_written ? '<span class="chip hot">AI-written</span>' : ""}<span class="dim">${ago(o.created_at)}</span></div>
       ${o.channel === "email" ? `<input data-subject value="${esc(o.subject)}" style="width:100%;margin-bottom:8px">` : ""}
       <textarea data-body>${esc(o.body)}</textarea>
-      <div class="row" style="margin-top:8px"><button class="btn small primary" data-approve>Approve and send</button><button class="btn small" data-discard>Discard</button></div>
+      <div class="row" style="margin-top:8px"><button class="btn small primary" data-open>${o.channel === "whatsapp" ? "Open in WhatsApp" : "Open in email app"}</button><button class="btn small" data-approve>${state.settings.connections[o.channel === "whatsapp" ? "whatsapp" : "email"] ? "Send automatically" : "Send (simulated)"}</button><button class="btn small" data-discard>Discard</button></div>
     </div>`).join("") : ""}
     <h3 class="dim">History</h3>
     <div class="card tablewrap">${rest.length ? `<table><thead><tr><th>When</th><th>Lead</th><th>Channel</th><th>Status</th><th>Message</th></tr></thead><tbody>
@@ -415,6 +436,11 @@ async function viewOutbox() {
     card.querySelector("[data-approve]").onclick = async () => {
       const r = await api(`/api/outbox/${id}/approve`, {json:{body: card.querySelector("[data-body]").value, subject: card.querySelector("[data-subject]")?.value}});
       toast(r.status === "sent" ? "Sent" : r.status === "simulated" ? (r.error || "Dry run: logged, not sent") : "Not sent: " + r.error); render();
+    };
+    card.querySelector("[data-open]").onclick = async () => {
+      const o = drafts.find(d => d.id == id), body = card.querySelector("[data-body]").value, subject = card.querySelector("[data-subject]")?.value;
+      if (!openInApp(o, o.channel, body, subject)) return;
+      await api(`/api/outbox/${id}/manual`, {json:{body, subject}}); toast("Opened and marked as sent"); render();
     };
     card.querySelector("[data-discard]").onclick = async () => { await api(`/api/outbox/${id}/discard`, {method:"POST"}); render(); };
   });

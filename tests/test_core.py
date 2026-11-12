@@ -278,3 +278,27 @@ def test_seed_demo_env_on_startup(monkeypatch):
     monkeypatch.setenv("SEED_DEMO", "1")
     with TestClient(app) as client:  # runs the startup hook
         assert len(client.get("/api/leads?stage=").json()) > 5
+
+
+def test_manual_send_logs_contact_and_marks_draft_sent():
+    client = TestClient(app)
+    with db.connect() as con:
+        lid = make_lead(con)
+        set_mode(con, "approve")
+        engine.enroll(con, lid, db.one(con, "SELECT id FROM sequences")["id"])
+    engine.tick()
+    draft = client.get("/api/outbox?status=draft").json()[0]
+    assert draft["phone"] == "971501234567"
+    # Sent from the user's own WhatsApp: the draft is closed and the lead counts as contacted.
+    assert client.post(f"/api/outbox/{draft['id']}/manual", json={"body": "Edited by hand"}).status_code == 200
+    with db.connect() as con:
+        assert db.one(con, "SELECT status FROM outbox WHERE id=?", (draft["id"],))["status"] == "sent"
+        ev = db.one(con, "SELECT * FROM events WHERE kind='wa_out'")
+        assert ev["status"] == "manual" and ev["body"] == "Edited by hand"
+        assert get(con, lid)["stage"] == "contacted"
+    assert client.post(f"/api/outbox/{draft['id']}/manual", json={}).status_code == 404  # no double-logging
+    # One-off message from the lead page
+    assert client.post(f"/api/leads/{lid}/manual-send", json={"channel": "whatsapp", "body": "Hi again"}).status_code == 200
+    # Opted-out leads can't be messaged this way either
+    client.patch(f"/api/leads/{lid}", json={"opted_out": True})
+    assert client.post(f"/api/leads/{lid}/manual-send", json={"channel": "whatsapp", "body": "x"}).status_code == 400

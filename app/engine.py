@@ -88,6 +88,25 @@ def deliver(con, outbox_id: int) -> dict:
     return {"status": status, "error": error}
 
 
+def log_manual(con, lead_id: int, channel: str, body: str, subject: str = "", outbox_id=None) -> int:
+    """Record a message the agent sent themselves (via the WhatsApp/email app on
+    their device). We can't see whether they pressed send, so it is logged as
+    'manual' and counted as contact."""
+    lead = db.one(con, "SELECT * FROM leads WHERE id=?", (lead_id,))
+    if lead["opted_out"]:
+        raise ValueError("This lead opted out of messages")
+    ts = db.iso(db.now())
+    if outbox_id is None:
+        outbox_id = queue_message(con, lead_id, channel, body, subject)
+    con.execute("UPDATE outbox SET body=?, subject=?, status='sent', sent_at=? WHERE id=?",
+                (body, subject, ts, outbox_id))
+    db.add_event(con, lead_id, "wa_out" if channel == "whatsapp" else "email_out", body, "manual", ts)
+    stage = "contacted" if lead["stage"] == "new" else lead["stage"]
+    con.execute("UPDATE leads SET last_outbound_at=?, stage=?, updated_at=? WHERE id=?", (ts, stage, ts, lead_id))
+    scoring.rescore(con, [lead_id])
+    return outbox_id
+
+
 def enroll(con, lead_id: int, sequence_id: int):
     if db.one(con, "SELECT id FROM enrollments WHERE lead_id=? AND sequence_id=? AND status='active'",
               (lead_id, sequence_id)):

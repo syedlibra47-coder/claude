@@ -62,6 +62,20 @@ this automatically). Scheduled follow-ups wait out quiet hours.
 
 Start with *Approve first* when you go live.
 
+## Sending from your own WhatsApp (no setup)
+
+The **Open in WhatsApp** button on a lead, and on each Outbox draft, opens
+your own WhatsApp (app or web) on that lead's chat with the message already
+typed. You press send. It works on a phone or iPad, uses your normal number
+and needs no Meta account, no templates and no 24-hour rule. The message is
+logged in the lead's history as "manual" so scoring and sequences know the
+lead was contacted. The app can't see whether you actually pressed send, so
+it records the attempt. **Open in email app** does the same with `mailto:`.
+
+Use **Approve first** mode with this: follow-ups wait in the Outbox, and you
+tap *Open in WhatsApp* on each one. The trade-off is that you do the tapping;
+the automatic sending below does not need you.
+
 ## Connecting WhatsApp
 
 This uses Meta's official **WhatsApp Business Cloud API**. Unofficial

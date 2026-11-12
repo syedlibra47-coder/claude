@@ -236,6 +236,20 @@ def send_message(lead_id: int, data: SendIn):
         return engine.deliver(con, oid)
 
 
+@app.post("/api/leads/{lead_id}/manual-send")
+def manual_send(lead_id: int, data: SendIn):
+    """Log a message the user is sending from their own WhatsApp/email app."""
+    if data.channel not in ("whatsapp", "email") or not data.body.strip():
+        raise HTTPException(400, "Choose a channel and write a message")
+    with db.connect() as con:
+        _lead_or_404(con, lead_id)
+        try:
+            engine.log_manual(con, lead_id, data.channel, data.body.strip(), data.subject)
+        except ValueError as e:
+            raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
 @app.post("/api/leads/{lead_id}/draft")
 def draft_message(lead_id: int, data: DraftIn):
     with db.connect() as con:
@@ -342,7 +356,7 @@ def run_scheduler_now():
 
 @app.get("/api/outbox")
 def list_outbox(status: str = ""):
-    sql = ("SELECT o.*, l.name AS lead_name, l.phone, l.email, l.score FROM outbox o JOIN leads l ON l.id = o.lead_id"
+    sql = ("SELECT o.*, l.name AS lead_name, l.phone, l.email, l.score, l.opted_out FROM outbox o JOIN leads l ON l.id = o.lead_id"
            + (" WHERE o.status = ?" if status else "") + " ORDER BY o.id DESC LIMIT 200")
     with db.connect() as con:
         return db.rows(con, sql, (status,) if status else ())
@@ -359,6 +373,21 @@ def approve(oid: int, data: ApproveIn):
         if data.subject is not None:
             con.execute("UPDATE outbox SET subject=? WHERE id=?", (data.subject, oid))
         return engine.deliver(con, oid)
+
+
+@app.post("/api/outbox/{oid}/manual")
+def approve_manual(oid: int, data: ApproveIn):
+    """The user sent this draft themselves from their own app: mark it sent."""
+    with db.connect() as con:
+        msg = db.one(con, "SELECT * FROM outbox WHERE id=?", (oid,))
+        if not msg or msg["status"] != "draft":
+            raise HTTPException(404, "No draft with this id")
+        try:
+            engine.log_manual(con, msg["lead_id"], msg["channel"], (data.body or msg["body"]).strip(),
+                              data.subject if data.subject is not None else msg["subject"], outbox_id=oid)
+        except ValueError as e:
+            raise HTTPException(400, str(e))
+    return {"ok": True}
 
 
 @app.post("/api/outbox/{oid}/discard")
