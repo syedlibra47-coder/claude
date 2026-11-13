@@ -404,6 +404,7 @@ def discard(oid: int):
 def get_settings():
     with db.connect() as con:
         s = db.get_settings(con)
+    s["version"] = config.version()
     s["connections"] = {
         "whatsapp": config.whatsapp_configured(),
         "email": config.email_configured(),

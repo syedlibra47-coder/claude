@@ -332,3 +332,10 @@ def test_demo_never_seeds_a_real_database(monkeypatch):
     with TestClient(app):
         pass
     assert calls == []
+
+
+def test_settings_report_running_version(monkeypatch):
+    client = TestClient(app)
+    assert client.get("/api/settings").json()["version"] == "dev"
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "2448266686ef6fc9fad46f809c9ded0a6efeddc79")
+    assert client.get("/api/settings").json()["version"] == "2448266"

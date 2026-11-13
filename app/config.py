@@ -52,3 +52,8 @@ def tz_offset_hours() -> float:
 def database_url() -> str:
     """Postgres connection string (e.g. Supabase). Empty means use local SQLite."""
     return get("DATABASE_URL")
+
+
+def version() -> str:
+    """Short git commit of the running code (set by Render), or 'dev' locally."""
+    return get("RENDER_GIT_COMMIT")[:7] or "dev"

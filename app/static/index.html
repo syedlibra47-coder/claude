@@ -471,7 +471,8 @@ async function viewSettings() {
       <div class="conn"><span><b>WhatsApp Business</b><div class="dim">WHATSAPP_TOKEN, WHATSAPP_PHONE_ID</div></span>${pill(c.whatsapp)}</div>
       <div class="conn"><span><b>Email (SMTP)</b><div class="dim">SMTP_HOST, SMTP_FROM</div></span>${pill(c.email)}</div>
       <div class="conn"><span><b>Claude AI</b><div class="dim">ANTHROPIC_API_KEY · model ${esc(c.ai_model)}</div></span>${pill(c.ai)}</div>
-    </div>`;
+    </div>
+    <p class="dim">Running version <code>${esc(s.version)}</code>. This matches the latest commit on GitHub once a deploy has finished.</p>`;
   $("#s_mode").value = s.send_mode;
   $("#saveSettings").onclick = async () => {
     await api("/api/settings", {method:"PUT", json:{send_mode: $("#s_mode").value, agent_name: $("#s_agent").value, company_name: $("#s_company").value, quiet_start: $("#s_qs").value, quiet_end: $("#s_qe").value}});
