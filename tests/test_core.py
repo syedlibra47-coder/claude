@@ -339,3 +339,16 @@ def test_settings_report_running_version(monkeypatch):
     assert client.get("/api/settings").json()["version"] == "dev"
     monkeypatch.setenv("RENDER_GIT_COMMIT", "2448266686ef6fc9fad46f809c9ded0a6efeddc79")
     assert client.get("/api/settings").json()["version"] == "2448266"
+
+
+def test_healthz_is_open_but_reports_database_state(monkeypatch):
+    client = TestClient(app)
+    monkeypatch.setenv("APP_PASSWORD", "pw")
+    r = client.get("/healthz")  # no login: hosts call this without credentials
+    assert r.status_code == 200 and r.json() == {"ok": True}
+    assert client.get("/api/leads").status_code == 401  # everything else stays locked
+
+    def boom():
+        raise RuntimeError("down")
+    monkeypatch.setattr(db, "connect", boom)
+    assert client.get("/healthz").status_code == 503
