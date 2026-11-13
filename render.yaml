@@ -1,0 +1,21 @@
+# One-tap deployment on Render's free plan.
+# Free instances sleep when idle and lose their files on restart. Without
+# DATABASE_URL the app uses a temporary SQLite file seeded with demo data.
+# With DATABASE_URL set (e.g. a free Supabase database) your leads persist,
+# and demo data is never created.
+services:
+  - type: web
+    name: leadpilot-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: SEED_DEMO
+        value: "1"
+      - key: APP_PASSWORD
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false

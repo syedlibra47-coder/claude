@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeadPilot</title>
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#fff; --ink:#1c1b18; --muted:#6d6a62; --line:#e4e1d8; --accent:#0f6b55;
+  --accent-ink:#fff; --hot:#c2410c; --warm:#b7791f; --cool:#5b6472; --good:#0f6b55; --bad:#b42318;
+  --chip:#efede6; --shadow:0 8px 30px rgba(20,18,12,.12);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#141412; --panel:#1d1c19; --ink:#ecebe6; --muted:#9a968c; --line:#2f2d28; --accent:#3fb596;
+  --accent-ink:#0b1f19; --hot:#fb923c; --warm:#e0b252; --cool:#8f98a6; --good:#3fb596; --bad:#f97066;
+  --chip:#2a2824; --shadow:0 8px 30px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:200px 1fr;min-height:100vh}
+nav{border-right:1px solid var(--line);padding:20px 12px;position:sticky;top:0;height:100vh}
+.brand{font-weight:700;font-size:17px;letter-spacing:-.01em;padding:0 10px 18px}
+.brand span{color:var(--accent)}
+nav button{display:flex;justify-content:space-between;width:100%;text-align:left;background:none;border:0;
+  padding:9px 10px;border-radius:8px;cursor:pointer;color:var(--muted)}
+nav button:hover{background:var(--chip)}
+nav button.on{background:var(--chip);color:var(--ink);font-weight:600}
+.count{background:var(--accent);color:var(--accent-ink);border-radius:99px;padding:0 7px;font-size:12px;font-weight:600}
+.mode{margin:18px 10px 0;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.mode b{display:block;color:var(--ink);font-size:13px}
+main{padding:22px 26px;min-width:0}
+h1{font-size:20px;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 16px}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.stat b{display:block;font-size:21px;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.bar .grow{flex:1}
+input,select,textarea{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+textarea{width:100%;resize:vertical;min-height:70px}
+.btn{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.danger{color:var(--bad)}
+.btn.small{padding:4px 9px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font-size:12px;color:var(--muted);font-weight:600;text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--chip)}
+.score{display:inline-block;min-width:38px;text-align:center;font-weight:700;border-radius:8px;padding:3px 0;
+  font-variant-numeric:tabular-nums;color:#fff}
+.s-hot{background:var(--hot)} .s-warm{background:var(--warm)} .s-cool{background:var(--cool)}
+.chip{display:inline-block;background:var(--chip);border-radius:99px;padding:1px 9px;font-size:12px;white-space:nowrap}
+.chip.good{color:var(--good)} .chip.bad{color:var(--bad)} .chip.hot{color:var(--hot)}
+.dim{color:var(--muted);font-size:12.5px}
+.clip{max-width:280px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.empty{padding:38px;text-align:center;color:var(--muted)}
+.drawer{position:fixed;top:0;right:0;width:min(560px,100vw);height:100vh;background:var(--panel);
+  border-left:1px solid var(--line);box-shadow:var(--shadow);overflow-y:auto;padding:20px 22px 40px;z-index:5}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:4}
+.drawer h2{margin:0;font-size:19px}
+.drawer h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:22px 0 8px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid2 label,.field{display:block;font-size:12px;color:var(--muted)}
+.grid2 input,.grid2 select,.field input,.field select{width:100%;margin-top:3px;color:var(--ink)}
+.reasons{margin:0;padding:0;list-style:none}
+.reasons li{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.aibox{background:var(--chip);border-radius:10px;padding:12px 14px}
+.aibox p{margin:0 0 8px} .aibox p:last-child{margin:0}
+.ev{border-left:3px solid var(--line);padding:2px 0 2px 11px;margin-bottom:11px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ev.in{border-color:var(--accent)} .ev.out{border-color:var(--warm)} .ev.failed{border-color:var(--bad)}
+.ev .meta{font-size:12px;color:var(--muted)}
+.step{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.step .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.step input[type=number]{width:74px}
+.seq{padding:16px;margin-bottom:14px}
+.seq > .row{margin-bottom:12px}
+.check{display:flex;gap:6px;align-items:center;font-size:13px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+  padding:9px 16px;border-radius:99px;z-index:9;box-shadow:var(--shadow);max-width:90vw}
+.notice{border:1px solid var(--line);border-left:3px solid var(--warm);border-radius:8px;padding:10px 13px;margin-bottom:14px;background:var(--panel)}
+.conn{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)}
+.conn:last-child{border:0}
+code{background:var(--chip);padding:1px 5px;border-radius:5px;font-size:12.5px}
+@media (max-width:800px){
+  .app{grid-template-columns:1fr} nav{position:static;height:auto;display:flex;gap:4px;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--line);padding:10px}
+  .brand{width:100%;padding:0 6px 6px} nav button{width:auto} .mode{display:none}
+  main{padding:16px} .stats{grid-template-columns:repeat(2,1fr)} .hide-sm{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav>
+    <div class="brand">Lead<span>Pilot</span></div>
+    <button data-view="leads">Leads</button>
+    <button data-view="sequences">Follow-up sequences</button>
+    <button data-view="outbox">Outbox <span class="count" id="draftCount" hidden></span></button>
+    <button data-view="settings">Settings</button>
+    <div class="mode" id="modeBox"></div>
+  </nav>
+  <main id="main"></main>
+</div>
+<div id="overlay"></div>
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const STAGES = {new:"New", contacted:"Contacted", engaged:"Engaged", site_visit:"Site visit", negotiation:"Negotiation", won:"Won", lost:"Lost"};
+const TIMELINE = {this_week:"This week", this_month:"This month", this_quarter:"This quarter", later:"Later", unlikely:"Unlikely", closed:"Closed"};
+const KIND = {wa_in:"WhatsApp from lead", wa_out:"WhatsApp sent", email_in:"Email from lead", email_out:"Email sent", note:"Note", call:"Call", stage:"Stage"};
+const MODES = {dry_run:["Dry run","Nothing is really sent"], approve:["Approve first","You review each message"], auto:["Automatic","Messages send on schedule"]};
+const state = {view:"leads", q:"", stage:"open", settings:null, sequences:[], openLead:null};
+
+async function api(path, opts = {}) {
+  if (opts.json !== undefined) { opts.body = JSON.stringify(opts.json); opts.headers = {"Content-Type":"application/json"}; opts.method ??= "POST"; }
+  const r = await fetch(path, opts);
+  if (!r.ok) {
+    let msg = r.statusText;
+    try { msg = (await r.json()).detail || msg; } catch {}
+    toast(typeof msg === "string" ? msg : "Request failed");
+    throw new Error(msg);
+  }
+  return r.json();
+}
+function toast(msg) {
+  document.querySelectorAll(".toast").forEach(t => t.remove());
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  document.body.append(t); setTimeout(() => t.remove(), 4200);
+}
+function ago(ts) {
+  if (!ts) return "";
+  const s = (Date.now() - new Date(ts)) / 1000, f = s < 0, a = Math.abs(s);
+  const txt = a < 90 ? "a minute" : a < 3600 ? Math.round(a/60) + " min" : a < 86400 ? Math.round(a/3600) + " h" : Math.round(a/86400) + " d";
+  return f ? "in " + txt : txt + " ago";
+}
+const scoreClass = n => n >= 60 ? "s-hot" : n >= 30 ? "s-warm" : "s-cool";
+const lastTouch = l => [l.last_inbound_at, l.last_outbound_at].filter(Boolean).sort().pop();
+
+async function refreshChrome() {
+  state.settings = await api("/api/settings");
+  const stats = await api("/api/stats");
+  const c = $("#draftCount"); c.hidden = !stats.drafts; c.textContent = stats.drafts;
+  const [name, hint] = MODES[state.settings.send_mode];
+  $("#modeBox").innerHTML = `Send mode<b>${name}</b>${hint}`;
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.view === state.view));
+  return stats;
+}
+async function render() {
+  const stats = await refreshChrome();
+  await ({leads: viewLeads, sequences: viewSequences, outbox: viewOutbox, settings: viewSettings})[state.view](stats);
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => { state.view = b.dataset.view; render(); });
+
+/* Open the user's own WhatsApp / mail app with the message prefilled. */
+function openInApp(target, channel, body, subject) {
+  if (target.opted_out) { toast("This lead opted out of messages"); return false; }
+  if (channel === "whatsapp") {
+    if (!target.phone) { toast("This lead has no phone number"); return false; }
+    window.open(`https://wa.me/${target.phone}` + (body.trim() ? `?text=${encodeURIComponent(body)}` : ""), "_blank");
+  } else {
+    if (!target.email) { toast("This lead has no email address"); return false; }
+    window.location.href = `mailto:${encodeURIComponent(target.email)}?subject=${encodeURIComponent(subject || "")}&body=${encodeURIComponent(body)}`;
+  }
+  return true;
+}
+
+/* ---------------- Leads ---------------- */
+async function viewLeads(stats) {
+  const [leads, seqs] = await Promise.all([
+    api(`/api/leads?q=${encodeURIComponent(state.q)}&stage=${state.stage}`), api("/api/sequences")]);
+  state.sequences = seqs;
+  const ai = state.settings.connections.ai;
+  $("#main").innerHTML = `
+    <h1>Leads</h1>
+    <p class="sub">Ranked by how likely each lead is to buy. Open a lead to see why.</p>
+    <div class="stats">
+      <div class="stat"><b>${stats.total - (stats.by_stage.won||0) - (stats.by_stage.lost||0)}</b><span>Open leads</span></div>
+      <div class="stat"><b>${stats.hot}</b><span>Hot (score 60+)</span></div>
+      <div class="stat"><b>${stats.in_sequence}</b><span>In a follow-up sequence</span></div>
+      <div class="stat"><b>${stats.replies_7d} / ${stats.sent_7d}</b><span>Replies / messages, 7 days</span></div>
+      <div class="stat"><b>${stats.by_stage.won||0}</b><span>Deals won</span></div>
+    </div>
+    <div class="bar">
+      <input id="q" type="search" placeholder="Search name, phone, project…" value="${esc(state.q)}" style="width:240px">
+      <select id="stage">
+        <option value="open">Open leads</option><option value="">All leads</option>
+        ${Object.entries(STAGES).map(([k,v]) => `<option value="${k}">${v}</option>`).join("")}
+      </select>
+      <span class="grow"></span>
+      <button class="btn" id="enrollAll" title="Start a sequence for every open lead that isn't in one">Start follow-ups…</button>
+      <button class="btn" id="analyzeAll" ${ai ? "" : "disabled title='Add ANTHROPIC_API_KEY in your host's Environment settings (or .env) to enable'"}>AI-analyse all</button>
+      <label class="btn">Import CSV<input id="file" type="file" accept=".csv,.tsv,.txt" hidden></label>
+      <button class="btn primary" id="add">Add lead</button>
+    </div>
+    <div class="card tablewrap">${leads.length ? `<table>
+      <thead><tr><th>Score</th><th>Lead</th><th>Stage</th><th class="hide-sm">Likely to close</th><th class="hide-sm">Last contact</th><th class="hide-sm">Follow-up</th><th>Next step</th></tr></thead>
+      <tbody>${leads.map(l => `<tr data-id="${l.id}">
+        <td><span class="score ${scoreClass(l.score)}">${l.score}</span></td>
+        <td><b>${esc(l.name)}</b>${l.opted_out ? ' <span class="chip bad">opted out</span>' : ""}<div class="dim">${esc([l.project, l.source].filter(Boolean).join(" · ") || l.phone)}</div></td>
+        <td><span class="chip ${l.stage==="won"?"good":l.stage==="lost"?"bad":""}">${STAGES[l.stage]}</span></td>
+        <td class="hide-sm">${TIMELINE[l.timeline] || ""}</td>
+        <td class="hide-sm dim">${lastTouch(l) ? ago(lastTouch(l)) : "never"}</td>
+        <td class="hide-sm dim">${l.sequence_name ? `${esc(l.sequence_name)}<br>${new Date(l.next_followup_at) < Date.now() ? "due, sends after quiet hours" : "next " + ago(l.next_followup_at)}` : "—"}</td>
+        <td><div class="clip dim">${esc(l.ai_next_action || l.next_action)}</div></td>
+      </tr>`).join("")}</tbody></table>` :
+      `<div class="empty">${state.q || state.stage !== "open" ? "No leads match this filter." : "No leads yet. Import a CSV from your spreadsheet or add one by hand."}</div>`}
+    </div>`;
+  $("#stage").value = state.stage;
+  $("#stage").onchange = e => { state.stage = e.target.value; render(); };
+  let timer; $("#q").oninput = e => { clearTimeout(timer); timer = setTimeout(() => { state.q = e.target.value; render().then(() => { const q = $("#q"); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }); }, 250); };
+  document.querySelectorAll("tbody tr").forEach(tr => tr.onclick = () => openLead(+tr.dataset.id));
+  $("#add").onclick = addLeadDialog;
+  $("#file").onchange = async e => {
+    const fd = new FormData(); fd.append("file", e.target.files[0]);
+    const r = await api("/api/import", {method:"POST", body: fd});
+    toast(`Imported ${r.created} leads` + (r.duplicates ? `, skipped ${r.duplicates} duplicates` : "")); render();
+  };
+  $("#analyzeAll").onclick = async () => { const r = await api("/api/analyze-all", {method:"POST"}); toast(`Analysing ${r.queued} leads in the background. Refresh in a minute.`); };
+  $("#enrollAll").onclick = enrollAllDialog;
+}
+function drawer(html) {
+  $("#overlay").innerHTML = `<div class="scrim"></div><aside class="drawer">${html}</aside>`;
+  $(".scrim").onclick = closeDrawer;
+}
+function closeDrawer() { $("#overlay").innerHTML = ""; state.openLead = null; render(); }
+function addLeadDialog() {
+  drawer(`<div class="row"><h2>Add lead</h2><span style="flex:1"></span><button class="btn small" id="x">Close</button></div>
+    <h3>Details</h3>
+    <div class="grid2">
+      <label>Name<input id="f_name"></label><label>Phone (WhatsApp)<input id="f_phone" placeholder="+971 50 123 4567"></label>
+      <label>Email<input id="f_email"></label><label>Source<input id="f_source" placeholder="YouTube, referral…"></label>
+      <label>Project<input id="f_project"></label><label>Budget<input id="f_budget"></label>
+    </div>
+    <h3>Notes</h3><textarea id="f_notes"></textarea>
+    <div class="row" style="margin-top:14px"><button class="btn primary" id="save">Save lead</button></div>`);
+  $("#x").onclick = closeDrawer;
+  $("#save").onclick = async () => {
+    const body = {}; ["name","phone","email","source","project","budget","notes"].forEach(k => body[k] = $("#f_" + k).value);
+    const r = await api("/api/leads", {json: body}); openLead(r.id);
+  };
+}
+function enrollAllDialog() {
+  if (!state.sequences.length) return toast("Create a sequence first");
+  drawer(`<div class="row"><h2>Start follow-ups</h2><span style="flex:1"></span><button class="btn small" id="x">Close</button></div>
+    <p class="dim" style="margin-top:10px">Enrols every open lead that is not already in a sequence. A lead leaves the sequence automatically as soon as they reply.</p>
+    <label class="field">Sequence<select id="seqPick">${state.sequences.map(s => `<option value="${s.id}">${esc(s.name)} (${s.steps.length} steps)</option>`).join("")}</select></label>
+    <div class="row" style="margin-top:14px"><button class="btn primary" id="go">Enrol leads</button></div>`);
+  $("#x").onclick = closeDrawer;
+  $("#go").onclick = async () => { const r = await api("/api/enroll", {json:{sequence_id:+$("#seqPick").value}}); toast(`${r.enrolled} leads enrolled`); closeDrawer(); };
+}
+
+async function openLead(id) {
+  state.openLead = id;
+  const l = await api("/api/leads/" + id);
+  const ai = state.settings.connections.ai;
+  const active = l.enrollments.filter(e => e.status === "active");
+  drawer(`
+    <div class="row"><span class="score ${scoreClass(l.score)}">${l.score}</span><h2>${esc(l.name)}</h2><span style="flex:1"></span><button class="btn small" id="x">Close</button></div>
+    <div class="dim" style="margin-top:6px">${esc([l.phone && "+" + l.phone, l.email].filter(Boolean).join(" · ") || "No contact details")}
+      · likely to close: <b>${TIMELINE[l.timeline] || "—"}</b></div>
+
+    <h3>Why this score</h3>
+    <ul class="reasons">${l.score_reasons.map(([r, v]) => `<li><span>${esc(r)}</span><span class="${v > 0 ? "pos" : v < 0 ? "neg" : "dim"}">${v > 0 ? "▲" : v < 0 ? "▼" : ""}</span></li>`).join("") || '<li class="dim">No signals yet.</li>'}</ul>
+    ${l.next_action && !l.ai_next_action ? `<div style="margin-top:8px"><b>Suggested next step:</b> ${esc(l.next_action)}</div>` : ""}
+    <div class="dim" style="margin-top:6px">Signals score ${l.rule_score}${l.ai_probability != null ? ` · AI estimate ${l.ai_probability} · blended ${l.score}` : ""}</div>
+
+    <h3>AI read</h3>
+    ${l.ai_summary ? `<div class="aibox"><p>${esc(l.ai_summary)}</p><p><b>Next step:</b> ${esc(l.ai_next_action)}</p>
+      ${l.ai_signals.length ? `<p class="dim">Signals: ${esc(l.ai_signals.join("; "))}</p>` : ""}
+      ${l.ai_objections.length ? `<p class="dim">Objections: ${esc(l.ai_objections.join("; "))}</p>` : ""}
+      <p class="dim">Analysed ${ago(l.ai_scored_at)}</p></div>` : `<div class="dim">${ai ? "Not analysed yet." : "Add ANTHROPIC_API_KEY (in .env, or in your host's Environment settings) to get an AI summary, conversion estimate and next step for each lead."}</div>`}
+    <div class="row" style="margin-top:8px"><button class="btn small" id="analyze" ${ai ? "" : "disabled"}>${l.ai_summary ? "Re-analyse" : "Analyse with AI"}</button></div>
+
+    <h3>Message</h3>
+    <div class="row" style="margin-bottom:8px">
+      <select id="channel"><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select>
+      <input id="subject" placeholder="Subject" hidden style="flex:1">
+      <button class="btn small" id="draft">${ai ? "Draft with AI" : "Insert template"}</button>
+    </div>
+    <textarea id="msg" placeholder="Write a message…"></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn primary" id="openApp">Open in WhatsApp</button><button class="btn" id="send">${state.settings.connections.whatsapp ? "Send automatically" : "Send (simulated)"}</button>
+      <span class="dim">${state.settings.send_mode === "dry_run" ? "Dry run: logged, not actually sent." : ""}</span></div>
+
+    <h3>Follow-up sequence</h3>
+    ${active.length ? active.map(e => `<div class="row"><span class="chip good">${esc(e.sequence_name)}</span><span class="dim">step ${e.step_index + 1} of ${e.step_count}, ${new Date(e.next_run_at) < Date.now() ? "due, sends after quiet hours" : ago(e.next_run_at)}</span></div>`).join("") + `<div class="row" style="margin-top:8px"><button class="btn small danger" id="stopSeq">Stop follow-ups</button></div>`
+      : `<div class="row"><select id="seqPick">${state.sequences.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("")}</select><button class="btn small" id="enroll">Start</button></div>`}
+
+    <h3>Details</h3>
+    <div class="grid2">
+      <label>Stage<select id="e_stage">${Object.entries(STAGES).map(([k,v]) => `<option value="${k}" ${k===l.stage?"selected":""}>${v}</option>`).join("")}</select></label>
+      <label>Name<input id="e_name" value="${esc(l.name)}"></label>
+      <label>Phone<input id="e_phone" value="${esc(l.phone)}"></label><label>Email<input id="e_email" value="${esc(l.email)}"></label>
+      <label>Source<input id="e_source" value="${esc(l.source)}"></label><label>Project<input id="e_project" value="${esc(l.project)}"></label>
+      <label>Budget<input id="e_budget" value="${esc(l.budget)}"></label>
+      <label class="check" style="align-self:end;padding-bottom:8px"><input type="checkbox" id="e_opt" ${l.opted_out ? "checked" : ""}> Do not contact</label>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn small" id="saveLead">Save changes</button><span style="flex:1"></span><button class="btn small danger" id="del">Delete lead</button></div>
+
+    <h3>Log activity</h3>
+    <div class="row" style="margin-bottom:8px"><select id="logKind"><option value="note">Note</option><option value="call">Call</option><option value="wa_in">Lead replied on WhatsApp</option><option value="email_in">Lead replied by email</option></select></div>
+    <textarea id="logBody" placeholder="What happened?"></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn small" id="log">Add to history</button></div>
+
+    <h3>History</h3>
+    ${l.events.map(e => `<div class="ev ${e.status === "failed" ? "failed" : e.kind.endsWith("_in") ? "in" : e.kind.endsWith("_out") ? "out" : ""}">
+      <div class="meta">${KIND[e.kind] || e.kind}${e.status && e.status !== "sent" ? ` (${e.status})` : ""} · ${ago(e.ts)}</div>${esc(e.body)}</div>`).join("") || '<div class="dim">Nothing yet.</div>'}
+  `);
+  const again = () => openLead(id);
+  $("#x").onclick = closeDrawer;
+  $("#channel").onchange = e => {
+    $("#subject").hidden = e.target.value !== "email";
+    $("#openApp").textContent = e.target.value === "email" ? "Open in email app" : "Open in WhatsApp";
+  };
+  $("#openApp").onclick = async () => {
+    const ch = $("#channel").value, body = $("#msg").value, subject = $("#subject").value;
+    if (!openInApp(l, ch, body, subject)) return;
+    if (body.trim()) { await api(`/api/leads/${id}/manual-send`, {json:{channel: ch, body, subject}}); toast("Opened. Logged in this lead's history."); again(); }
+  };
+  $("#analyze").onclick = async e => { e.target.disabled = true; e.target.textContent = "Analysing…"; try { await api(`/api/leads/${id}/analyze`, {method:"POST"}); } finally { again(); } };
+  $("#draft").onclick = async e => {
+    e.target.disabled = true; const label = e.target.textContent; e.target.textContent = "Writing…";
+    try { const r = await api(`/api/leads/${id}/draft`, {json:{channel: $("#channel").value}}); $("#msg").value = r.body; }
+    finally { e.target.disabled = false; e.target.textContent = label; }
+  };
+  $("#send").onclick = async () => {
+    const r = await api(`/api/leads/${id}/send`, {json:{channel: $("#channel").value, body: $("#msg").value, subject: $("#subject").value}});
+    toast(r.status === "sent" ? "Sent" : r.status === "simulated" ? (r.error || "Dry run: logged, not sent") : "Not sent: " + r.error); again();
+  };
+  if ($("#enroll")) $("#enroll").onclick = async () => { if (!$("#seqPick").value) return toast("Create a sequence first"); await api("/api/enroll", {json:{sequence_id:+$("#seqPick").value, lead_ids:[id]}}); again(); };
+  if ($("#stopSeq")) $("#stopSeq").onclick = async () => { await api(`/api/leads/${id}/stop-sequences`, {method:"POST"}); again(); };
+  $("#saveLead").onclick = async () => {
+    const body = {stage: $("#e_stage").value, opted_out: $("#e_opt").checked};
+    ["name","phone","email","source","project","budget"].forEach(k => body[k] = $("#e_" + k).value);
+    await api("/api/leads/" + id, {method:"PATCH", json: body}); toast("Saved"); again();
+  };
+  $("#del").onclick = async () => { if (confirm(`Delete ${l.name} and their whole history?`)) { await api("/api/leads/" + id, {method:"DELETE"}); closeDrawer(); } };
+  $("#log").onclick = async () => { await api(`/api/leads/${id}/events`, {json:{kind: $("#logKind").value, body: $("#logBody").value}}); again(); };
+}
+
+/* ---------------- Sequences ---------------- */
+function stepHtml(s, i) {
+  const days = s.delay_hours / 24, unit = s.delay_hours && Number.isInteger(days) ? "days" : "hours";
+  return `<div class="step" data-step>
+    <div class="head"><b>Step ${i + 1}</b><span class="dim">wait</span>
+      <input type="number" min="0" step="any" data-f="delay" value="${unit === "days" ? days : s.delay_hours}">
+      <select data-f="unit"><option value="hours" ${unit==="hours"?"selected":""}>hours</option><option value="days" ${unit==="days"?"selected":""}>days</option></select>
+      <span class="dim">${i ? "after the previous step, then send" : "after enrolment, then send"}</span>
+      <select data-f="channel"><option value="whatsapp" ${s.channel==="whatsapp"?"selected":""}>WhatsApp</option><option value="email" ${s.channel==="email"?"selected":""}>Email</option></select>
+      <span style="flex:1"></span><button class="btn small danger" data-remove>Remove</button></div>
+    <input data-f="subject" placeholder="Email subject" value="${esc(s.subject)}" style="width:100%;margin-bottom:8px" ${s.channel==="email"?"":"hidden"}>
+    <textarea data-f="body" placeholder="Message. Use {first_name}, {project}, {agent}">${esc(s.body)}</textarea>
+    <div class="row" style="margin-top:8px">
+      <label class="check"><input type="checkbox" data-f="ai" ${s.ai_personalize ? "checked" : ""}> Let AI rewrite this for each lead, using their conversation</label>
+      <span style="flex:1"></span>
+      <input data-f="template" placeholder="WhatsApp template name (optional)" value="${esc(s.wa_template)}" style="width:290px" ${s.channel==="whatsapp"?"":"hidden"}>
+    </div></div>`;
+}
+async function viewSequences() {
+  const seqs = await api("/api/sequences");
+  $("#main").innerHTML = `<h1>Follow-up sequences</h1>
+    <p class="sub">A sequence is a timed series of messages. Leads drop out the moment they reply, are marked won or lost, or opt out.</p>
+    <div class="notice"><b>WhatsApp's 24-hour rule.</b> Meta only delivers free-text messages to people who messaged you in the last 24 hours. For anyone else the step needs the name of a template you've had approved in WhatsApp Manager (with one variable, the first name). Steps without one are skipped for those leads once you go live.</div>
+    <div id="seqs">${seqs.map(s => `<div class="card seq" data-seq="${s.id}">
+      <div class="row"><input data-f="name" value="${esc(s.name)}" style="font-weight:600;flex:1;min-width:180px">
+        <label class="check"><input type="checkbox" data-f="active" ${s.active ? "checked" : ""}> Active</label>
+        <span class="chip">${s.active_leads} leads in progress</span></div>
+      <div data-steps>${s.steps.map(stepHtml).join("")}</div>
+      <div class="row"><button class="btn small" data-addstep>Add step</button><span style="flex:1"></span>
+        <button class="btn small danger" data-delseq>Delete sequence</button><button class="btn small primary" data-save>Save</button></div>
+    </div>`).join("")}</div>
+    <div class="row"><button class="btn" id="newSeq">New sequence</button><button class="btn" id="runNow" title="Send anything that is due right now instead of waiting for the next check">Run due follow-ups now</button></div>`;
+  const blank = {delay_hours:24, channel:"whatsapp", subject:"", body:"", wa_template:"", ai_personalize:0};
+  const wire = card => {
+    card.querySelectorAll("[data-step]").forEach(st => {
+      st.querySelector("[data-remove]").onclick = () => { st.remove(); };
+      st.querySelector('[data-f="channel"]').onchange = e => {
+        st.querySelector('[data-f="subject"]').hidden = e.target.value !== "email";
+        st.querySelector('[data-f="template"]').hidden = e.target.value !== "whatsapp";
+      };
+    });
+  };
+  document.querySelectorAll("[data-seq]").forEach(card => {
+    wire(card);
+    const id = card.dataset.seq;
+    card.querySelector("[data-addstep]").onclick = () => {
+      const box = card.querySelector("[data-steps]");
+      box.insertAdjacentHTML("beforeend", stepHtml(blank, box.children.length)); wire(card);
+    };
+    card.querySelector("[data-delseq]").onclick = async () => { if (confirm("Delete this sequence? Leads in it stop receiving follow-ups.")) { await api("/api/sequences/" + id, {method:"DELETE"}); render(); } };
+    card.querySelector("[data-save]").onclick = async () => {
+      const steps = [...card.querySelectorAll("[data-step]")].map(st => {
+        const f = n => st.querySelector(`[data-f="${n}"]`);
+        return {delay_hours: (+f("delay").value || 0) * (f("unit").value === "days" ? 24 : 1), channel: f("channel").value,
+          subject: f("subject").value, body: f("body").value, wa_template: f("template").value.trim(), ai_personalize: f("ai").checked};
+      });
+      if (steps.some(s => !s.body.trim())) return toast("Every step needs a message");
+      await api("/api/sequences/" + id, {method:"PUT", json:{name: card.querySelector('[data-f="name"]').value, active: card.querySelector('[data-f="active"]').checked, steps}});
+      toast("Sequence saved"); render();
+    };
+  });
+  $("#newSeq").onclick = async () => { await api("/api/sequences", {json:{name:"New sequence", steps:[{...blank, delay_hours:0, body:"Hi {first_name}, this is {agent}."}]}}); render(); };
+  $("#runNow").onclick = async () => { const r = await api("/api/scheduler/run", {method:"POST"}); toast(r.ran ? `${r.ran} follow-up${r.ran > 1 ? "s" : ""} processed` : "Nothing is due right now"); render(); };
+}
+
+/* ---------------- Outbox ---------------- */
+async function viewOutbox() {
+  const items = await api("/api/outbox");
+  const drafts = items.filter(o => o.status === "draft"), rest = items.filter(o => o.status !== "draft");
+  const tone = {sent:"good", failed:"bad", simulated:"", discarded:""};
+  $("#main").innerHTML = `<h1>Outbox</h1>
+    <p class="sub">${state.settings.send_mode === "approve" ? "Follow-ups wait here until you approve them." : "Everything the system has sent or tried to send."}</p>
+    ${drafts.length ? `<h3 class="dim">Waiting for approval (${drafts.length})</h3>` + drafts.map(o => `<div class="card seq" data-o="${o.id}">
+      <div class="row"><span class="score ${scoreClass(o.score)}">${o.score}</span><b>${esc(o.lead_name)}</b><span class="chip">${o.channel === "whatsapp" ? "WhatsApp" : "Email"}</span>
+        ${o.ai_written ? '<span class="chip hot">AI-written</span>' : ""}<span class="dim">${ago(o.created_at)}</span></div>
+      ${o.channel === "email" ? `<input data-subject value="${esc(o.subject)}" style="width:100%;margin-bottom:8px">` : ""}
+      <textarea data-body>${esc(o.body)}</textarea>
+      <div class="row" style="margin-top:8px"><button class="btn small primary" data-open>${o.channel === "whatsapp" ? "Open in WhatsApp" : "Open in email app"}</button><button class="btn small" data-approve>${state.settings.connections[o.channel === "whatsapp" ? "whatsapp" : "email"] ? "Send automatically" : "Send (simulated)"}</button><button class="btn small" data-discard>Discard</button></div>
+    </div>`).join("") : ""}
+    <h3 class="dim">History</h3>
+    <div class="card tablewrap">${rest.length ? `<table><thead><tr><th>When</th><th>Lead</th><th>Channel</th><th>Status</th><th>Message</th></tr></thead><tbody>
+      ${rest.map(o => `<tr style="cursor:default"><td class="dim" style="white-space:nowrap">${ago(o.sent_at || o.created_at)}</td><td>${esc(o.lead_name)}</td><td>${o.channel === "whatsapp" ? "WhatsApp" : "Email"}</td>
+        <td><span class="chip ${tone[o.status]}">${o.status}</span></td><td><div class="clip">${esc(o.body)}</div>${o.error ? `<div class="dim neg">${esc(o.error)}</div>` : ""}</td></tr>`).join("")}
+      </tbody></table>` : '<div class="empty">No messages yet. Enrol leads in a sequence to get started.</div>'}</div>`;
+  document.querySelectorAll("[data-o]").forEach(card => {
+    const id = card.dataset.o;
+    card.querySelector("[data-approve]").onclick = async () => {
+      const r = await api(`/api/outbox/${id}/approve`, {json:{body: card.querySelector("[data-body]").value, subject: card.querySelector("[data-subject]")?.value}});
+      toast(r.status === "sent" ? "Sent" : r.status === "simulated" ? (r.error || "Dry run: logged, not sent") : "Not sent: " + r.error); render();
+    };
+    card.querySelector("[data-open]").onclick = async () => {
+      const o = drafts.find(d => d.id == id), body = card.querySelector("[data-body]").value, subject = card.querySelector("[data-subject]")?.value;
+      if (!openInApp(o, o.channel, body, subject)) return;
+      await api(`/api/outbox/${id}/manual`, {json:{body, subject}}); toast("Opened and marked as sent"); render();
+    };
+    card.querySelector("[data-discard]").onclick = async () => { await api(`/api/outbox/${id}/discard`, {method:"POST"}); render(); };
+  });
+}
+
+/* ---------------- Settings ---------------- */
+async function viewSettings() {
+  const s = state.settings, c = s.connections;
+  const pill = ok => `<span class="chip ${ok ? "good" : ""}">${ok ? "Connected" : "Not connected"}</span>`;
+  $("#main").innerHTML = `<h1>Settings</h1><p class="sub">Connections are set in the <code>.env</code> file, or in your host's Environment settings (such as Render's Environment tab). See the README.</p>
+    <div class="card seq" style="max-width:640px">
+      <h3 class="dim" style="margin-top:0">Sending</h3>
+      <label class="field">Send mode<select id="s_mode">
+        <option value="dry_run">Dry run: simulate everything, send nothing</option>
+        <option value="approve">Approve first: follow-ups wait in the Outbox for your OK</option>
+        <option value="auto">Automatic: follow-ups send on schedule without review</option></select></label>
+      <div class="grid2" style="margin-top:10px">
+        <label>Your name (used as {agent})<input id="s_agent" value="${esc(s.agent_name)}"></label>
+        <label>Company (used as {company})<input id="s_company" value="${esc(s.company_name)}"></label>
+        <label>Quiet hours start (0–23)<input id="s_qs" type="number" min="0" max="23" value="${esc(s.quiet_start)}"></label>
+        <label>Quiet hours end (0–23)<input id="s_qe" type="number" min="0" max="23" value="${esc(s.quiet_end)}"></label>
+      </div>
+      <p class="dim">Automated follow-ups that come due during quiet hours wait until they end. Set both to the same hour to turn this off.</p>
+      <button class="btn primary" id="saveSettings">Save settings</button>
+    </div>
+    <div class="card seq" style="max-width:640px">
+      <h3 class="dim" style="margin-top:0">Connections</h3>
+      <div class="conn"><span><b>WhatsApp Business</b><div class="dim">WHATSAPP_TOKEN, WHATSAPP_PHONE_ID</div></span>${pill(c.whatsapp)}</div>
+      <div class="conn"><span><b>Email (SMTP)</b><div class="dim">SMTP_HOST, SMTP_FROM</div></span>${pill(c.email)}</div>
+      <div class="conn"><span><b>Claude AI</b><div class="dim">ANTHROPIC_API_KEY · model ${esc(c.ai_model)}</div></span>${pill(c.ai)}</div>
+    </div>
+    <p class="dim">Running version <code>${esc(s.version)}</code>. This matches the latest commit on GitHub once a deploy has finished.</p>`;
+  $("#s_mode").value = s.send_mode;
+  $("#saveSettings").onclick = async () => {
+    await api("/api/settings", {method:"PUT", json:{send_mode: $("#s_mode").value, agent_name: $("#s_agent").value, company_name: $("#s_company").value, quiet_start: $("#s_qs").value, quiet_end: $("#s_qe").value}});
+    toast("Settings saved"); render();
+  };
+}
+render();
+</script>
+</body>
+</html>
