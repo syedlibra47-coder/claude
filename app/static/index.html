@@ -450,7 +450,7 @@ async function viewOutbox() {
 async function viewSettings() {
   const s = state.settings, c = s.connections;
   const pill = ok => `<span class="chip ${ok ? "good" : ""}">${ok ? "Connected" : "Not connected"}</span>`;
-  $("#main").innerHTML = `<h1>Settings</h1><p class="sub">Connections are configured in the <code>.env</code> file; see the README.</p>
+  $("#main").innerHTML = `<h1>Settings</h1><p class="sub">Connections are set in the <code>.env</code> file, or in your host's Environment settings (such as Render's Environment tab). See the README.</p>
     <div class="card seq" style="max-width:640px">
       <h3 class="dim" style="margin-top:0">Sending</h3>
       <label class="field">Send mode<select id="s_mode">
