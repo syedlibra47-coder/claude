@@ -43,8 +43,9 @@ app = FastAPI(title="LeadPilot", lifespan=lifespan)
 @app.middleware("http")
 async def require_password(request: Request, call_next):
     password = config.get("APP_PASSWORD")
-    # The webhook is called by Meta and authenticates by signature instead.
-    if password and not request.url.path.startswith("/webhook/"):
+    # The webhook is called by Meta and authenticates by signature instead;
+    # /healthz is for the host's uptime checks and returns no data.
+    if password and not request.url.path.startswith("/webhook/") and request.url.path != "/healthz":
         given = ""
         header = request.headers.get("authorization", "")
         if header.lower().startswith("basic "):
@@ -509,6 +510,18 @@ async def receive_webhook(request: Request):
                     touched.append(lead_id)
     if touched and config.ai_configured():
         engine.analyze_in_background(sorted(set(touched)))
+    return {"ok": True}
+
+
+@app.get("/healthz")
+def healthz():
+    """Uptime check for hosting services: 200 if the app can reach its database."""
+    try:
+        with db.connect() as con:
+            con.execute("SELECT 1").fetchone()
+    except Exception:
+        log.exception("Health check: database unreachable")
+        raise HTTPException(503, "database unreachable")
     return {"ok": True}
 
 

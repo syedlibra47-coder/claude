@@ -166,6 +166,11 @@ The database holds your clients' contact details. The app listens only on
 your own machine by default. Before exposing it (which WhatsApp webhooks
 require), set `APP_PASSWORD` and put it behind HTTPS.
 
+## Deploying
+
+See [DEPLOY.md](DEPLOY.md) for the settings any host needs, the full list of
+environment variables, and how to move to a new host without losing data.
+
 ## Layout
 
 ```
