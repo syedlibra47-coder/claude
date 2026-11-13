@@ -3,3 +3,4 @@ uvicorn[standard]>=0.30
 python-multipart>=0.0.9
 anthropic>=2.0
 pytest>=8.0
+psycopg[binary]>=3.1

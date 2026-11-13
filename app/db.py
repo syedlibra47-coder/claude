@@ -116,24 +116,99 @@ def parse_ts(s):
     return datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
 
 
+TABLES = ["leads", "events", "sequences", "steps", "enrollments", "outbox", "settings"]
+
+
+def is_postgres() -> bool:
+    return bool(config.database_url())
+
+
+def translate_sql(sql: str):
+    """Rewrite the SQLite-flavoured statements used in this app for Postgres.
+    Returns (sql, wants_returning_id)."""
+    sql = sql.replace("%", "%%").replace("?", "%s")
+    sql = re.sub(r"\bLIKE\b", "ILIKE", sql)  # SQLite's LIKE ignores case; Postgres' doesn't
+    returning = False
+    m = re.match(r"\s*INSERT\s+(OR\s+IGNORE\s+)?INTO\s+(\w+)", sql, re.IGNORECASE)
+    if m:
+        if m.group(1):
+            sql = re.sub(r"INSERT\s+OR\s+IGNORE", "INSERT", sql, count=1, flags=re.IGNORECASE) + " ON CONFLICT DO NOTHING"
+        if m.group(2).lower() != "settings" and "RETURNING" not in sql.upper():
+            sql += " RETURNING id"
+            returning = True
+    return sql, returning
+
+
+class _Result:
+    def __init__(self, cur, lastrowid=None):
+        self._cur, self.lastrowid = cur, lastrowid
+
+    def fetchone(self):
+        return self._cur.fetchone() if self._cur.description else None
+
+    def fetchall(self):
+        return self._cur.fetchall() if self._cur.description else []
+
+    def __iter__(self):
+        return iter(self.fetchall())
+
+
+class PgConnection:
+    """Just enough of the sqlite3 connection API for this app, on psycopg."""
+
+    def __init__(self, url: str):
+        import psycopg
+        from psycopg.rows import dict_row
+        # prepare_threshold=None: Supabase's transaction pooler can't do prepared statements.
+        self._con = psycopg.connect(url, row_factory=dict_row, prepare_threshold=None, connect_timeout=15)
+
+    def execute(self, sql, params=()):
+        sql, returning = translate_sql(sql)
+        cur = self._con.execute(sql, tuple(params))
+        if returning:
+            row = cur.fetchone()
+            return _Result(cur, row["id"] if row else None)
+        return _Result(cur)
+
+    def executescript(self, script: str):
+        script = re.sub(r"--[^\n]*", "", script)
+        for stmt in filter(None, (x.strip() for x in script.split(";"))):
+            self._con.execute(stmt.replace("INTEGER PRIMARY KEY", "SERIAL PRIMARY KEY"))
+
+    def commit(self):
+        self._con.commit()
+
+    def close(self):
+        self._con.close()
+
+
 @contextmanager
 def connect():
-    path = config.db_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    con = sqlite3.connect(path, timeout=15)
-    con.row_factory = sqlite3.Row
-    con.execute("PRAGMA journal_mode=WAL")
-    con.execute("PRAGMA foreign_keys=ON")
+    if is_postgres():
+        con = PgConnection(config.database_url())
+    else:
+        path = config.db_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        con = sqlite3.connect(path, timeout=15)
+        con.row_factory = sqlite3.Row
+        con.execute("PRAGMA journal_mode=WAL")
+        con.execute("PRAGMA foreign_keys=ON")
     try:
         yield con
         con.commit()
     finally:
-        con.close()
+        con.close()  # an exception skips the commit, so the transaction is rolled back
 
 
 def init():
     with connect() as con:
         con.executescript(SCHEMA)
+        if is_postgres():
+            # Supabase exposes public tables through its REST API using a public
+            # "anon" key. Row-level security with no policies shuts that door;
+            # this app connects directly as the database owner, which is unaffected.
+            for t in TABLES:
+                con.execute(f"ALTER TABLE {t} ENABLE ROW LEVEL SECURITY")
         for k, v in DEFAULT_SETTINGS.items():
             con.execute("INSERT OR IGNORE INTO settings(key, value) VALUES(?, ?)", (k, v))
 

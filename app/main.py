@@ -27,7 +27,8 @@ STATIC = Path(__file__).parent / "static"
 async def lifespan(app):
     db.init()
     engine.seed_default_sequence()
-    if config.get("SEED_DEMO"):  # for trial deployments with a throwaway database
+    # Trial deployments only. Never into a real (Postgres) database.
+    if config.get("SEED_DEMO") and not config.database_url():
         demo.seed()
     stop = threading.Event()
     if not config.get("DISABLE_SCHEDULER"):

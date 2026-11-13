@@ -188,8 +188,18 @@ def rescore(con, lead_ids=None) -> None:
     all_leads = db.rows(con, "SELECT * FROM leads")
     priors = learn_priors(all_leads)
     targets = all_leads if lead_ids is None else [l for l in all_leads if l["id"] in set(lead_ids)]
+    by_lead = {}  # one query for everyone: round trips are slow against a hosted database
+    if lead_ids is None:
+        ev = db.rows(con, "SELECT * FROM events ORDER BY ts, id")
+    elif targets:
+        marks = ",".join("?" * len(targets))
+        ev = db.rows(con, f"SELECT * FROM events WHERE lead_id IN ({marks}) ORDER BY ts, id", [l["id"] for l in targets])
+    else:
+        ev = []
+    for e in ev:
+        by_lead.setdefault(e["lead_id"], []).append(e)
     for lead in targets:
-        events = db.rows(con, "SELECT * FROM events WHERE lead_id = ? ORDER BY ts, id", (lead["id"],))
+        events = by_lead.get(lead["id"], [])
         r = score_lead(lead, events, priors)
         closed = lead["stage"] in ("won", "lost") or lead["opted_out"]
         ai_p = None if closed else lead["ai_probability"]

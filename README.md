@@ -124,6 +124,42 @@ app is asleep, scheduled follow-ups don't fire; use **Run due follow-ups
 now** on the Sequences page. Don't enter real client data here, and keep
 Send mode on Dry run.
 
+## Keeping your data on a free host (Supabase)
+
+Free hosts erase local files on restart. Pointing the app at a free
+[Supabase](https://supabase.com) Postgres database keeps your leads safe
+while the app itself stays on the free plan.
+
+1. Create a Supabase account and a new project. Choose a database password
+   with **letters and numbers only**, and a region close to your app host
+   (each page makes several database calls, so distance adds up).
+2. Open the project's **Connect** button (labels move around) and copy the
+   **Session pooler** connection string. It looks like
+   `postgresql://postgres.<ref>:[YOUR-PASSWORD]@aws-0-<region>.pooler.supabase.com:5432/postgres`.
+   Replace `[YOUR-PASSWORD]` with your password. The pooler works from hosts
+   without IPv6; the "direct" string may not.
+3. Set it as `DATABASE_URL`: in `.env` locally, or in Render under
+   **Environment**. Treat it like a password and never commit it.
+4. Restart the app. It creates its tables on first start, turns on row-level
+   security (so the public Supabase API can't read them), and never creates
+   demo data in a Postgres database.
+
+Already have leads in a local SQLite file? Copy them over once:
+
+```bash
+DATABASE_URL='postgresql://...' .venv/bin/python scripts/migrate_sqlite_to_postgres.py data/leads.db
+```
+
+It only reads the SQLite file and refuses to run if the Postgres database
+already has leads. Otherwise, start the app on Supabase and use **Import CSV**.
+
+Notes: Supabase pauses free projects after a period of inactivity (check
+their current policy); unpausing in their dashboard restores everything. The
+app itself still sleeps on Render's free plan, so scheduled follow-ups only
+go out while it is awake. Use **Run due follow-ups now**, or a paid host.
+To run the test suite on Postgres, set `TEST_DATABASE_URL` to an empty
+scratch database (the tests drop and recreate its `public` schema).
+
 ## Security
 
 The database holds your clients' contact details. The app listens only on

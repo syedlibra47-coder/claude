@@ -275,6 +275,10 @@ def test_demo_seed_runs_once_and_ranks_leads():
 
 
 def test_seed_demo_env_on_startup(monkeypatch):
+    import os
+    import pytest
+    if os.environ.get("TEST_DATABASE_URL"):
+        pytest.skip("demo seeding is deliberately disabled on Postgres")
     monkeypatch.setenv("SEED_DEMO", "1")
     with TestClient(app) as client:  # runs the startup hook
         assert len(client.get("/api/leads?stage=").json()) > 5
@@ -302,3 +306,29 @@ def test_manual_send_logs_contact_and_marks_draft_sent():
     # Opted-out leads can't be messaged this way either
     client.patch(f"/api/leads/{lid}", json={"opted_out": True})
     assert client.post(f"/api/leads/{lid}/manual-send", json={"channel": "whatsapp", "body": "x"}).status_code == 400
+
+
+# ---------- Postgres support ----------
+
+def test_sql_translation_for_postgres():
+    t = db.translate_sql
+    assert t("SELECT * FROM leads WHERE id=? AND name LIKE ?") == (
+        "SELECT * FROM leads WHERE id=%s AND name ILIKE %s", False)
+    assert t("INSERT INTO leads(name) VALUES(?)") == ("INSERT INTO leads(name) VALUES(%s) RETURNING id", True)
+    assert t("INSERT OR IGNORE INTO settings(key, value) VALUES(?, ?)") == (
+        "INSERT INTO settings(key, value) VALUES(%s, %s) ON CONFLICT DO NOTHING", False)
+    assert t("UPDATE leads SET score=? WHERE id=?")[1] is False
+    assert t("SELECT '100%' AS x")[0] == "SELECT '100%%' AS x"  # literal % must survive psycopg
+
+
+def test_demo_never_seeds_a_real_database(monkeypatch):
+    from app import demo
+    calls = []
+    monkeypatch.setenv("DATABASE_URL", "postgresql://example/none")
+    monkeypatch.setenv("SEED_DEMO", "1")
+    monkeypatch.setattr(db, "init", lambda: None)
+    monkeypatch.setattr(engine, "seed_default_sequence", lambda: None)
+    monkeypatch.setattr(demo, "seed", lambda: calls.append(1))
+    with TestClient(app):
+        pass
+    assert calls == []

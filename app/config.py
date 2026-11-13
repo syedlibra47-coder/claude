@@ -47,3 +47,8 @@ def tz_offset_hours() -> float:
         return float(get("TZ_OFFSET_HOURS", "4"))
     except ValueError:
         return 4.0
+
+
+def database_url() -> str:
+    """Postgres connection string (e.g. Supabase). Empty means use local SQLite."""
+    return get("DATABASE_URL")
