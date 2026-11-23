@@ -13,25 +13,24 @@
     function listingCardHtml(l) {
       const waMessage = `Hi, I'm interested in ${l.title} (${l.community}, ${l.city}). Could you share more details?`;
       const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+      // Full-image card: the photo fills the card, a dark gradient rises from the
+      // bottom, and only the essentials sit on it (status, price, name, area, size).
+      const beds = l.beds === 'Studio' ? 'Studio' : `${l.beds} Beds`;
       return `
-      <article class="listing-card reveal in-view" data-type="${l.type}" data-listing-id="${l.id}">
-        <div class="listing-image">
-          <img src="${l.hero}" alt="${l.title}, ${l.community}">
-          <span class="badge ${l.type === 'sale' ? 'badge--gold' : 'badge--navy'} listing-tag">${l.type === 'sale' ? 'For Sale' : 'For Rent'}</span>
-          <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      <article class="listing-card listing-card--photo reveal in-view" data-type="${l.type}" data-listing-id="${l.id}">
+        <img class="lc-photo" src="${l.hero}" alt="${l.title}, ${l.community}" loading="lazy">
+        <div class="lc-shade" aria-hidden="true"></div>
+        <div class="lc-top">
+          <span class="lc-status lc-status--${l.type === 'sale' ? 'sale' : 'rent'}">${l.type === 'sale' ? 'For Sale' : 'For Rent'}</span>
+          <a class="lc-wa" href="${waHref}" target="_blank" rel="noopener" aria-label="Enquire about ${l.title} on WhatsApp">
+            <img src="assets/WhatsApp.svg.webp" alt="">
+          </a>
         </div>
-        <div class="listing-body">
-          <div class="pill-row"><span class="pill">${l.tags[0] || l.category}</span><span class="pill">${l.tags[1] || l.category}</span></div>
-          <div class="listing-price">${l.priceLabel}${l.priceSuffix ? ` <span>${l.priceSuffix}</span>` : ''}</div>
-          <h3>${l.title}</h3>
-          <p class="listing-location">${l.community}, ${l.city}</p>
-          <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none"><path d="M3 19v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 19h18M6 11V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${l.beds === 'Studio' ? 'Studio' : l.beds + ' Beds'}</span><span><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M6 12V6a2 2 0 0 1 2-2h1M6 12v7a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>${l.baths} Baths</span><span><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 8.5h17M8.5 3.5v17" stroke="currentColor" stroke-width="1.8"/></svg>${l.sqft} sqft</span></div>
-          <div class="listing-footer">
-            <a href="listing-detail.html?id=${l.id}" class="card-link">View Details &rarr;</a>
-            <a class="whatsapp-btn whatsapp-btn--inline" href="${waHref}" target="_blank" rel="noopener" aria-label="Enquire about ${l.title} on WhatsApp">
-              <img src="assets/WhatsApp.svg.webp" alt="WhatsApp">
-            </a>
-          </div>
+        <div class="lc-info">
+          <div class="lc-price">${l.priceLabel}${l.priceSuffix ? `<span>${l.priceSuffix}</span>` : ''}</div>
+          <h3 class="lc-title"><a href="listing-detail.html?id=${l.id}">${l.title}</a></h3>
+          <p class="lc-location">${l.community}</p>
+          <p class="lc-meta"><span>${beds}</span><span>${l.baths} Baths</span><span>${l.sqft} sqft</span></p>
         </div>
       </article>`;
     }

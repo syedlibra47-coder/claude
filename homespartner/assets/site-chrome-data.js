@@ -1,55 +1,147 @@
+
+// Synced from the live Supabase database on 2026-11-23.
+
 window.SITE_CHROME_DATA = {
-  navLinks: [
-    { label: "Services", href: "services.html" },
-    { label: "Listings", href: "listings.html" },
-    { label: "Off-Plan", href: "offplan-listings.html" },
-    { label: "Offices", href: "index.html#offices" }
-  ],
-  whyusLabel: "Why Us",
-  whyusHref: "index.html#why",
-  whyusSubmenu: [
-    { label: "Agents", href: "agents.html" },
-    { label: "Careers", href: "careers.html" }
-  ],
-  contactLabel: "Contact",
-  contactHref: "contact.html",
-  ctaText: "Get in Touch",
-  ctaHref: "index.html#contact",
-  footerBlurb: "Your Dubai property partner, with reach into the UK, Pakistan and India.",
-  footerEmail: "info@homespartner.ae",
-  footerColumns: [
+  "navLinks": [
     {
-      heading: "Services",
-      links: [
-        { label: "Buying", href: "services.html#buying" },
-        { label: "Rent", href: "services.html#rent" },
-        { label: "Selling", href: "services.html#sell" },
-        { label: "Off-Plan Projects", href: "offplan-listings.html" },
-        { label: "Property Management", href: "services.html#property-management" },
-        { label: "Property Maintenance", href: "services.html#property-maintenance" }
-      ]
+      "href": "listings.html?status=sale",
+      "label": "Buy"
     },
     {
-      heading: "Offices",
-      links: [
-        { label: "Dubai — Main Office", href: "contact.html" },
-        { label: "United Kingdom", href: "contact.html" },
-        { label: "Pakistan", href: "contact.html" },
-        { label: "India", href: "contact.html" }
-      ]
+      "href": "listings.html?status=rent",
+      "label": "Rent"
     },
     {
-      heading: "Company",
-      links: [
-        { label: "Why Us", href: "index.html#why" },
-        { label: "Agents", href: "agents.html" },
-        { label: "Careers", href: "careers.html" },
-        { label: "Contact", href: "contact.html" }
-      ]
+      "href": "offplan-listings.html",
+      "label": "Off-Plan"
+    },
+    {
+      "href": "custom-page.html?slug=dubai-areas-communities",
+      "label": "Areas"
+    },
+    {
+      "href": "services.html",
+      "label": "Services"
+    },
+    {
+      "href": "custom-page.html?slug=guides-and-insights",
+      "label": "Insights"
     }
   ],
-  footerCopyright: "HomesPartner Real Estate. All rights reserved.",
-  reraBrokerNumber: "",
-  tradeLicenseNumber: "",
-  registeredOfficeAddress: ""
+  "whyusLabel": "About",
+  "whyusHref": "index.html#why",
+  "whyusSubmenu": [
+    {
+      "href": "agents.html",
+      "label": "Agents"
+    },
+    {
+      "href": "careers.html",
+      "label": "Careers"
+    }
+  ],
+  "contactLabel": "Contact",
+  "contactHref": "contact.html",
+  "ctaText": "Get in Touch",
+  "ctaHref": "index.html#contact",
+  "footerBlurb": "Your Dubai property partner, with reach into the UK, Pakistan and India.",
+  "footerEmail": "info@homespartner.ae",
+  "footerColumns": [
+    {
+      "links": [
+        {
+          "href": "services.html#buying",
+          "label": "Buying"
+        },
+        {
+          "href": "services.html#rent",
+          "label": "Rent"
+        },
+        {
+          "href": "services.html#sell",
+          "label": "Selling"
+        },
+        {
+          "href": "offplan-listings.html",
+          "label": "Off-Plan Projects"
+        },
+        {
+          "href": "services.html#property-management",
+          "label": "Property Management"
+        },
+        {
+          "href": "services.html#property-maintenance",
+          "label": "Property Maintenance"
+        }
+      ],
+      "heading": "Services"
+    },
+    {
+      "links": [
+        {
+          "href": "custom-page.html?slug=buying-property-in-dubai-guide",
+          "label": "Buyer's Guide"
+        },
+        {
+          "href": "custom-page.html?slug=selling-property-in-dubai-guide",
+          "label": "Seller's Guide"
+        },
+        {
+          "href": "custom-page.html?slug=renting-property-in-dubai-guide",
+          "label": "Tenant's Guide"
+        },
+        {
+          "href": "custom-page.html?slug=renting-out-property-in-dubai-guide",
+          "label": "Landlord's Guide"
+        }
+      ],
+      "heading": "Guides"
+    },
+    {
+      "links": [
+        {
+          "href": "contact.html",
+          "label": "Dubai — Main Office"
+        },
+        {
+          "href": "contact.html",
+          "label": "United Kingdom"
+        },
+        {
+          "href": "contact.html",
+          "label": "Pakistan"
+        },
+        {
+          "href": "contact.html",
+          "label": "India"
+        }
+      ],
+      "heading": "Offices"
+    },
+    {
+      "links": [
+        {
+          "href": "index.html#why",
+          "label": "Why Us"
+        },
+        {
+          "href": "agents.html",
+          "label": "Agents"
+        },
+        {
+          "href": "careers.html",
+          "label": "Careers"
+        },
+        {
+          "href": "contact.html",
+          "label": "Contact"
+        }
+      ],
+      "heading": "Company"
+    }
+  ],
+  "footerCopyright": "HomesPartner Real Estate. All rights reserved.",
+  "reraBrokerNumber": "",
+  "tradeLicenseNumber": "",
+  "registeredOfficeAddress": ""
 };

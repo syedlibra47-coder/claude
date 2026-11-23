@@ -14,8 +14,8 @@
   --line: #E4E6EE;
   --hairline: rgba(31, 39, 92, 0.10);
 
-  --font-head: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-head: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Fraunces', Georgia, serif;
   --font-mono: 'IBM Plex Mono', 'SF Mono', ui-monospace, monospace;
 
@@ -1586,3 +1586,115 @@ h3, h4 { font-weight: 700; letter-spacing: -0.01em; }
   .popup-banner-box { max-width: 100%; max-height: 78vh; border-radius: 10px; }
   .popup-banner-close { width: 30px; height: 30px; font-size: 1.1rem; }
 }
+
+/* ==========================================================================
+   REFINEMENT PASS (Nov 2026) — same design language, clearer hierarchy.
+   Type: Fraunces for display headings, Plus Jakarta Sans for text,
+   IBM Plex Mono for figures and labels. Everything below only adjusts
+   sizes, spacing and the homepage listing card; delete this block to revert.
+   ========================================================================== */
+.container { max-width: 1240px; }
+body { font-size: 1rem; line-height: 1.65; }
+
+/* display headings: larger, tighter, optical sizing on */
+.display { font-weight: 500; letter-spacing: -0.022em; font-variation-settings: "opsz" 144; }
+.hero h1 { font-size: clamp(2.8rem, 6.2vw, 5rem); line-height: 1.02; margin-bottom: 26px; }
+.section-head h2, .row-head h2, .why-copy h2, .cta-inner h2 { font-size: clamp(2.1rem, 4vw, 3.15rem); line-height: 1.06; }
+.row-head h2 { margin-top: 2px; }
+.section-head { max-width: 720px; margin-bottom: 64px; }
+.section-sub { font-size: 1.08rem; line-height: 1.6; color: #5d5f6b; }
+.section-sub--left { max-width: 620px; margin-bottom: 44px; }
+.section-sub--light { color: rgba(255,255,255,0.72); }
+
+/* labels: the mono "departures board" voice, a touch larger and calmer */
+.eyebrow { font-size: 0.76rem; letter-spacing: 0.18em; margin-bottom: 16px; }
+.trust-badge { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; font-weight: 500; }
+
+/* hero: more air, a firmer subtitle */
+.hero { padding: 200px 0 120px; }
+.hero-sub { font-size: 1.15rem; max-width: 640px; }
+
+/* stats: the figures lead, labels step back */
+.hero-stats--strip { margin-top: 64px; padding-top: 44px; }
+.stat-num { font-size: clamp(2rem, 3.2vw, 2.6rem); font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; }
+.stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; font-family: var(--font-mono); }
+
+/* cards: one weight step down, more readable body */
+.quick-card h4, .service-card h3, .office-card h3, .why-item h4 { font-weight: 700; letter-spacing: -0.015em; }
+.service-card h3 { font-size: 1.3rem; }
+.service-card p, .office-card p, .why-item p { font-size: 0.97rem; line-height: 1.6; }
+
+/* consistent section rhythm */
+.services, .listings, .offplan, .offices, .youtube, .why, .reviews, .cta-banner { padding-top: 120px; padding-bottom: 120px; }
+
+/* ===== Homepage listing card: full photo, gradient, essentials only ===== */
+.listing-card--photo {
+  position: relative;
+  flex: 0 0 360px;
+  aspect-ratio: 4 / 5;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--navy-deep);
+  isolation: isolate;
+  box-shadow: 0 18px 40px -22px rgba(18, 23, 61, 0.55);
+}
+.listing-card--photo .lc-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(.2,.7,.3,1);
+  z-index: -2;
+}
+.listing-card--photo:hover { transform: translateY(-4px); box-shadow: 0 26px 50px -24px rgba(18, 23, 61, 0.7); }
+.listing-card--photo:hover .lc-photo { transform: scale(1.05); }
+.listing-card--photo .lc-shade {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(10,12,28,0.35) 0%, rgba(10,12,28,0) 22%, rgba(10,12,28,0) 42%, rgba(10,12,28,0.62) 68%, rgba(10,12,28,0.92) 100%);
+}
+.lc-top {
+  position: absolute; top: 18px; left: 18px; right: 18px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.lc-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 7px 12px; border-radius: 100px;
+  color: #fff; background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.lc-status--sale { background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); border-color: transparent; color: var(--navy-deep); }
+.lc-wa {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.lc-wa img { width: 24px; height: 24px; }
+.lc-wa:hover { transform: scale(1.08); background: rgba(255,255,255,0.28); }
+.lc-info { position: absolute; left: 22px; right: 22px; bottom: 22px; color: #fff; }
+.lc-price {
+  font-family: var(--font-mono); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.01em;
+  color: var(--gold-light); margin-bottom: 6px; font-variant-numeric: tabular-nums;
+}
+.lc-price span { font-family: var(--font-body); font-weight: 500; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin-left: 4px; }
+.lc-title { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 4px; color: #fff; }
+.lc-title a { color: inherit; text-decoration: none; }
+.lc-title a::after { content: ''; position: absolute; inset: 0; z-index: 0; } /* whole card opens the listing */
+.lc-wa, .lc-status { position: relative; z-index: 1; }
+.lc-location { font-size: 0.9rem; color: rgba(255,255,255,0.78); margin: 0 0 14px; }
+.lc-meta {
+  display: flex; gap: 0; margin: 0;
+  padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.22);
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.02em; color: rgba(255,255,255,0.9);
+}
+.lc-meta span + span::before { content: '·'; margin: 0 10px; color: var(--gold-light); }
+@media (max-width: 720px) {
+  .listing-card--photo { flex-basis: 82vw; }
+  .hero { padding: 150px 0 80px; }
+  .services, .listings, .offplan, .offices, .youtube, .why, .reviews, .cta-banner { padding-top: 84px; padding-bottom: 84px; }
+}
+.hero h1, .display { text-wrap: balance; }
+.hero h1 { max-width: 1000px; }

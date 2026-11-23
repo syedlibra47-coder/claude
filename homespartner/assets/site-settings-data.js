@@ -3,15 +3,15 @@ window.SITE_SETTINGS_DATA = {
   typography: {
     headingFont: "Fraunces",
     headingColor: "#1F275C",
-    bodyFont: "Manrope",
+    bodyFont: "Plus Jakarta Sans",
     bodyColor: "#1B1D28",
     dataFont: "IBM Plex Mono",
     dataColor: "#1F275C",
-    cardFont: "Manrope",
+    cardFont: "Plus Jakarta Sans",
     cardColor: "#1F275C",
-    blogFont: "Manrope",
+    blogFont: "Plus Jakarta Sans",
     blogColor: "#1F275C",
-    formFont: "Manrope",
+    formFont: "Plus Jakarta Sans",
     formColor: "#1F275C"
   }
 };

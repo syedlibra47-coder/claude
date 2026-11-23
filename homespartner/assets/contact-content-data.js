@@ -1,20 +1,23 @@
+
+// Synced from the live Supabase database on 2026-11-23.
+
 window.CONTACT_CONTENT_DATA = {
-  heroEyebrow: "Get In Touch",
-  heroHeading: "Contact HomesPartner Real Estate",
-  heroSubtitle: "Speak to a Dubai property specialist about buying, renting, selling or investing off-plan — or reach our overseas desks in the UK, Pakistan and India.",
-  introEyebrow: "Who We Are",
-  introHeading: "Dubai Property Experts, Trusted Since 2007",
-  introParagraph1: "HomesPartner Real Estate has guided buyers, tenants, sellers and investors through the Dubai property market since 2007. Our Sheikh Zayed Road head office runs full-service brokerage, off-plan sales, property management and asset management for residential and commercial real estate across the city — while our international desks in the United Kingdom, Pakistan and India help overseas clients invest in Dubai property with confidence, from first enquiry to handover and beyond.",
-  introParagraph2: "Whether you're searching for an apartment in Dubai Marina, a villa on Palm Jumeirah, an off-plan launch in Dubai Creek Harbour, or need a trusted partner to manage a property you already own, our team is one message away.",
-  networkEyebrow: "Our Global Network",
-  networkHeading: "Four Offices, One Dedicated Team",
-  networkSubtitle: "From our Dubai headquarters to feeder desks in London, Karachi and Ahmedabad, every HomesPartner client is supported by local, on-the-ground advisors.",
-  formEyebrow: "Send An Enquiry",
-  formHeading: "How Can We Help You?",
-  formSubtitle: "Tell us what you're looking for and a HomesPartner advisor from the office nearest you will be in touch shortly.",
-  faqEyebrow: "Frequently Asked",
-  faqHeading: "Contacting HomesPartner",
-  whatsappNumber: "971500000000",
-  generalPhone: "",
-  generalEmail: "info@homespartner.ae"
+  "heroEyebrow": "Get In Touch",
+  "heroHeading": "Contact HomesPartner Real Estate",
+  "heroSubtitle": "Speak to a Dubai property specialist about buying, renting, selling or investing off-plan — or reach our overseas desks in the UK, Pakistan and India.",
+  "introEyebrow": "Who We Are",
+  "introHeading": "Dubai Property Experts, Trusted Since 2007",
+  "introParagraph1": "HomesPartner Real Estate has guided buyers, tenants, sellers and investors through the Dubai property market since 2007. Our Sheikh Zayed Road head office runs full-service brokerage, off-plan sales, property management and asset management for residential and commercial real estate across the city — while our international desks in the United Kingdom, Pakistan and India help overseas clients invest in Dubai property with confidence, from first enquiry to handover and beyond.",
+  "introParagraph2": "Whether you're searching for an apartment in Dubai Marina, a villa on Palm Jumeirah, an off-plan launch in Dubai Creek Harbour, or need a trusted partner to manage a property you already own, our team is one message away.",
+  "networkEyebrow": "Our Global Network",
+  "networkHeading": "Four Offices, One Dedicated Team",
+  "networkSubtitle": "From our Dubai headquarters to feeder desks in London, Karachi and Ahmedabad, every HomesPartner client is supported by local, on-the-ground advisors.",
+  "formEyebrow": "Send An Enquiry",
+  "formHeading": "How Can We Help You?",
+  "formSubtitle": "Tell us what you're looking for and a HomesPartner advisor from the office nearest you will be in touch shortly.",
+  "faqEyebrow": "Frequently Asked",
+  "faqHeading": "Contacting HomesPartner",
+  "whatsappNumber": "971523559027",
+  "generalPhone": "+97144456705",
+  "generalEmail": "info@homespartner.ae"
 };
