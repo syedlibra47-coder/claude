@@ -23,7 +23,7 @@
       if (el.dataset.anim) return;
       const siblings = el.parentElement ? [...el.parentElement.children] : [el];
       el.dataset.anim = kind;
-      el.style.setProperty('--anim-delay', (Math.min(siblings.indexOf(el), 5) * 0.09).toFixed(2) + 's');
+      el.style.setProperty('--anim-delay', (Math.min(siblings.indexOf(el), 6) * 0.05).toFixed(2) + 's');
       io.observe(el);
     });
   });

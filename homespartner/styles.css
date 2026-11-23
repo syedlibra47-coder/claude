@@ -2025,3 +2025,39 @@ h1, h2, h3, h4 { color: var(--ink); }
 }
 .section-sub--light, .offplan .section-sub { color: rgba(255,255,255,0.66); }
 .quiz .section-sub--light { color: var(--gray); }
+
+/* ==========================================================================
+   UI/UX PRO MAX PASS — fixes from the skill's checklist:
+   touch targets >= 44px, one shared motion rhythm (enter ~0.8s, 50ms stagger,
+   small offsets), press feedback, minimal shadows, link contrast.
+   ========================================================================== */
+:root { --dur-in: .8s; --dur-out: .5s; --stagger: .05s; }
+
+/* touch targets */
+.search-panel--bar .toggle-pill { min-height: 44px; padding: 0 22px; }
+.filter-btn { min-height: 44px; }
+.lc-wa { width: 44px; height: 44px; }
+.carousel-arrow { width: 48px; height: 48px; }
+.nav-toggle { width: 44px; height: 44px; align-items: center; justify-content: center; }
+.card-link { display: inline-block; padding: 12px 0; margin: -12px 0; }
+.quiz-back, .quiz-restart { min-height: 44px; }
+button, a, [role="button"], input[type="range"] { touch-action: manipulation; }
+
+/* contrast */
+.search-panel--bar .search-alt a { color: var(--ink); }
+
+/* press feedback (subtle, restores on release) */
+.btn:active, .filter-btn:active, .quiz-option:active, .carousel-arrow:active { transform: scale(0.97); transition-duration: .1s; }
+
+/* minimal: no decorative shadows */
+.search-panel--bar { box-shadow: none; }
+.quiz-card { box-shadow: none; }
+.whatsapp-float { box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+
+/* one motion rhythm */
+.reveal { transform: translateY(24px); transition: opacity var(--dur-in) var(--ease-out), transform var(--dur-in) var(--ease-out); }
+.anim-ready [data-anim] { transform: translateY(24px); transition: opacity var(--dur-in) var(--ease-out), transform var(--dur-in) var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.anim-ready [data-anim="photo"] { transform: none; clip-path: inset(8% 4% 0 4% round 24px); transition: clip-path 1s var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.anim-ready [data-anim="photo"] .lc-photo, .anim-ready [data-anim="photo"] > img { transform: scale(1.1); transition: transform 1.2s var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.home .hero-inner > * { animation-duration: 1s; }
+.home .hero-photo { animation-duration: 2.2s; }
