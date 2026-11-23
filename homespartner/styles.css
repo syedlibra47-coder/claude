@@ -1699,3 +1699,91 @@ body { font-size: 1rem; line-height: 1.65; font-weight: 400; }
 }
 .hero h1, .display { text-wrap: balance; }
 .hero h1 { max-width: 1000px; }
+
+/* ===== MORTGAGE CALCULATOR ===== */
+.mortgage { background: var(--paper-flat); padding: 120px 0; }
+.mortgage-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: start; }
+.mortgage-copy h2 { font-size: clamp(2rem, 3.6vw, 2.85rem); line-height: 1.1; margin-bottom: 14px; }
+.mortgage-copy .section-sub { margin-bottom: 36px; max-width: 520px; }
+.mortgage-form { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 20px; }
+.mf-field { display: flex; flex-direction: column; gap: 8px; }
+.mf-field--wide { grid-column: 1 / -1; }
+.mf-field > span { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+.mf-field > span b { font-family: var(--font-mono); font-weight: 600; color: var(--gold-dark); }
+.mf-field input[type="text"], .mf-field input[type="number"], .mf-field select {
+  height: 54px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--line); background: #fff;
+  font-family: var(--font-body); font-size: 1rem; color: var(--ink);
+}
+.mf-field--wide input { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--navy); }
+.mf-field input:focus, .mf-field select:focus { outline: none; border-color: var(--gold-dark); box-shadow: 0 0 0 3px rgba(201,175,108,0.2); }
+.mf-field input[type="range"] { accent-color: var(--navy); height: 54px; }
+.mortgage-result {
+  background: linear-gradient(160deg, var(--navy-deep), var(--navy) 70%, var(--navy-soft));
+  color: #fff; border-radius: 24px; padding: 40px; box-shadow: 0 30px 60px -30px rgba(18,23,61,0.6);
+  position: sticky; top: 110px;
+}
+.mr-label { font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--gold-light); margin-bottom: 8px; }
+.mr-monthly { font-family: var(--font-head); font-weight: 600; font-size: clamp(2.4rem, 4vw, 3.3rem); letter-spacing: -0.03em; line-height: 1; margin-bottom: 28px; }
+.mr-lines { display: flex; flex-direction: column; margin: 0 0 28px; }
+.mr-lines div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
+.mr-lines dt { color: rgba(255,255,255,0.7); }
+.mr-lines dd { margin: 0; font-family: var(--font-mono); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mr-lines .mr-total { border-bottom: none; padding-top: 16px; font-size: 1rem; }
+.mr-lines .mr-total dt { color: #fff; font-weight: 600; }
+.mr-lines .mr-total dd { color: var(--gold-light); font-size: 1.1rem; }
+.mr-cta { width: 100%; }
+.mr-note { margin-top: 16px; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.55); }
+
+/* ===== 2-MINUTE QUIZ ===== */
+.quiz { background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-soft) 100%); padding: 120px 0; color: #fff; }
+.quiz-shell { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; }
+.quiz-head h2 { color: #fff; font-size: clamp(2rem, 3.6vw, 2.85rem); line-height: 1.1; margin-bottom: 14px; }
+.quiz-card { background: #fff; color: var(--ink); border-radius: 24px; padding: 36px; box-shadow: 0 40px 80px -40px rgba(0,0,0,0.6); min-height: 440px; display: flex; flex-direction: column; }
+.quiz-progress { height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 18px; }
+.quiz-progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); transition: width 0.4s cubic-bezier(.3,.6,.2,1); }
+.quiz-step { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+.quiz-q { font-family: var(--font-head); font-weight: 600; font-size: 1.55rem; letter-spacing: -0.02em; line-height: 1.2; color: var(--navy); margin-bottom: 22px; }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.quiz-option {
+  text-align: left; display: flex; flex-direction: column; gap: 3px; padding: 18px 20px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--paper-flat); cursor: pointer; font-family: var(--font-body);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.quiz-option span { font-weight: 600; font-size: 0.98rem; color: var(--navy); }
+.quiz-option small { font-size: 0.8rem; color: var(--gray); }
+.quiz-option:hover { border-color: var(--gold-dark); background: #fff; transform: translateY(-2px); }
+.quiz-option.is-picked { border-color: var(--navy); background: var(--navy); }
+.quiz-option.is-picked span, .quiz-option.is-picked small { color: #fff; }
+.quiz-nav { margin-top: auto; padding-top: 20px; }
+.quiz-back, .quiz-restart { background: none; border: none; font-family: var(--font-body); font-weight: 600; font-size: 0.88rem; color: var(--gray); cursor: pointer; padding: 6px 0; }
+.quiz-back:hover, .quiz-restart:hover { color: var(--navy); }
+.quiz-lead { color: var(--gray); margin: -10px 0 22px; font-size: 0.95rem; }
+.quiz-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.quiz-form label { display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+.quiz-form-wide, .quiz-submit, .quiz-error, .quiz-privacy { grid-column: 1 / -1; }
+.quiz-form input { height: 52px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); font-family: var(--font-body); font-size: 0.95rem; color: var(--ink); }
+.quiz-form input:focus { outline: none; border-color: var(--gold-dark); box-shadow: 0 0 0 3px rgba(201,175,108,0.2); }
+.quiz-error { color: #B3261E; font-size: 0.85rem; min-height: 0; margin: 0; }
+.quiz-error:empty { display: none; }
+.quiz-privacy { font-size: 0.78rem; color: var(--gray); text-align: center; }
+.quiz-matches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+.quiz-match { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden; color: #fff; text-decoration: none; }
+.quiz-match img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.quiz-match:hover img { transform: scale(1.05); }
+.qm-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,28,0) 35%, rgba(10,12,28,0.9) 100%); }
+.qm-info { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 2px; }
+.qm-price { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--gold-light); }
+.qm-title { font-weight: 600; font-size: 0.92rem; line-height: 1.2; }
+.qm-meta { font-size: 0.7rem; color: rgba(255,255,255,0.75); }
+.quiz-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+@media (max-width: 980px) {
+  .mortgage-grid, .quiz-shell { grid-template-columns: 1fr; gap: 40px; }
+  .mortgage-result { position: static; }
+}
+@media (max-width: 720px) {
+  .mortgage, .quiz { padding: 84px 0; }
+  .mortgage-form, .quiz-options, .quiz-form { grid-template-columns: 1fr; }
+  .mortgage-result, .quiz-card { padding: 26px; border-radius: 18px; }
+  .quiz-matches { grid-template-columns: 1fr 1fr; }
+}

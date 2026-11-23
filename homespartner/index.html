@@ -155,6 +155,81 @@
   </div>
 </section>
 
+<!-- ===== MORTGAGE CALCULATOR ===== -->
+<section class="mortgage" id="mortgage">
+  <div class="container">
+    <div class="mortgage-grid">
+      <div class="mortgage-copy reveal">
+        <p class="eyebrow eyebrow--dark">Mortgage Calculator</p>
+        <h2 class="display">What Your Dubai Home Really Costs</h2>
+        <p class="section-sub">Your monthly repayment and the full cash you need on day one: down payment, Dubai Land Department fee, mortgage registration and agency fee, before you speak to a bank.</p>
+        <form class="mortgage-form" id="mortgageForm" novalidate>
+          <label class="mf-field mf-field--wide">
+            <span>Property price (AED)</span>
+            <input type="text" inputmode="numeric" id="mPrice" value="2,000,000" autocomplete="off">
+          </label>
+          <label class="mf-field">
+            <span>You are</span>
+            <select id="mBuyer">
+              <option value="expat" selected>UAE resident (expat)</option>
+              <option value="national">UAE national</option>
+              <option value="nonres">Non-resident</option>
+            </select>
+          </label>
+          <label class="mf-field">
+            <span>Down payment <b id="mDownLabel">20%</b></span>
+            <input type="range" id="mDown" min="20" max="80" step="5" value="20">
+          </label>
+          <label class="mf-field">
+            <span>Interest rate (%)</span>
+            <input type="number" id="mRate" value="4.25" min="1" max="12" step="0.05">
+          </label>
+          <label class="mf-field">
+            <span>Term <b id="mTermLabel">25 years</b></span>
+            <input type="range" id="mTerm" min="5" max="25" step="1" value="25">
+          </label>
+        </form>
+      </div>
+      <div class="mortgage-result reveal" aria-live="polite">
+        <p class="mr-label">Estimated monthly repayment</p>
+        <p class="mr-monthly"><span id="mMonthly">AED 0</span></p>
+        <dl class="mr-lines">
+          <div><dt>Loan amount</dt><dd id="mLoan">–</dd></div>
+          <div><dt>Down payment</dt><dd id="mDownAmt">–</dd></div>
+          <div><dt>DLD fee (4% + AED 580)</dt><dd id="mDld">–</dd></div>
+          <div><dt>Mortgage registration (0.25% + AED 290)</dt><dd id="mReg">–</dd></div>
+          <div><dt>Agency fee (2% + VAT)</dt><dd id="mAgency">–</dd></div>
+          <div><dt>Bank arrangement (up to 1%)</dt><dd id="mBank">–</dd></div>
+          <div class="mr-total"><dt>Cash needed upfront</dt><dd id="mUpfront">–</dd></div>
+        </dl>
+        <a class="btn btn-gold mr-cta" id="mCta" href="#" target="_blank" rel="noopener">Get Pre-Approval Help on WhatsApp</a>
+        <p class="mr-note">Estimates only. Banks set the final rate, fees and the down payment you need (expats usually 20% on a first home up to AED 5M, non-residents often 40–50%).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2-MINUTE PROPERTY MATCH QUIZ ===== -->
+<section class="quiz" id="quiz">
+  <div class="container">
+    <div class="quiz-shell reveal" id="quizShell">
+      <div class="quiz-head">
+        <p class="eyebrow">2-Minute Property Match</p>
+        <h2 class="display">Find Your Match in Six Questions</h2>
+        <p class="section-sub section-sub--light">Tell us what you want and we’ll shortlist the homes and launches that fit, then an advisor sends you the details.</p>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-progress" aria-hidden="true"><span id="quizBar"></span></div>
+        <p class="quiz-step" id="quizStep">Question 1 of 6</p>
+        <div id="quizBody"></div>
+        <div class="quiz-nav">
+          <button type="button" class="quiz-back" id="quizBack" hidden>&larr; Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== OFFICES ===== -->
 <section class="offices" id="offices">
   <div class="container">
@@ -350,6 +425,7 @@
 <script src="homepage-content.js"></script>
 <script src="homepage-reviews.js"></script>
 <script src="newsletter-signup.js"></script>
+<script src="homepage-tools.js"></script>
 
 </body>
 </html>

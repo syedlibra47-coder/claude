@@ -797,3 +797,31 @@ create policy "Authenticated can upload property photos" on storage.objects
   for insert with check (bucket_id = 'property-photos' and auth.role() = 'authenticated');
 create policy "Authenticated can delete property photos" on storage.objects
   for delete using (bucket_id = 'property-photos' and auth.role() = 'authenticated');
+
+-- ============================================================
+-- QUIZ LEADS (homepage "2-minute property match" quiz)
+-- Visitors insert one row when they finish the quiz; only admins can read.
+-- ============================================================
+create table if not exists quiz_leads (
+  id bigint generated always as identity primary key,
+  name text not null,
+  whatsapp text not null,
+  email text not null default '',
+  answers jsonb not null default '{}'::jsonb,
+  matches jsonb not null default '[]'::jsonb,
+  page_url text not null default '',
+  created_at timestamptz not null default now()
+);
+
+alter table quiz_leads enable row level security;
+
+drop policy if exists "Anyone can submit a quiz lead" on quiz_leads;
+create policy "Anyone can submit a quiz lead" on quiz_leads for insert with check (true);
+
+drop policy if exists "Admins can view quiz leads" on quiz_leads;
+create policy "Admins can view quiz leads" on quiz_leads for select
+  using (current_user_role() in ('admin', 'super_admin'));
+
+drop policy if exists "Admins can delete quiz leads" on quiz_leads;
+create policy "Admins can delete quiz leads" on quiz_leads for delete
+  using (current_user_role() in ('admin', 'super_admin'));
