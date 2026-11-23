@@ -5,7 +5,7 @@ const WHITE = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.78 
 const NAVY = new THREE.MeshStandardMaterial({ color: 0x2a3372, roughness: 0.3, metalness: 0.1 });
 const BRASS = new THREE.MeshStandardMaterial({ color: 0xd9bd7a, roughness: 0.38, metalness: 0.25, emissive: 0x3a2c0c, emissiveIntensity: 0.25 });
 const STONE = new THREE.MeshStandardMaterial({ color: 0xf6f7fa, roughness: 0.92 });
-const WATER = new THREE.MeshStandardMaterial({ color: 0xdfe6f1, roughness: 0.4 });
+const WATER = new THREE.MeshStandardMaterial({ color: 0xbfcde6, roughness: 0.35 });
 
 const box = (w, h, d, mat = WHITE) => {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
@@ -60,7 +60,7 @@ const BUILD = {
     for (let i = 0; i < n; i++) {
       const t = -Math.PI * 0.08 + (i + 0.5) / n * Math.PI * 1.15;
       const v = new THREE.Group();
-      const body = box(0.32, 0.17, 0.24); body.position.y = 0.085; v.add(body);
+      const body = box(0.36, 0.2, 0.28); body.position.y = 0.085; v.add(body);
       const upper = box(0.2, 0.12, 0.2); upper.position.set(-0.04, 0.23, 0); v.add(upper);
       const glass = box(0.205, 0.05, 0.205, NAVY); glass.position.set(-0.04, 0.23, 0); v.add(glass);
       const pool = box(0.12, 0.012, 0.09, BRASS); pool.position.set(0.12, 0.012, 0.16); v.add(pool);
@@ -70,14 +70,39 @@ const BUILD = {
     }
     return g;
   },
+  // Creek Waters 2: two stepped towers at the water's edge
+  creek() {
+    const g = new THREE.Group();
+    const water = new THREE.Mesh(new THREE.CylinderGeometry(2.45, 2.45, 0.04, 96, 1, false, Math.PI * 0.5, Math.PI), WATER);
+    water.position.y = 0.02; water.receiveShadow = true; g.add(water);
+    const pod = box(2.0, 0.3, 1.0); pod.position.set(0, 0.15, -0.6); g.add(pod);
+    const a = tower(0.6, 2.9, 0.6, { crown: true }); a.position.set(-0.5, 0.3, -0.6); g.add(a);
+    const b = tower(0.6, 2.3, 0.6); b.position.set(0.5, 0.3, -0.6); g.add(b);
+    const deck = box(2.2, 0.06, 0.5, BRASS); deck.position.set(0, 0.03, 0.1); g.add(deck);
+    return g;
+  },
+  // Azizi Venice: mid-rise blocks around a lagoon
+  venice() {
+    const g = new THREE.Group();
+    const lagoon = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 0.04, 64), WATER);
+    lagoon.position.y = 0.02; g.add(lagoon);
+    for (let i = 0; i < 6; i++) {
+      const t = i / 6 * Math.PI * 2 + 0.3;
+      const blk = tower(0.62, 0.9 + (i % 3) * 0.25, 0.42, { step: 0.2 });
+      blk.position.set(Math.cos(t) * 1.65, 0, Math.sin(t) * 1.65);
+      blk.rotation.y = -t + Math.PI / 2;
+      g.add(blk);
+    }
+    return g;
+  },
 };
 
 // camera framing per model: distance and target height
-const FRAME = { towers: [12.5, 1.3], tall: [14.5, 1.7], villas: [10.5, 0.0] };
+const FRAME = { towers: [12.5, 1.3], tall: [14.5, 1.7], villas: [8.2, 0.1], creek: [12, 1.1], venice: [10.5, 0.2] };
 
-export function mount(host, { live = true } = {}) {
+export function mount(host, { live = true, preserve = false, offset = -0.55 } = {}) {
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); }
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power', preserveDrawingBuffer: preserve }); }
   catch { return null; }
   if (!renderer.getContext()) return null;
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -86,6 +111,8 @@ export function mount(host, { live = true } = {}) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.setClearColor(0x000000, 0);
+  // a shader that fails to compile drops the live model and leaves the still in place
+  renderer.debug.onShaderError = () => { host.classList.remove('is-live'); renderer.domElement.remove(); renderer.setAnimationLoop(null); };
   const canvas = renderer.domElement;
   canvas.setAttribute('role', 'img');
   canvas.setAttribute('aria-label', 'Scale model of the launch on show. Drag to turn it.');
@@ -153,7 +180,7 @@ export function mount(host, { live = true } = {}) {
     if (!needs) return;
     turn.rotation.y = angle;
     camera.position.set(-cam.r * 0.1, cam.y + cam.r * 0.4, cam.r);
-    camera.lookAt(-0.55, cam.y - 0.35, 0);
+    camera.lookAt(offset, cam.y - 0.35, 0);
     renderer.render(scene, camera);
     needs = false;
   }
@@ -182,6 +209,7 @@ export function mount(host, { live = true } = {}) {
   }
 
   return {
+    renderNow() { needs = true; frame(performance.now()); },
     show(kind, instant = false) {
       if (shown && shown.userData.kind === kind) return;
       if (leaving) turn.remove(leaving);

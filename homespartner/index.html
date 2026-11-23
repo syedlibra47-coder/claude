@@ -36,7 +36,7 @@
 }
 </style>
 <!-- brand commitments (Homes Partner Brand Guidelines): Poppins, HomesPartner Blue as the action colour,
-     the gold gradient as trim only -->
+     the gold gradient as trim only; muted text darkened to 7:1 -->
 <style>
 @font-face { font-family: "Poppins"; font-style: normal; font-weight: 300; font-display: swap; src: url(assets/fonts/poppins-300.woff2) format("woff2"); }
 @font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/poppins-400.woff2) format("woff2"); }
@@ -48,6 +48,7 @@
   --display-weight: 600;
   --display-tracking: -0.025em;
   --display-tracking-xl: -0.035em;
+  --p-muted: #4b5172;
   --p-action: #20275c; --p-action-ink: #ffffff;
   --p-accent-ink: #20275c; --p-inv-action-ink: #20275c;
   --gold-1: #e2c980; --gold-2: #b59e5a; --gold-text: #715e30;
@@ -55,19 +56,20 @@
   --stone: #f3f4f8;
 }
 body { font-weight: 300; }
-b, strong, .rows__name, .t-card, h3 { font-weight: 500; }
+b, strong, .rows__name, .t-card { font-weight: 500; }
+h3 { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
 ::selection { background: color-mix(in oklab, var(--gold-1) 55%, white); color: var(--p-ink); }
 html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent; accent-color: var(--p-ink); caret-color: var(--p-ink); }
 
 /* the logo, drawn from the master artwork: three diamonds, the gold one interlocking */
-.hp-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--p-ink); text-decoration: none; }
+.hp-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--p-ink); text-decoration: none; white-space: nowrap; }
 .hp-logo svg { width: 46px; height: 26px; flex: none; }
 .hp-logo__words { display: grid; line-height: 1; }
 .hp-logo__name { font: 600 19px/1 var(--font-display); letter-spacing: .06em; }
 .hp-logo__name span { background: var(--brass); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hp-logo__sub { font: 400 8.5px/1 var(--font-text); letter-spacing: .42em; color: #6f7280; margin-top: 5px; }
 
-/* hero: the scale model on its plinth, the plaque beside it */
+/* hero: the scale model on its plinth, the plaque in front of it */
 .hero .hero-split { align-items: stretch; }
 .hero-copy h1 { max-width: 15ch; font-size: clamp(42px, 4.3vw, 66px); }
 .finder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: var(--s-6); }
@@ -77,45 +79,41 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 .model { position: relative; min-height: 420px; }
 .model canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
 .model canvas:active { cursor: grabbing; }
-.model__still { position: absolute; inset: 0; width: 100%; height: 100%; }
-.model.is-live .model__still { display: none; }
-.plaque { position: absolute; left: 0; bottom: 0; width: min(372px, 92%); background: #fff; border: 1px solid color-mix(in oklab, var(--gold-2) 55%, white);
-  border-radius: 6px; padding: 18px 20px 20px; box-shadow: 0 18px 40px -24px rgba(32, 39, 92, .45); z-index: 2; }
-.plaque__rule { height: 2px; border: 0; margin: 0 0 14px; background: var(--brass); border-radius: 2px; }
-.plaque h2 { font-size: 21px; letter-spacing: -0.01em; margin: 0; }
+.model__still { position: absolute; inset: 0 0 auto auto; width: 86%; height: auto; max-height: 100%; object-fit: contain; }
+.model.is-live .model__still { visibility: hidden; }
+.plaque { position: absolute; left: 0; bottom: 0; width: min(372px, 92%); background: #fff; border: 1px solid color-mix(in oklab, var(--gold-2) 60%, white);
+  border-radius: 6px; padding: 20px; box-shadow: 0 18px 40px -24px rgba(32, 39, 92, .45); z-index: 2; }
+.plaque__name { font: 600 21px/1.2 var(--font-display); letter-spacing: -0.01em; margin: 0; color: var(--p-ink); }
 .plaque__dev { color: var(--p-muted); font-size: 14px; margin: 2px 0 12px; }
 .plaque dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0 0 16px; font-size: 14px; }
 .plaque dt { color: var(--p-muted); }
 .plaque dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
-.plaque__pick { display: flex; flex-wrap: nowrap; gap: 6px; margin: 0 0 14px; }
+.plaque__pick { display: flex; flex-wrap: nowrap; gap: 6px; margin: 0 0 16px; }
 .plaque__pick button, .filters button { font: 500 13px/1 var(--font-text); height: 44px; padding: 0 13px; white-space: nowrap; border-radius: 999px; border: 1px solid var(--line-strong, #d4d7e2);
   background: #fff; color: var(--p-ink); cursor: pointer; transition: background-color var(--m-in, 150ms) var(--ease), border-color var(--m-in, 150ms) var(--ease), color var(--m-in, 150ms) var(--ease); }
 .plaque__pick button:hover, .filters button:hover { border-color: var(--p-ink); }
 .plaque__pick button[aria-pressed="true"], .filters button[aria-pressed="true"] { background: var(--p-ink); border-color: var(--p-ink); color: #fff; }
 .model__pause { position: absolute; right: 0; bottom: 0; z-index: 2; }
 
-/* launches: brass-ruled plaques in rows */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--s-5); }
-.launches { border-top: 1px solid var(--line); }
-.launch { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) 300px; gap: 16px; align-items: center;
-  padding: 16px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
-.launch[hidden] { display: none; }
-.launch__name { font-weight: 500; font-size: 17px; }
-.launch__name small { display: block; font-weight: 300; font-size: 14px; color: var(--p-muted); }
-.launch__cell { font-size: 15px; }
-.launch__cell span { display: block; font-size: 12px; color: var(--p-muted); }
-.launch__actions { display: flex; gap: 8px; justify-content: flex-end; }
-.launches__empty { padding: 24px 0; color: var(--p-muted); }
-.launch-head { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)) auto; gap: 16px; padding-bottom: 10px; font-size: 13px; color: var(--p-muted); }
+/* launches: the board beside the model of the row in focus */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: var(--s-5) 0; }
+.board__frame { position: relative; aspect-ratio: 16 / 10; background: var(--stone); border-radius: 8px; overflow: hidden; }
+.board__frame .frame__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 3%; }
+.board .rows > li { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding-block: 14px; }
+.board .rows > li[hidden] { display: none; }
+.launch__meta { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 4px 0 0; font-size: 14px; color: var(--p-muted); font-variant-numeric: tabular-nums; }
+.launch__meta b { color: var(--p-ink); font-weight: 500; }
+.launch__actions { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 8px; }
+.launches__empty { padding: 20px 0; color: var(--p-muted); }
 
 /* payment plan: the milestone wall */
-.wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: end; height: clamp(260px, 38vh, 380px); margin-top: var(--s-6); padding: 0 0 0; border-bottom: 2px solid var(--p-ink); }
-.wall__bar { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
-.wall__fill { height: var(--h, var(--pct)); min-height: 44px; background: var(--p-ink); border-radius: 4px 4px 0 0; position: relative; transition: height 600ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)); }
-.wall__fill::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--brass); border-radius: 4px 4px 0 0; }
-.wall__pct { position: absolute; top: 14px; left: 16px; color: #fff; font: 600 clamp(28px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
-.wall__labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 16px; }
-.wall__labels h3 { font-size: 17px; margin: 0 0 4px; }
+.wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); align-items: end; height: clamp(260px, 38vh, 380px); margin-top: var(--s-6); }
+.wall__bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.wall__fill { height: var(--h, var(--pct)); min-height: 64px; background: var(--p-ink); border-radius: 6px 6px 0 0; position: relative; transition: height 600ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)); }
+.wall__fill::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: var(--brass); border-radius: 6px 6px 0 0; }
+.wall__pct { position: absolute; top: 16px; left: 18px; color: #fff; font: 600 clamp(26px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.wall__labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); margin-top: 16px; }
+.wall__title { margin: 0 0 4px; font-weight: 500; font-size: 17px; }
 .wall__labels p { margin: 0; color: var(--p-muted); font-size: 15px; }
 .plan-for { font-weight: 500; }
 
@@ -127,70 +125,100 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 .lightbox__plan .inner { fill: none; stroke: var(--p-ink); stroke-width: 1; }
 .lightbox__plan .door { fill: none; stroke: var(--gold-2); stroke-width: 1.2; }
 .lightbox__plan text { font: 400 7px var(--font-text); fill: var(--p-muted); }
-.lightbox h3 { font-size: 17px; margin: 0; }
+.lightbox h3 { margin: 0; }
 .lightbox__meta { color: var(--p-muted); font-size: 14px; margin: 2px 0 0; }
 .lightbox__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; }
 .price { font-weight: 500; font-variant-numeric: tabular-nums; }
-.tag { font-size: 12px; font-weight: 500; color: var(--gold-text); }
+.tag { font-size: 13px; font-weight: 500; color: var(--gold-text); }
 
 /* areas */
-.areas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--gutter); }
-.areas a { display: grid; gap: 4px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
-.areas a b { font-size: 19px; font-weight: 500; }
-.areas a span { color: var(--p-muted); font-size: 15px; }
+.areas { display: grid; gap: 0; }
+.areas a { display: grid; grid-template-columns: 1fr; gap: 0; padding: 7px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.areas a:first-child { padding-top: 0; }
+.areas a b { font-size: 17px; font-weight: 500; }
+.areas a span { color: var(--p-muted); font-size: 14px; line-height: 1.45; }
 .areas a:hover b { text-decoration: underline; text-decoration-color: var(--gold-2); text-underline-offset: 5px; text-decoration-thickness: 2px; }
-
-.area-map { width: 100%; height: auto; margin-top: var(--s-6); }
-.area-map__sea { fill: #eef1f7; }
+.area-map { width: 100%; height: min(560px, calc(100svh - 390px)); background: #f6f8fc; border-radius: 8px; }
+.area-map__sea { fill: #e4eaf4; }
 .area-map__coast { fill: none; stroke: var(--p-ink); stroke-width: 1.5; }
-.area-map__creek { fill: none; stroke: #b9c3d8; stroke-width: 5; stroke-linecap: round; }
+.area-map__creek { fill: none; stroke: #b9c6dd; stroke-width: 5; stroke-linecap: round; }
 .area-map__palm { stroke: var(--gold-2); stroke-width: 2.4; stroke-linecap: round; }
 .area-map__pins circle { fill: #fff; stroke: var(--p-ink); stroke-width: 2; }
 .area-map__pins circle.is-launch { fill: var(--p-ink); stroke: var(--gold-1); stroke-width: 3; }
-.area-map__pins text { font: 400 11px var(--font-text); fill: var(--p-muted); }
+.area-map__pins text { font: 400 12px var(--font-text); fill: var(--p-ink); }
 
 /* the statement */
 .statement > .wrap { display: grid; align-content: center; min-height: 100%; }
 .statement .mo-wh__text { max-width: 30ch; font: 600 clamp(34px, 3.4vw, 56px)/1.15 var(--font-display); letter-spacing: -0.02em; }
 
 /* UK desk */
-.steps { counter-reset: step; display: grid; gap: 0; }
+.steps { counter-reset: step; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .steps li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.steps li:first-child { padding-top: 0; }
 .steps li::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
   border: 1px solid var(--gold-2); color: var(--p-ink); font-weight: 500; font-size: 14px; }
-.steps--short { margin: var(--s-5) 0 var(--s-5); }
-.steps h3 { font-size: 16px; margin: 4px 0 2px; }
-.steps p { margin: 0; color: var(--p-muted); font-size: 15px; }
-.figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px var(--gutter); align-content: start; }
-.figures div { display: grid; gap: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
-.figures dd { margin: 0; font: 600 clamp(30px, 2.6vw, 44px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.step__title { margin: 4px 0 2px; font-weight: 500; font-size: 17px; }
+.steps p:not(.step__title) { margin: 0; color: var(--p-muted); font-size: 15px; }
+.route { width: 100%; height: min(300px, 32vh); background: #f6f8fc; border-radius: 8px; }
+.route text { font: 400 13px var(--font-text); fill: var(--p-ink); }
+.route .city { font-weight: 500; font-size: 15px; }
+.figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px var(--gutter); margin: var(--s-6) 0 0; }
+.figures div { display: grid; gap: 4px; }
+.figures dd { margin: 0; font: 600 clamp(28px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
 .figures dt { color: var(--p-muted); font-size: 14px; }
-.figures .to-confirm { font-size: 12px; color: var(--gold-text); font-weight: 500; }
+.figures .to-confirm { font-size: 13px; color: var(--gold-text); font-weight: 500; }
 
 /* guides */
-.guide { display: grid; gap: 12px; align-content: start; padding: 24px; border: 1px solid var(--line); border-radius: 8px; }
-.guide h3 { font-size: 19px; margin: 0; }
+.guide { display: grid; gap: 12px; align-content: start; }
+.guide__cover { aspect-ratio: 2 / 1; background: var(--stone); border-radius: 8px; display: grid; place-items: center; padding: 8%; }
+.guide__cover svg { width: 100%; height: 100%; }
+.guide h3 { margin: 4px 0 0; }
 .guide p { margin: 0; color: var(--p-muted); }
-.guide .btn { justify-self: start; margin-top: 8px; }
+.guide .btn { justify-self: start; margin-top: 6px; }
+
+/* contact */
+.contact-form { grid-template-columns: 1fr; }
+.shortlist { width: 100%; height: auto; margin: var(--s-5) 0; background: var(--stone); border-radius: 8px; }
+.shortlist text { font: 400 11px var(--font-text); fill: var(--p-ink); }
+.shortlist .t { font-weight: 600; font-size: 13px; }
+.shortlist .m { fill: var(--p-muted); }
 
 @media (max-width: 1023px) {
-  .launch, .launch-head { grid-template-columns: minmax(0, 1fr) auto; }
-  .launch-head { display: none; }
-  .launch__cell { display: none; }
-  .launch__cell.is-keep { display: block; }
+  .launch__actions .btn--secondary { display: none; }
 }
 @media (max-width: 639px) {
-  .finder { grid-template-columns: 1fr; }
-  .finder .btn { justify-self: stretch; }
-  .model { min-height: 360px; }
-  .plaque { position: relative; width: 100%; margin-top: 300px; }
-  .model__pause { top: 0; bottom: auto; }
-  .wall { height: 240px; gap: 10px; }
+  .hp-logo svg { width: 36px; height: 21px; }
+  .hp-logo__name { font-size: 15px; }
+  .nav:not(.is-open) .nav__actions { display: none; }
+  .nav:not(.is-open) .nav__actions + .nav__toggle { margin-left: auto; }
+  #areas .areas a span { display: none; }
+  #areas .areas { grid-template-columns: 1fr 1fr; column-gap: 16px; }
+  #areas .areas a:nth-child(2) { padding-top: 0; }
+  .guide { grid-template-columns: 112px 1fr; gap: 4px 14px; }
+  .guide__cover { grid-row: 1 / span 3; aspect-ratio: 1; padding: 10%; }
+  .guide .btn { grid-column: 2; }
+  .guide p { display: none; }
+  #homes .lightbox__meta { display: none; }
+  #launches, #uk-desk { --hm: 2; }
+  .area-map { height: auto; }
+  .route { height: auto; }
+  .finder { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: var(--s-5); }
+  .finder .field:first-child { grid-column: 1 / -1; }
+  .finder .btn { grid-column: auto; align-self: end; height: 48px; }
+  .hero .model { min-height: 0; height: 190px; margin-top: var(--s-4); }
+  .hero .model__still { width: 100%; height: 100%; inset: 0; }
+  .hero .plaque, .hero .model__pause { display: none; }
+  .board__frame { aspect-ratio: 2 / 1; margin-bottom: var(--s-4); }
+  #launches .section-head p { display: none; }
+  #uk-desk .grid, #launches .grid { flex: 1 1 auto; align-content: space-between; }
+  .wall { height: 240px; }
   .wall__labels { gap: 10px; }
-  .wall__labels h3 { font-size: 14px; }
+  .wall__title { font-size: 14px; }
   .wall__labels p { font-size: 13px; }
-  .areas { grid-template-columns: 1fr; }
-  .launch__actions .btn--secondary { display: none; }
+  .areas a { grid-template-columns: 1fr; }
+  #homes .lightbox { display: grid; grid-template-columns: 112px 1fr; gap: 6px 14px; align-items: start; }
+  #homes .lightbox__plan { grid-row: 1 / span 4; aspect-ratio: 1; padding: 10%; }
+  #homes .lightbox__foot { flex-wrap: wrap; gap: 4px 12px; }
 }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
@@ -203,7 +231,9 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 <!-- type: service (a brokerage: people are hired)
      deal: hero split 5/7 holding the client's scale model (impeccable direction: sales gallery), nav plain, close close--type,
      footer columns, rhythm space, buttons solid, mark: the client's logo; palette: the client's brand colours via start.mjs brand
-     moments: word-highlight in #advisor (the one promise the page makes, lit word by word) -->
+     moments: word-highlight in #advisor (the one promise the page makes, lit word by word)
+     pictures: renders of the scale models (assets/models, made from assets/model.js), drawn floor plans, maps and covers;
+     the client's photographs replace none of these yet: none were supplied -->
 <header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
@@ -235,42 +265,25 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
         <div class="hero-copy span-5">
           <h1 id="hero-h">Dubai off&#8209;plan property for UK and UAE buyers</h1>
           <p class="t-lead">Compare new launches by developer, handover date and payment plan, then talk to one HomesPartner advisor on WhatsApp about the exact unit you want.</p>
-          <form class="finder" action="#launches" method="get" data-finder>
+          <div class="finder" role="search" aria-label="Find a launch" data-finder>
             <div class="field"><label for="f-dev">Developer</label>
               <select id="f-dev" name="developer"><option value="">Any</option><option>Emaar</option><option>DAMAC</option><option>Sobha</option><option>Nakheel</option><option>Azizi</option></select></div>
             <div class="field"><label for="f-area">Area</label>
               <select id="f-area" name="area"><option value="">Any</option><option>Sobha Hartland 2</option><option>Business Bay</option><option>Palm Jebel Ali</option><option>Dubai Creek Harbour</option><option>Dubai South</option></select></div>
             <div class="field"><label for="f-year">Handover by</label>
               <select id="f-year" name="year"><option value="">Any year</option><option>2027</option><option>2028</option></select></div>
-            <button class="btn btn--primary" type="submit">Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
-          </form>
+            <a class="btn btn--primary" href="#launches" data-find>Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          </div>
         </div>
         <div class="hero-visual model span-7 start-6" data-model>
-          <svg class="model__still" viewBox="0 0 700 520" role="img" aria-label="Scale model of Sobha One: a podium with three stepped towers on a round white plinth">
-            <ellipse cx="400" cy="430" rx="250" ry="58" fill="#eceef4"/>
-            <ellipse cx="400" cy="418" rx="250" ry="58" fill="#ffffff" stroke="#d8dbe6"/>
-            <path d="M150 418a250 58 0 0 0 500 0" fill="none" stroke="#c9ad6a" stroke-width="3"/>
-            <g fill="#ffffff" stroke="#20275c" stroke-width="1.4">
-              <path d="M290 400V350l110-30 110 30v50l-110 30z"/>
-              <path d="M330 360V130l40-12 40 12v230l-40 12z"/>
-              <path d="M410 350V190l34-10 34 10v160l-34 10z"/>
-              <path d="M300 372V240l28-8 28 8v132l-28 8z"/>
-            </g>
-            <g stroke="#20275c" stroke-width="1" opacity=".55">
-              <path d="M330 160l40 12 40-12M330 200l40 12 40-12M330 240l40 12 40-12M330 280l40 12 40-12M330 320l40 12 40-12"/>
-              <path d="M410 220l34 10 34-10M410 260l34 10 34-10M410 300l34 10 34-10"/>
-              <path d="M300 270l28 8 28-8M300 310l28 8 28-8"/>
-            </g>
-            <path d="M330 130l40-12 40 12" fill="none" stroke="#c9ad6a" stroke-width="3"/>
-          </svg>
+          <img class="model__still" src="assets/models/sobha-one.webp" alt="Scale model of Sobha One: three stepped towers on a podium, on a round white plinth" width="1600" height="1200" fetchpriority="high" data-model-still>
           <div class="plaque" data-plaque aria-live="polite">
-            <hr class="plaque__rule">
             <div class="plaque__pick" role="group" aria-label="Choose the model">
               <button type="button" aria-pressed="true" data-pick="sobha-one">Sobha One</button>
               <button type="button" aria-pressed="false" data-pick="safa-two">Safa Two</button>
               <button type="button" aria-pressed="false" data-pick="palm-jebel-ali">Palm Jebel Ali</button>
             </div>
-            <h2 data-f="name">Sobha One</h2>
+            <p class="plaque__name" data-f="name">Sobha One</p>
             <p class="plaque__dev" data-f="where">Sobha, Sobha Hartland 2</p>
             <dl>
               <dt>Handover</dt><dd data-f="handover">Q4 2027</dd>
@@ -286,60 +299,58 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 
   <section class="section" id="launches" aria-labelledby="launches-h">
     <div class="wrap">
-      <div class="section-head">
-        <h2 id="launches-h">New launches by developer</h2>
-        <p>Each launch shows its handover quarter, starting price and payment plan. Pick a developer to narrow the list.</p>
-      </div>
-      <div class="filters" role="group" aria-label="Filter by developer" data-filters>
-        <button type="button" aria-pressed="true" data-dev="">All developers</button>
-        <button type="button" aria-pressed="false" data-dev="Emaar">Emaar</button>
-        <button type="button" aria-pressed="false" data-dev="DAMAC">DAMAC</button>
-        <button type="button" aria-pressed="false" data-dev="Sobha">Sobha</button>
-        <button type="button" aria-pressed="false" data-dev="Nakheel">Nakheel</button>
-        <button type="button" aria-pressed="false" data-dev="Azizi">Azizi</button>
-      </div>
-      <div class="launches" data-launches>
-        <div class="launch" data-dev="Sobha" data-area="Sobha Hartland 2" data-year="2027" data-id="sobha-one">
-          <p class="launch__name">Sobha One<small>Sobha</small></p>
-          <p class="launch__cell"><span>Area</span>Sobha Hartland 2</p>
-          <p class="launch__cell is-keep"><span>Handover</span>Q4 2027</p>
-          <p class="launch__cell"><span>From</span>AED 1.65M</p>
-          <p class="launch__cell"><span>Plan</span>60/40</p>
-          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="sobha-one">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Sobha One">Ask on WhatsApp</a></div>
+      <div class="grid grid--top board" data-peek>
+        <div class="span-5 board__side">
+        <div class="section-head">
+          <h2 id="launches-h">Off-plan launches by developer</h2>
+          <p>Each launch shows its handover quarter, starting price and payment plan. Pick a developer to narrow the list.</p>
         </div>
-        <div class="launch" data-dev="DAMAC" data-area="Business Bay" data-year="2028" data-id="safa-two">
-          <p class="launch__name">Safa Two<small>DAMAC</small></p>
-          <p class="launch__cell"><span>Area</span>Business Bay</p>
-          <p class="launch__cell is-keep"><span>Handover</span>Q2 2028</p>
-          <p class="launch__cell"><span>From</span>AED 2.1M</p>
-          <p class="launch__cell"><span>Plan</span>80/20</p>
-          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="safa-two">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Safa%20Two%20(ref%20HP-L02)%3A%20https%3A%2F%2Fhomespartner.ae%2Fbusiness-bay%2Fsafa-two%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Safa Two">Ask on WhatsApp</a></div>
+        <div class="filters" role="group" aria-label="Filter by developer" data-filters>
+          <button type="button" aria-pressed="true" data-dev="">All developers</button>
+          <button type="button" aria-pressed="false" data-dev="Emaar">Emaar</button>
+          <button type="button" aria-pressed="false" data-dev="DAMAC">DAMAC</button>
+          <button type="button" aria-pressed="false" data-dev="Sobha">Sobha</button>
+          <button type="button" aria-pressed="false" data-dev="Nakheel">Nakheel</button>
+          <button type="button" aria-pressed="false" data-dev="Azizi">Azizi</button>
         </div>
-        <div class="launch" data-dev="Nakheel" data-area="Palm Jebel Ali" data-year="2028" data-id="palm-jebel-ali">
-          <p class="launch__name">Palm Jebel Ali Beach Villas<small>Nakheel</small></p>
-          <p class="launch__cell"><span>Area</span>Palm Jebel Ali</p>
-          <p class="launch__cell is-keep"><span>Handover</span>Q4 2028</p>
-          <p class="launch__cell"><span>From</span>AED 18.5M</p>
-          <p class="launch__cell"><span>Plan</span>80/20</p>
-          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="palm-jebel-ali">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Palm%20Jebel%20Ali%20Beach%20Villas%20(ref%20HP-L03)%3A%20https%3A%2F%2Fhomespartner.ae%2Fpalm-jebel-ali%2Fbeach-villas%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Palm Jebel Ali Beach Villas">Ask on WhatsApp</a></div>
+        <div class="frame board__frame">
+          <img class="frame__img" data-peek-for="sobha-one" src="assets/models/sobha-one.webp" alt="Scale model of Sobha One: three stepped towers on a podium" loading="lazy">
+          <img class="frame__img" data-peek-for="safa-two" src="assets/models/safa-two.webp" alt="Scale model of Safa Two: two slender towers joined by a sky bridge" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="palm-jebel-ali" src="assets/models/palm-jebel-ali.webp" alt="Scale model of Palm Jebel Ali Beach Villas: villas along a curved frond over water" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="creek-waters-2" src="assets/models/creek-waters-2.webp" alt="Scale model of Creek Waters 2: two stepped towers at the water's edge" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="azizi-venice" src="assets/models/azizi-venice.webp" alt="Scale model of Azizi Venice: mid-rise blocks around a lagoon" loading="lazy" hidden>
         </div>
-        <div class="launch" data-dev="Emaar" data-area="Dubai Creek Harbour" data-year="2028" data-id="creek-waters-2">
-          <p class="launch__name">Creek Waters 2<small>Emaar</small></p>
-          <p class="launch__cell"><span>Area</span>Dubai Creek Harbour</p>
-          <p class="launch__cell is-keep"><span>Handover</span>Q1 2028</p>
-          <p class="launch__cell"><span>From</span>AED 1.4M</p>
-          <p class="launch__cell"><span>Plan</span>90/10</p>
-          <div class="launch__actions"><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Creek%20Waters%202%20(ref%20HP-L04)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-creek-harbour%2Fcreek-waters-2%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Creek Waters 2">Ask on WhatsApp</a></div>
         </div>
-        <div class="launch" data-dev="Azizi" data-area="Dubai South" data-year="2027" data-id="azizi-venice">
-          <p class="launch__name">Azizi Venice<small>Azizi</small></p>
-          <p class="launch__cell"><span>Area</span>Dubai South</p>
-          <p class="launch__cell is-keep"><span>Handover</span>Q4 2027</p>
-          <p class="launch__cell"><span>From</span>AED 690K</p>
-          <p class="launch__cell"><span>Plan</span>50/50</p>
-          <div class="launch__actions"><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Azizi%20Venice%20(ref%20HP-L05)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-south%2Fazizi-venice%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Azizi Venice">Ask on WhatsApp</a></div>
+        <div class="span-7 start-6">
+          <ul class="rows" data-launches>
+            <li data-peek-to="sobha-one" tabindex="0" data-dev="Sobha" data-area="Sobha Hartland 2" data-year="2027">
+              <span class="rows__name">Sobha One, Sobha Hartland 2</span>
+              <p class="launch__meta"><span>Sobha</span><span>Handover <b>Q4 2027</b></span><span>From <b>AED 1.65M</b></span><span>Plan <b>60/40</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="sobha-one">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Sobha One">Ask on WhatsApp</a></span>
+            </li>
+            <li data-peek-to="safa-two" tabindex="0" data-dev="DAMAC" data-area="Business Bay" data-year="2028">
+              <span class="rows__name">Safa Two, Business Bay</span>
+              <p class="launch__meta"><span>DAMAC</span><span>Handover <b>Q2 2028</b></span><span>From <b>AED 2.1M</b></span><span>Plan <b>80/20</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="safa-two">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Safa%20Two%20(ref%20HP-L02)%3A%20https%3A%2F%2Fhomespartner.ae%2Fbusiness-bay%2Fsafa-two%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Safa Two">Ask on WhatsApp</a></span>
+            </li>
+            <li data-peek-to="palm-jebel-ali" tabindex="0" data-dev="Nakheel" data-area="Palm Jebel Ali" data-year="2028">
+              <span class="rows__name">Beach Villas, Palm Jebel Ali</span>
+              <p class="launch__meta"><span>Nakheel</span><span>Handover <b>Q4 2028</b></span><span>From <b>AED 18.5M</b></span><span>Plan <b>80/20</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="palm-jebel-ali">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Palm%20Jebel%20Ali%20Beach%20Villas%20(ref%20HP-L03)%3A%20https%3A%2F%2Fhomespartner.ae%2Fpalm-jebel-ali%2Fbeach-villas%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Palm Jebel Ali Beach Villas">Ask on WhatsApp</a></span>
+            </li>
+            <li data-peek-to="creek-waters-2" tabindex="0" data-dev="Emaar" data-area="Dubai Creek Harbour" data-year="2028">
+              <span class="rows__name">Creek Waters 2, Dubai Creek Harbour</span>
+              <p class="launch__meta"><span>Emaar</span><span>Handover <b>Q1 2028</b></span><span>From <b>AED 1.4M</b></span><span>Plan <b>90/10</b></span></p>
+              <span class="launch__actions"><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Creek%20Waters%202%20(ref%20HP-L04)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-creek-harbour%2Fcreek-waters-2%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Creek Waters 2">Ask on WhatsApp</a></span>
+            </li>
+            <li data-peek-to="azizi-venice" tabindex="0" data-dev="Azizi" data-area="Dubai South" data-year="2027">
+              <span class="rows__name">Azizi Venice, Dubai South</span>
+              <p class="launch__meta"><span>Azizi</span><span>Handover <b>Q4 2027</b></span><span>From <b>AED 690K</b></span><span>Plan <b>50/50</b></span></p>
+              <span class="launch__actions"><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Azizi%20Venice%20(ref%20HP-L05)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-south%2Fazizi-venice%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Azizi Venice">Ask on WhatsApp</a></span>
+            </li>
+          </ul>
+          <p class="launches__empty" data-empty hidden>No launch matches these choices yet. Ask on WhatsApp and an advisor will tell you what is coming in that area.</p>
         </div>
-        <p class="launches__empty" data-empty hidden>No launch matches these choices yet. Ask on WhatsApp and an advisor will tell you what is coming in that area.</p>
       </div>
     </div>
   </section>
@@ -350,15 +361,15 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
         <h2 id="plans-h">Payment plans before you call</h2>
         <p>How the price of <span class="plan-for" data-plan-name>Sobha One</span> is paid, from the booking deposit to the keys. Developers change plans between phases, so we confirm the live plan in writing.</p>
       </div>
-      <div class="wall" data-wall>
+      <div class="wall" role="img" aria-label="Payment plan: 10% booking deposit, 50% during construction, 40% on handover" data-wall>
         <div class="wall__bar"><div class="wall__fill" style="--pct: 10%; --h: 20%" data-bar="0"><span class="wall__pct" data-pct="0">10%</span></div></div>
         <div class="wall__bar"><div class="wall__fill" style="--pct: 50%; --h: 100%" data-bar="1"><span class="wall__pct" data-pct="1">50%</span></div></div>
         <div class="wall__bar"><div class="wall__fill" style="--pct: 40%; --h: 80%" data-bar="2"><span class="wall__pct" data-pct="2">40%</span></div></div>
       </div>
       <div class="wall__labels">
-        <div><h3>Booking deposit</h3><p>Paid by bank transfer when you reserve the unit.</p></div>
-        <div><h3>During construction</h3><p data-mid>In instalments until Q4 2027.</p></div>
-        <div><h3>On handover</h3><p>Paid when the keys are released, or financed with a mortgage.</p></div>
+        <div><p class="wall__title">Booking deposit</p><p>Paid by bank transfer when you reserve the unit.</p></div>
+        <div><p class="wall__title">During construction</p><p data-mid>In instalments until Q4 2027.</p></div>
+        <div><p class="wall__title">On handover</p><p>Paid when the keys are released, or financed with a mortgage.</p></div>
       </div>
     </div>
   </section>
@@ -366,8 +377,8 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
   <section class="section g2" id="homes" aria-labelledby="homes-h">
     <div class="wrap">
       <div class="group">
-        <div class="section-head section-head--row">
-          <h2 id="homes-h">Ready homes to buy or rent</h2>
+        <div class="section-head">
+          <h2 id="homes-h">Ready homes to buy or rent in Dubai</h2>
           <p>Apartments, townhouses and villas you can move into now. Every home opens a WhatsApp chat with its reference.</p>
         </div>
         <div class="grid">
@@ -416,28 +427,12 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 
   <section class="section" id="areas" aria-labelledby="areas-h">
     <div class="wrap">
+      <div class="section-head">
+        <h2 id="areas-h">Dubai areas we sell in</h2>
+        <p>Choose an area to see its launches. Gold pins mark the areas with launches on the board above.</p>
+      </div>
       <div class="grid grid--top">
-        <div class="section-head span-4">
-          <h2 id="areas-h">Dubai areas we sell in</h2>
-          <p>Choose an area to see its launches. Each line says what kind of home it has.</p>
-          <svg class="area-map" viewBox="0 0 400 300" role="img" aria-label="Map of Dubai's coast with the eight areas marked, from Palm Jebel Ali in the south-west to Dubai Creek Harbour in the north-east">
-            <path class="area-map__sea" d="M0 0H400V40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268Z"/>
-            <path class="area-map__coast" d="M400 40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268"/>
-            <path class="area-map__creek" d="M318 82C326 100 324 118 334 134C342 148 352 156 362 166"/>
-            <path class="area-map__palm" d="M54 218l-22-26M54 218l-8-32M54 218l8-30M54 218l20-24M54 218l-30-12M54 218l30-8"/>
-            <g class="area-map__pins">
-              <circle class="is-launch" cx="54" cy="222" r="6"/><text x="64" y="244">Palm Jebel Ali</text>
-              <circle cx="112" cy="206" r="5"/><text x="96" y="194">Dubai Marina</text>
-              <circle class="is-launch" cx="92" cy="276" r="6"/><text x="104" y="280">Dubai South</text>
-              <circle cx="188" cy="214" r="5"/><text x="168" y="236">Dubai Hills Estate</text>
-              <circle cx="250" cy="146" r="5"/><text x="178" y="140">Downtown</text>
-              <circle class="is-launch" cx="268" cy="160" r="6"/><text x="280" y="164">Business Bay</text>
-              <circle class="is-launch" cx="292" cy="196" r="6"/><text x="246" y="214">Sobha Hartland 2</text>
-              <circle class="is-launch" cx="338" cy="136" r="6"/><text x="300" y="118">Creek Harbour</text>
-            </g>
-          </svg>
-        </div>
-        <div class="areas span-8 start-5">
+        <div class="areas span-5">
           <a href="#launches" data-area-link="Dubai Creek Harbour"><b>Dubai Creek Harbour</b><span>New towers on the creek, beside the Ras Al Khor wildlife sanctuary</span></a>
           <a href="#launches" data-area-link="Business Bay"><b>Business Bay</b><span>Towers on the Dubai Water Canal, next to Downtown</span></a>
           <a href="#launches" data-area-link="Palm Jebel Ali"><b>Palm Jebel Ali</b><span>Beachfront villas on Nakheel's second palm island</span></a>
@@ -447,39 +442,64 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
           <a href="#launches" data-area-link="Dubai Marina"><b>Dubai Marina</b><span>Waterfront apartments along the marina walk</span></a>
           <a href="#launches" data-area-link="Downtown Dubai"><b>Downtown Dubai</b><span>Apartments around Burj Khalifa and Dubai Mall</span></a>
         </div>
+        <div class="span-7 start-6"><svg class="area-map" viewBox="0 0 400 320" role="img" aria-label="Map of Dubai's coast with the eight areas marked, from Palm Jebel Ali in the south-west to Dubai Creek Harbour in the north-east">
+          <path class="area-map__sea" d="M0 0H400V40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268Z"/>
+          <path class="area-map__coast" d="M400 40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268"/>
+          <path class="area-map__creek" d="M318 82C326 100 324 118 334 134C342 148 352 156 362 166"/>
+          <path class="area-map__palm" d="M54 218l-22-26M54 218l-8-32M54 218l8-30M54 218l20-24M54 218l-30-12M54 218l30-8"/>
+          <g class="area-map__pins">
+            <circle class="is-launch" cx="54" cy="222" r="6"/><text x="36" y="248">Palm Jebel Ali</text>
+            <circle cx="112" cy="206" r="5"/><text x="124" y="214">Dubai Marina</text>
+            <circle class="is-launch" cx="92" cy="292" r="6"/><text x="104" y="296">Dubai South</text>
+            <circle cx="182" cy="240" r="5"/><text x="194" y="244">Dubai Hills Estate</text>
+            <circle cx="248" cy="150" r="5"/><text x="168" y="154">Downtown</text>
+            <circle class="is-launch" cx="270" cy="168" r="6"/><text x="282" y="172">Business Bay</text>
+            <circle class="is-launch" cx="290" cy="206" r="6"/><text x="302" y="210">Sobha Hartland 2</text>
+            <circle class="is-launch" cx="338" cy="136" r="6"/><text x="300" y="116">Creek Harbour</text>
+          </g>
+        </svg></div>
       </div>
     </div>
   </section>
 
   <section class="section statement" id="advisor" data-moment="word-highlight" aria-labelledby="advisor-h">
     <div class="wrap">
-      <h2 id="advisor-h" class="sr-only">One advisor for the whole purchase</h2>
+      <h2 id="advisor-h" class="sr-only">One HomesPartner advisor for the whole purchase</h2>
       <p class="mo-wh__text">One HomesPartner advisor handles your purchase from the first WhatsApp message to <strong>the keys</strong>, including the paperwork and handover checks you cannot do from abroad.</p>
     </div>
   </section>
 
   <section class="section" id="uk-desk" aria-labelledby="uk-h">
     <div class="wrap">
+      <div class="section-head">
+        <h2 id="uk-h">Buying in Dubai from the UK</h2>
+        <p>The UK desk at homespartner.co.uk runs the same purchase for buyers who never fly out before handover.</p>
+      </div>
       <div class="grid grid--top">
-        <div class="span-6">
-          <div class="section-head">
-            <h2 id="uk-h">Buying in Dubai from the UK</h2>
-            <p>The UK desk at homespartner.co.uk runs the same purchase for buyers who never fly out before handover.</p>
-          </div>
-          <ol class="steps">
-            <li><div><h3>Video viewing</h3><p>We walk the show unit and the site with you on a video call.</p></div></li>
-            <li><div><h3>Reservation</h3><p>You pay the booking deposit to the developer by bank transfer.</p></div></li>
-            <li><div><h3>Sales agreement</h3><p>You sign the SPA electronically; we check it against the plan you were quoted.</p></div></li>
-            <li><div><h3>Oqood registration</h3><p>We register the sale with the Dubai Land Department.</p></div></li>
-            <li><div><h3>Handover inspection</h3><p>We inspect the unit at handover and send you the snag list.</p></div></li>
-          </ol>
+        <ol class="steps span-5">
+          <li><div><p class="step__title">Video viewing</p><p>We walk the show unit and the site with you on a video call.</p></div></li>
+          <li><div><p class="step__title">Reservation</p><p>You pay the booking deposit to the developer by bank transfer.</p></div></li>
+          <li><div><p class="step__title">Sales agreement</p><p>You sign the SPA electronically; we check it against the plan you were quoted.</p></div></li>
+          <li><div><p class="step__title">Oqood registration</p><p>We register the sale with the Dubai Land Department.</p></div></li>
+          <li><div><p class="step__title">Handover inspection</p><p>We inspect the unit at handover and send you the snag list.</p></div></li>
+        </ol>
+        <div class="span-7 start-6">
+          <svg class="route" viewBox="0 0 480 260" role="img" aria-label="Route from London to Dubai: about seven hours direct; Dubai is three to four hours ahead of London">
+            <path d="M60 150C150 40 330 40 420 120" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="6 6"/>
+            <circle cx="60" cy="150" r="8" fill="#20275c"/><circle cx="420" cy="120" r="9" fill="#20275c" stroke="#e2c980" stroke-width="3"/>
+            <text class="city" x="34" y="182">London</text><text x="34" y="200">UK desk</text>
+            <text class="city" x="392" y="154">Dubai</text><text x="392" y="172">Your launch</text>
+            <path d="M232 60l14 6-14 6 3-6z" fill="#b59e5a"/>
+            <text x="188" y="40">About 7 hours direct</text>
+            <text x="34" y="240">Dubai is 3 to 4 hours ahead of London</text>
+          </svg>
+          <dl class="figures">
+            <div><dt>Properties matched</dt><dd>500+</dd><span class="to-confirm">Figure to be confirmed</span></div>
+            <div><dt>Developer partners</dt><dd>12</dd><span class="to-confirm">Figure to be confirmed</span></div>
+            <div><dt>Transacted since 2021</dt><dd>AED 1.2B</dd><span class="to-confirm">Figure to be confirmed</span></div>
+            <div><dt>Google rating</dt><dd>4.9</dd><span class="to-confirm">Figure to be confirmed</span></div>
+          </dl>
         </div>
-        <dl class="figures span-5 start-8">
-          <div><dt>Properties matched</dt><dd>500+</dd><span class="to-confirm">Figure to be confirmed</span></div>
-          <div><dt>Developer partners</dt><dd>12</dd><span class="to-confirm">Figure to be confirmed</span></div>
-          <div><dt>Transacted since 2021</dt><dd>AED 1.2B</dd><span class="to-confirm">Figure to be confirmed</span></div>
-          <div><dt>Google rating</dt><dd>4.9</dd><span class="to-confirm">Figure to be confirmed</span></div>
-        </dl>
       </div>
     </div>
   </section>
@@ -491,17 +511,20 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
         <p>Short guides an advisor sends on WhatsApp, written for buyers comparing their first Dubai launch.</p>
       </div>
       <div class="grid">
-        <article class="guide span-4">
+        <article class="guide card span-4">
+          <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="A residence card with a 10-year term"><rect x="40" y="16" width="120" height="80" rx="8" fill="#fff" stroke="#20275c" stroke-width="1.6"/><rect x="52" y="30" width="28" height="34" rx="3" fill="#e4eaf4"/><path d="M90 34h56M90 46h44M90 58h50" stroke="#20275c" stroke-width="1.4"/><rect x="52" y="74" width="96" height="10" rx="2" fill="url(#hpg)"/></svg></div>
           <h3>Golden Visa through property</h3>
           <p>A property worth AED 2 million or more can qualify you for a 10-year UAE Golden Visa, off-plan included.</p>
           <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20Golden%20Visa%20guide." target="_blank" rel="noopener">Request the guide</a>
         </article>
-        <article class="guide span-4">
+        <article class="guide card span-4">
+          <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="Two paths: a building under construction and a finished home"><rect x="30" y="40" width="50" height="56" fill="#fff" stroke="#20275c" stroke-width="1.6" stroke-dasharray="4 3"/><path d="M30 40l25-18 25 18" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="4 3"/><rect x="120" y="40" width="50" height="56" fill="#fff" stroke="#20275c" stroke-width="1.6"/><path d="M120 40l25-18 25 18" fill="none" stroke="#20275c" stroke-width="1.6"/><rect x="138" y="70" width="14" height="26" fill="#20275c"/><path d="M90 68h20" stroke="#b59e5a" stroke-width="2"/></svg></div>
           <h3>Off-plan or ready home</h3>
           <p>A payment plan spreads the cost over the build; a ready home can earn rent from the month you buy it.</p>
           <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20off-plan%20or%20ready%20guide." target="_blank" rel="noopener">Request the guide</a>
         </article>
-        <article class="guide span-4">
+        <article class="guide card span-4">
+          <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="A transfer from a UK bank to a Dubai escrow account"><rect x="18" y="38" width="62" height="40" rx="6" fill="#fff" stroke="#20275c" stroke-width="1.6"/><text x="30" y="62" font-size="11" fill="#20275c">GBP</text><rect x="120" y="38" width="62" height="40" rx="6" fill="#fff" stroke="#20275c" stroke-width="1.6"/><text x="132" y="62" font-size="11" fill="#20275c">AED</text><path d="M86 58h26" stroke="#b59e5a" stroke-width="2"/><path d="M108 52l8 6-8 6" fill="none" stroke="#b59e5a" stroke-width="2"/></svg></div>
           <h3>Paying from a UK bank</h3>
           <p>What to send, what to sign, and how the deposit moves from a UK account to the developer's escrow.</p>
           <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20UK%20payments%20guide." target="_blank" rel="noopener">Request the guide</a>
@@ -513,17 +536,22 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
   <section class="section" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
       <div class="grid grid--top">
-        <div class="section-head span-4">
-          <h2 id="contact-h">Send an enquiry</h2>
-          <p>Tell us what you are looking for. An advisor replies by WhatsApp or email, from Dubai or the UK desk.</p>
-          <ol class="steps steps--short">
-            <li><div><h3>A reply from one advisor</h3><p>The same person stays with you to handover.</p></div></li>
-            <li><div><h3>A shortlist of launches</h3><p>Matched to your budget, area and handover year.</p></div></li>
-            <li><div><h3>A viewing</h3><p>In person in Dubai, or on a video call from the UK.</p></div></li>
-          </ol>
+        <div class="span-5">
+          <div class="section-head">
+            <h2 id="contact-h">Contact an advisor</h2>
+            <p>Tell us what you are looking for. An advisor replies by WhatsApp or email with a shortlist of launches that fit.</p>
+          </div>
+          <svg class="shortlist" viewBox="0 0 420 210" role="img" aria-label="A shortlist of three launches with handover dates and payment plans">
+            <rect x="24" y="20" width="372" height="170" rx="8" fill="#fff" stroke="#d8dbe6"/>
+            <text class="t" x="44" y="50">Your shortlist</text>
+            <path d="M44 62h332" stroke="url(#hpg)" stroke-width="2"/>
+            <text x="44" y="90">Sobha One</text><text class="m" x="200" y="90">Q4 2027</text><text class="m" x="290" y="90">60/40</text>
+            <text x="44" y="120">Creek Waters 2</text><text class="m" x="200" y="120">Q1 2028</text><text class="m" x="290" y="120">90/10</text>
+            <text x="44" y="150">Azizi Venice</text><text class="m" x="200" y="150">Q4 2027</text><text class="m" x="290" y="150">50/50</text>
+          </svg>
           <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor." target="_blank" rel="noopener">Ask on WhatsApp</a>
         </div>
-        <form class="form span-7 start-6" action="mailto:hello@homespartner.example" method="post" enctype="text/plain" data-endpoint="" novalidate>
+        <form class="form contact-form span-7 start-6" action="mailto:hello@homespartner.example" method="post" enctype="text/plain" data-endpoint="" novalidate>
           <div class="field"><label for="c-name">Name</label>
             <input id="c-name" name="name" type="text" autocomplete="name" required aria-describedby="c-name-err">
             <p class="field__error" id="c-name-err" hidden>Write the name we should use.</p></div>
@@ -535,8 +563,8 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
             <p class="field__error" id="c-email-err" hidden>Write an email address with an @, like name@example.com.</p></div>
           <div class="field"><label for="c-want">Looking to</label>
             <select id="c-want" name="looking-to"><option>Buy off-plan</option><option>Buy a ready home</option><option>Rent a home</option><option>Sell or let my property</option></select></div>
-          <div class="field field--full"><label for="c-msg">Message</label>
-            <textarea id="c-msg" name="message" rows="7"></textarea></div>
+          <div class="field"><label for="c-msg">Message</label>
+            <textarea id="c-msg" name="message" rows="3"></textarea></div>
           <div class="btn-row"><button class="btn btn--primary" type="submit">Send enquiry</button></div>
           <p class="form__status" role="status" data-form-status></p>
         </form>

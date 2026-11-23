@@ -47,7 +47,7 @@ $$('[data-show]').forEach(a => a.addEventListener('click', e => { e.preventDefau
 const state = { dev: '', area: '', year: '' };
 function filter() {
   let shown = 0;
-  $$('[data-launches] .launch').forEach(row => {
+  $$('[data-launches] > li').forEach(row => {
     const ok = (!state.dev || row.dataset.dev === state.dev) && (!state.area || row.dataset.area === state.area) && (!state.year || Number(row.dataset.year) <= Number(state.year));
     row.hidden = !ok;
     if (ok) shown++;
@@ -57,9 +57,9 @@ function filter() {
 }
 $$('[data-filters] button').forEach(b => b.addEventListener('click', () => { state.dev = b.dataset.dev; state.area = ''; state.year = ''; filter(); }));
 const finder = $('[data-finder]');
-finder.addEventListener('submit', e => {
+$('[data-find]', finder).addEventListener('click', e => {
   e.preventDefault();
-  state.dev = finder.developer.value; state.area = finder.area.value; state.year = finder.year.value;
+  state.dev = $('#f-dev').value; state.area = $('#f-area').value; state.year = $('#f-year').value;
   filter();
   $('#launches').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 });

@@ -1,9 +1,9 @@
 {
  "start": "2026-11-23T19:31:40.333Z",
- "round": 0,
+ "round": 3,
  "idle": 0,
  "errors": 0,
- "status": "fail",
+ "status": "open",
  "history": [
   {
    "at": "2026-11-23T19:58:56.489Z",
@@ -16,6 +16,51 @@
    "stopHookActive": false,
    "decision": "block",
    "reason": "75 FAILs remain (not a round: the gate has not been run by hand in this build yet):"
+  },
+  {
+   "at": "2026-11-23T20:10:23.651Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 64,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-23T20:10:27.410Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 64,
+   "round": 1,
+   "reused": true,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-23T20:10:31.229Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 64,
+   "round": 1,
+   "reused": true,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-23T20:15:38.674Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 10,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-23T20:19:58.375Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 4,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
   }
  ],
  "max": 3,
@@ -30,11 +75,11 @@
   "start": "2026-11-23T19:31:40.333Z",
   "by": "gate.mjs --start"
  },
- "roundKey": "6e37f18e14fae3b4:da39a3ee",
- "roundFree": true,
+ "roundKey": "64f35575cbb44896:9d765ce6",
+ "roundFree": false,
  "idleFree": false,
- "blockKey": "6e37f18e14fae3b4:da39a3ee",
- "fp": "6e37f18e14fae3b4",
+ "blockKey": null,
+ "fp": "64f35575cbb44896",
  "page": "index.html",
  "found": {
   "fails": [
@@ -72,7 +117,7 @@
    },
    {
     "check": "placeholder",
-    "where": "div.grid.grid--top > dl.figures.span-5 > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\"",
+    "where": "div.span-7.start-6 > dl.figures > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\"",
     "msg": "\"to be confirmed\" is a placeholder left on the page (and 3 more like it: \"Figure to be confirmed\", \"Figure to be confirmed\", \"Figure to be confirmed\")",
     "fix": "write the real words: take the name or figure from the brief, or remove the claim; no bracketed placeholder ships",
     "widths": [
@@ -83,7 +128,7 @@
      "placeholder"
     ],
     "wheres": [
-     "div.grid.grid--top > dl.figures.span-5 > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\""
+     "div.span-7.start-6 > dl.figures > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\""
     ]
    },
    {
@@ -104,173 +149,6 @@
     ]
    },
    {
-    "check": "no-visual",
-    "where": "section#launches \"New launches by developer\"",
-    "msg": "no picture, effect or mock in this section; a feature section needs a visual",
-    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "no-visual"
-    ],
-    "wheres": [
-     "section#launches \"New launches by developer\""
-    ]
-   },
-   {
-    "check": "no-visual",
-    "where": "section#uk-desk \"Buying in Dubai from the UK\"",
-    "msg": "no picture, effect or mock in this section; a feature section needs a visual",
-    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "no-visual"
-    ],
-    "wheres": [
-     "section#uk-desk \"Buying in Dubai from the UK\""
-    ]
-   },
-   {
-    "check": "text-only",
-    "where": "section#plans \"Payment plans before you call\"",
-    "msg": "the section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "text-only"
-    ],
-    "wheres": [
-     "section#plans \"Payment plans before you call\""
-    ]
-   },
-   {
-    "check": "text-only",
-    "where": "section#guides \"Guides for off-plan buyers\"",
-    "msg": "the section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "text-only"
-    ],
-    "wheres": [
-     "section#guides \"Guides for off-plan buyers\""
-    ]
-   },
-   {
-    "check": "text-only",
-    "where": "section#contact \"Send an enquiry\"",
-    "msg": "the closing section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "text-only"
-    ],
-    "wheres": [
-     "section#contact \"Send an enquiry\""
-    ]
-   },
-   {
-    "check": "button-styles",
-    "where": "div.hero-text.grid > div.hero-copy.span-5 > form.finder > button.btn.btn--primary \"Find a launch\"",
-    "msg": "one button style (soft, fill #20275c) in 2 heights: 36, 44px (\"Find a launch\" 44px, \"Ask on WhatsApp\" 36px)",
-    "fix": "one primary and one secondary button: one shape, one height per size, one label size",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "button-styles"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-copy.span-5 > form.finder > button.btn.btn--primary \"Find a launch\""
-    ]
-   },
-   {
-    "check": "copy-headings",
-    "where": "h2#launches-h \"New launches by developer\"",
-    "msg": "\"New launches by developer\" names no product, part, place or section (12 headings like it; at most one brand line per page) (and 11 more like it: \"During construction\", \"Ready homes to buy or re\", \"Video viewing\", \"Reservation\", ...)",
-    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "copy-headings"
-    ],
-    "wheres": [
-     "h2#launches-h \"New launches by developer\""
-    ]
-   },
-   {
-    "check": "heading-scale",
-    "where": "h2#launches-h \"New launches by developer\"",
-    "msg": "h2 headings in 2 sizes, 21px (\"Sobha One\") to 48px (x2.29)",
-    "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "heading-scale"
-    ],
-    "wheres": [
-     "h2#launches-h \"New launches by developer\""
-    ]
-   },
-   {
-    "check": "text-contrast",
-    "where": "ol.steps > li:nth-of-type(1) > div > p \"We walk the show unit and the site with \"",
-    "msg": "body text in #565c78 on #ffffff reads 6.57:1 (needs 7:1); 7 like it, like \"You sign the SPA elect\", \"We inspect the unit at\", \"A property worth AED 2\"",
-    "fix": "body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "text-contrast"
-    ],
-    "wheres": [
-     "ol.steps > li:nth-of-type(1) > div > p \"We walk the show unit and the site with \""
-    ]
-   },
-   {
-    "check": "section-gaps",
-    "where": "section#guides / section#contact",
-    "msg": "492px between these sections, +89% against the median 260px",
-    "fix": "use one gap between sections (all within 25% of each other)",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "section-gaps"
-    ],
-    "wheres": [
-     "section#guides / section#contact"
-    ]
-   },
-   {
     "check": "effects-fit",
     "where": "(the page)",
     "msg": "a service page asks for 1 WebGL context (div.hero-visual, canvas): shader effects are for tech, software, AI and gaming pages",
@@ -287,106 +165,10 @@
     ]
    },
    {
-    "check": "gl-fallback",
-    "where": "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"Dubai off‑plan property for UK and UAE b\"",
-    "msg": "with its shader rejected (as a strict GPU rejects a reserved word) the WebGL picture shows only its ground (100% one colour, #ffffff): it needs a still fallback picture",
-    "fix": "give the WebGL piece a still fallback (a picture or a CSS ground) that shows when its shader fails to compile or link",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "gl-fallback"
-    ],
-    "wheres": [
-     "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"Dubai off‑plan property for UK and UAE b\""
-    ]
-   },
-   {
-    "check": "section-air",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > hr.plaque__rule",
-    "msg": "a rule (<hr>) between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-    "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "section-air"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > hr.plaque__rule"
-    ]
-   },
-   {
-    "check": "section-air",
-    "where": "section#launches > div.wrap > div.launches \"Sobha OneSobha AreaSobha Hartland 2 Hand\"",
-    "msg": "a top border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-    "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "section-air"
-    ],
-    "wheres": [
-     "section#launches > div.wrap > div.launches \"Sobha OneSobha AreaSobha Hartland 2 Hand\""
-    ]
-   },
-   {
-    "check": "section-air",
-    "where": "section#plans > div.wrap > div.wall \"10% 50% 40%\"",
-    "msg": "a bottom border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-    "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "section-air"
-    ],
-    "wheres": [
-     "section#plans > div.wrap > div.wall \"10% 50% 40%\""
-    ]
-   },
-   {
-    "check": "one-heading",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-    "msg": "the hero holds an h2 (1): its heading is the h1, and an h2 opens the next section (SR-5)",
-    "fix": "give each section one h2, first in its .wrap, and the hero only its h1",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "one-heading"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
-    ]
-   },
-   {
-    "check": "one-heading",
-    "where": "h2#launches-h \"New launches by developer\"",
-    "msg": "headings of two sections show whole on one screen at 8 of 181 scroll positions (4.4%; at scroll 200, 250, 300, 350px), here with \"Sobha One\": at most 3% on a desktop (SR-5)",
-    "fix": "make the sections one screen tall so their headings sit a screen apart and two never share one",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "one-heading"
-    ],
-    "wheres": [
-     "h2#launches-h \"New launches by developer\""
-    ]
-   },
-   {
     "check": "container-edges",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-    "msg": "the h2 starts 564px right of the container's left: every h1 and h2 starts on it, 2px either way (SR-6)",
-    "fix": "start the text on the container's left, or on the one split line every split shares",
+    "where": "div.wrap > div.grid.grid--top > div.span-7.start-6 > svg.area-map \"Palm Jebel Ali Dubai Marina Dubai South \"",
+    "msg": "a <svg> over half the container wide runs 623-1360px, not on the container's lines at 80-1360px (SR-6)",
+    "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
     "widths": [
      1440
     ],
@@ -395,868 +177,55 @@
      "container-edges"
     ],
     "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
+     "div.wrap > div.grid.grid--top > div.span-7.start-6 > svg.area-map \"Palm Jebel Ali Dubai Marina Dubai South \""
     ]
    },
    {
-    "check": "row-lines",
-    "where": "section#contact > div.wrap > div.grid.grid--top > form.form.span-7 \"Name Write the name we should use. Whats\"",
-    "msg": "a row of 2 items: its first item starts at 623px, the container's left line at 80px (2px either way) (SR-7)",
-    "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "row-lines"
-    ],
-    "wheres": [
-     "section#contact > div.wrap > div.grid.grid--top > form.form.span-7 \"Name Write the name we should use. Whats\""
-    ]
-   },
-   {
-    "check": "row-lines",
-    "where": "section#areas > div.wrap > div.grid.grid--top > div.areas.span-8 \"Dubai Creek HarbourNew towers on the cre\"",
-    "msg": "a row of 2 items: its first item starts at 515px, the container's left line at 80px (2px either way) (SR-7)",
-    "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "row-lines"
-    ],
-    "wheres": [
-     "section#areas > div.wrap > div.grid.grid--top > div.areas.span-8 \"Dubai Creek HarbourNew towers on the cre\""
-    ]
-   },
-   {
-    "check": "row-lines",
-    "where": "section#launches > div.wrap > div.launches > div.launch:nth-of-type(1) \"Sobha OneSobha AreaSobha Hartland 2 Hand\"",
-    "msg": "a row of 4 items: its first item starts at 392px, the container's left line at 80px; its last item ends at 1044px, the container's right line at 1360px (2px either way) (and 4 more like it: \"Safa TwoDAMAC AreaBusine\", \"Palm Jebel Ali Beach Vil\", \"Creek Waters 2Emaar Area\") (SR-7)",
-    "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "row-lines"
-    ],
-    "wheres": [
-     "section#launches > div.wrap > div.launches > div.launch:nth-of-type(1) \"Sobha OneSobha AreaSobha Hartland 2 Hand\""
-    ]
-   },
-   {
-    "check": "split-pair",
-    "where": "section#uk-desk > div.wrap > div.grid.grid--top \"Buying in Dubai from the UK The UK desk \"",
-    "msg": "the two columns of the split start 16px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
-    "fix": "top-align both columns of the split (align-items: start)",
-    "widths": [
-     1440
-    ],
-    "from": "consistency",
-    "ids": [
-     "split-pair"
-    ],
-    "wheres": [
-     "section#uk-desk > div.wrap > div.grid.grid--top \"Buying in Dubai from the UK The UK desk \""
-    ]
-   },
-   {
-    "check": "flush",
-    "where": "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \"",
-    "msg": "section.hero.hero--split and section#launches run together: -295px between their content, on one ground",
-    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "check": "row-gap",
+    "where": "div.hero-text.grid > div.hero-copy.span-5 > div.finder > a.btn.btn--primary \"Find a launch\"",
+    "msg": "fills 52% of its grid row and leaves 48% of it empty on the right",
+    "fix": "fill the row at this width: span the columns, or stack the split",
     "widths": [
      390
     ],
     "from": "consistency",
     "ids": [
-     "flush"
+     "row-gap"
     ],
     "wheres": [
-     "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \""
+     "div.hero-text.grid > div.hero-copy.span-5 > div.finder > a.btn.btn--primary \"Find a launch\""
     ]
    },
    {
-    "check": "nav",
-    "where": "header.nav",
-    "msg": "the nav has no bar, and its pieces sit past the content's edges (24-403px against 24-366px)",
-    "fix": "make the nav one bar from the content's left edge to its right edge, with every link and action inside it",
+    "check": "no-visual",
+    "where": "section#uk-desk \"Buying in Dubai from the UK\"",
+    "msg": "pictures, effects and mocks cover 11% of this section; a feature section needs a visual (about 25% or more)",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
     "widths": [
      390
     ],
     "from": "consistency",
     "ids": [
-     "nav"
+     "no-visual"
     ],
     "wheres": [
-     "header.nav"
+     "section#uk-desk \"Buying in Dubai from the UK\""
     ]
    },
    {
-    "check": "overlap-text",
-    "where": "h2#launches-h \"New launches by developer\"",
-    "msg": "lies over the text \"Sobha One\" (div.plaque__pick > button:nth-of-type(1))",
-    "fix": "move the box off the text (or the text off the box)",
+    "check": "photo-print",
+    "where": "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"sobha-one.webp\"",
+    "msg": "the photograph sobha-one.webp is drawn over by a print (a halftone, dither or engraving canvas) in the hero on a service page: its sky and light parts drop out to the page's ground",
+    "fix": "show the photograph plain (in colour, or greyed into the palette with CSS); a print belongs on a software page's secondary picture at most",
     "widths": [
      390
     ],
     "from": "consistency",
     "ids": [
-     "overlap-text"
+     "photo-print"
     ],
     "wheres": [
-     "h2#launches-h \"New launches by developer\""
-    ]
-   },
-   {
-    "check": "overlap-text",
-    "where": "section#launches > div.wrap > div.section-head > p \"Each launch shows its handover quarter, \"",
-    "msg": "lies over the text \"Sobha One\" (div.plaque > h2)",
-    "fix": "move the box off the text (or the text off the box)",
-    "widths": [
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "overlap-text"
-    ],
-    "wheres": [
-     "section#launches > div.wrap > div.section-head > p \"Each launch shows its handover quarter, \""
-    ]
-   },
-   {
-    "check": "overlap-text",
-    "where": "section#launches > div.wrap > div.filters > button:nth-of-type(1) \"All developers\"",
-    "msg": "lies over the text \"Ask about this launch\" (div.plaque > a.btn.btn--secondary)",
-    "fix": "move the box off the text (or the text off the box)",
-    "widths": [
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "overlap-text"
-    ],
-    "wheres": [
-     "section#launches > div.wrap > div.filters > button:nth-of-type(1) \"All developers\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(1) \"Sobha One\"",
-    "msg": "the words \"Sobha One\" lie over \"New launches by developer\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(1) \"Sobha One\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(2) \"Safa Two\"",
-    "msg": "the words \"Safa Two\" lie over \"New launches by developer\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(2) \"Safa Two\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-    "msg": "the words \"Sobha One\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > p.plaque__dev \"Sobha, Sobha Hartland 2\"",
-    "msg": "the words \"Sobha, Sobha Hartland 2\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > p.plaque__dev \"Sobha, Sobha Hartland 2\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(1) \"Handover\"",
-    "msg": "the words \"Handover\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(1) \"Handover\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(1) \"Q4 2027\"",
-    "msg": "the words \"Q4 2027\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(1) \"Q4 2027\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(2) \"From\"",
-    "msg": "the words \"From\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(2) \"From\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > a.btn.btn--secondary \"Ask about this launch\"",
-    "msg": "the words \"Ask about this launch\" lie over \"All developers\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-text.grid > div.hero-visual.model > div.plaque > a.btn.btn--secondary \"Ask about this launch\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \"",
-    "msg": "the words \"New launches by developer\" and the card div.hero-visual.model > div.plaque of another section lie in one place: the card runs out of its section, which is shorter than what it holds",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     390,
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \""
-    ]
-   },
-   {
-    "check": "button-styles",
-    "where": "footer#close > div.wrap > div.closing__cta.close--type > a.btn.btn--primary \"Find a launch\"",
-    "msg": "one button style (soft, fill #20275c) with labels in 3 sizes: 14, 16, 18px (\"Find a launch\", \"Ask on WhatsApp\")",
-    "fix": "one primary and one secondary button: one shape, one height per size, one label size",
-    "widths": [
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "button-styles"
-    ],
-    "wheres": [
-     "footer#close > div.wrap > div.closing__cta.close--type > a.btn.btn--primary \"Find a launch\""
-    ]
-   },
-   {
-    "check": "heading-scale",
-    "where": "div.wrap > div.grid > article.guide.span-4:nth-of-type(1) > h3 \"Golden Visa through property\"",
-    "msg": "h3 headings in 4 sizes, 14px (\"Booking deposit\") to 19px (x1.36)",
-    "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
-    "widths": [
-     390
-    ],
-    "from": "consistency",
-    "ids": [
-     "heading-scale"
-    ],
-    "wheres": [
-     "div.wrap > div.grid > article.guide.span-4:nth-of-type(1) > h3 \"Golden Visa through property\""
-    ]
-   },
-   {
-    "check": "collide",
-    "where": "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(2) \"AED 1.65M\"",
-    "msg": "the words \"AED 1.65M\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-    "widths": [
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "collide"
-    ],
-    "wheres": [
-     "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(2) \"AED 1.65M\""
-    ]
-   },
-   {
-    "check": "off-viewport",
-    "where": "header.nav > div.wrap.nav__bar \"Skip to content HomesPartner REAL ESTATE\"",
-    "msg": "at 320px wide it runs 21px past the screen's right edge (the page is 365px wide and scrolls sideways)",
-    "fix": "keep it inside the screen at this width: let it shrink, wrap or stack",
-    "widths": [
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "off-viewport"
-    ],
-    "wheres": [
-     "header.nav > div.wrap.nav__bar \"Skip to content HomesPartner REAL ESTATE\""
-    ]
-   },
-   {
-    "check": "off-viewport",
-    "where": "div.plaque > div.plaque__pick > button \"Palm Jebel Ali\"",
-    "msg": "at 320px wide it runs 45px past the screen's right edge (the page is 365px wide and scrolls sideways)",
-    "fix": "keep it inside the screen at this width: let it shrink, wrap or stack",
-    "widths": [
-     320
-    ],
-    "from": "consistency",
-    "ids": [
-     "off-viewport"
-    ],
-    "wheres": [
-     "div.plaque > div.plaque__pick > button \"Palm Jebel Ali\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"AreaSobha Hartland 2\"",
-    "msg": "starts at x 391.5; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"AreaSobha Hartland 2\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell.is-keep \"HandoverQ4 2027\"",
-    "msg": "starts at x 609; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell.is-keep \"HandoverQ4 2027\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"FromAED 1.65M\"",
-    "msg": "starts at x 759.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"FromAED 1.65M\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"Plan60/40\"",
-    "msg": "starts at x 909.7; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"Plan60/40\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"AreaBusiness Bay\"",
-    "msg": "starts at x 391.5; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"AreaBusiness Bay\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell.is-keep \"HandoverQ2 2028\"",
-    "msg": "starts at x 609; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell.is-keep \"HandoverQ2 2028\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"FromAED 2.1M\"",
-    "msg": "starts at x 759.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"FromAED 2.1M\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"Plan80/20\"",
-    "msg": "starts at x 909.7; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"Plan80/20\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"AreaPalm Jebel Ali\"",
-    "msg": "starts at x 391.5; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"AreaPalm Jebel Ali\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell.is-keep \"HandoverQ4 2028\"",
-    "msg": "starts at x 609; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell.is-keep \"HandoverQ4 2028\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"FromAED 18.5M\"",
-    "msg": "starts at x 759.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"FromAED 18.5M\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"AreaDubai Creek Harbour\"",
-    "msg": "starts at x 391.5; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"AreaDubai Creek Harbour\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell.is-keep \"HandoverQ1 2028\"",
-    "msg": "starts at x 609; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell.is-keep \"HandoverQ1 2028\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"FromAED 1.4M\"",
-    "msg": "starts at x 759.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"FromAED 1.4M\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"Plan90/10\"",
-    "msg": "starts at x 909.7; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"Plan90/10\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"AreaDubai South\"",
-    "msg": "starts at x 391.5; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"AreaDubai South\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"FromAED 690K\"",
-    "msg": "starts at x 759.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"FromAED 690K\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#launches p.launch__cell \"Plan50/50\"",
-    "msg": "starts at x 909.7; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#launches p.launch__cell \"Plan50/50\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#guides h3 \"Golden Visa through property\"",
-    "msg": "starts at x 105; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#guides h3 \"Golden Visa through property\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#guides p \"A property worth AED 2 million o\"",
-    "msg": "starts at x 105; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#guides p \"A property worth AED 2 million o\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#guides h3 \"Paying from a UK bank\"",
-    "msg": "starts at x 974.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#guides h3 \"Paying from a UK bank\""
-    ]
-   },
-   {
-    "check": "edge-left",
-    "where": "#guides p \"What to send, what to sign, and \"",
-    "msg": "starts at x 974.3; the lines are 80 and the column starts",
-    "fix": "start it on the .wrap left line",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-left"
-    ],
-    "wheres": [
-     "#guides p \"What to send, what to sign, and \""
-    ]
-   },
-   {
-    "check": "sparse",
-    "where": "#guides section.section \"Guides for off-plan buyers Short\"",
-    "msg": "its content fills 42% of its screen; merge it or give it its visual (0.55 is the aim)",
-    "fix": "fill the section or make it a screen shorter",
-    "widths": [
-     1440
-    ],
-    "from": "layout",
-    "ids": [
-     "sparse"
-    ],
-    "wheres": [
-     "#guides section.section \"Guides for off-plan buyers Short\""
-    ]
-   },
-   {
-    "check": "edge-right",
-    "where": "nav actions",
-    "msg": "end at x 416, the page's right line is 366",
-    "fix": "end it on the .wrap right line",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "edge-right"
-    ],
-    "wheres": [
-     "nav actions"
-    ]
-   },
-   {
-    "check": "neighbour",
-    "where": "#launches section.section \"New launches by developer Each l\"",
-    "msg": "framed, 44px of section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\" shows",
-    "fix": "keep the next section's heading and picture out of this screen",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "neighbour"
-    ],
-    "wheres": [
-     "#launches section.section \"New launches by developer Each l\""
-    ]
-   },
-   {
-    "check": "screen-height",
-    "where": "#homes section.section.g2 \"Ready homes to buy or rent Apart\"",
-    "msg": "2971px, 3.52 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills",
-    "fix": "make the section exactly one or two screens (--h: 1 or 2)",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "screen-height"
-    ],
-    "wheres": [
-     "#homes section.section.g2 \"Ready homes to buy or rent Apart\""
-    ]
-   },
-   {
-    "check": "neighbour",
-    "where": "#areas section.section \"Dubai areas we sell in Choose an\"",
-    "msg": "framed, 39px of #advisor section.section.statement \"One advisor for the whole purcha\" shows",
-    "fix": "keep the next section's heading and picture out of this screen",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "neighbour"
-    ],
-    "wheres": [
-     "#areas section.section \"Dubai areas we sell in Choose an\""
-    ]
-   },
-   {
-    "check": "neighbour",
-    "where": "#contact section.section \"Send an enquiry Tell us what you\"",
-    "msg": "framed, 301px of the footer shows",
-    "fix": "keep the next section's heading and picture out of this screen",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "neighbour"
-    ],
-    "wheres": [
-     "#contact section.section \"Send an enquiry Tell us what you\""
-    ]
-   },
-   {
-    "check": "hero-fold",
-    "where": "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\"",
-    "msg": "ends at y 974, past the fold (844): 1.15 screens tall",
-    "fix": "the hero fills the first screen alone, its button inside it",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "hero-fold"
-    ],
-    "wheres": [
-     "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\""
-    ]
-   },
-   {
-    "check": "hero-maxchars",
-    "where": "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\"",
-    "msg": "with a 45-character h1 (heroes.json maxChars): ends at y 974, past the fold (844): 1.15 screens tall",
-    "fix": "shorten the h1 or give the hero room for the longest headline",
-    "widths": [
-     390
-    ],
-    "from": "layout",
-    "ids": [
-     "hero-maxchars"
-    ],
-    "wheres": [
-     "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\""
+     "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"sobha-one.webp\""
     ]
    }
   ],
@@ -1274,12 +243,11 @@
    },
    {
     "check": "no-visual",
-    "where": "section#areas \"Dubai areas we sell in\"",
-    "msg": "pictures, effects and mocks cover 17% of this section; a feature section needs a visual (about 25% or more)",
+    "where": "section#uk-desk \"Buying in Dubai from the UK\"",
+    "msg": "pictures, effects and mocks cover 22% of this section; a feature section needs a visual (about 25% or more)",
     "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
     "widths": [
-     1440,
-     390
+     1440
     ],
     "from": "consistency"
    },
@@ -1304,40 +272,9 @@
     "from": "consistency"
    },
    {
-    "check": "heading-scale",
-    "where": "div.wrap > div.grid > article.guide.span-4:nth-of-type(1) > h3 \"Golden Visa through property\"",
-    "msg": "h3 headings in 3 sizes, 16px (\"Video viewing\") to 19px (x1.19)",
-    "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
-    "check": "col-edge",
-    "where": "section#areas > div.wrap > div.grid.grid--top > div.areas.span-8 \"Dubai Creek Harbour New towers on the cr\"",
-    "msg": "the second column starts at 3 places: 515px (section#areas), 623px (section.hero.hero--split, section#contact), 841px (section#uk-desk)",
-    "fix": "start the second column of every split on the same one or two grid columns",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "section-gaps",
-    "where": "main#top > section.hero.hero--split / section#launches",
-    "msg": "176px between these sections, -32% against the median 260px",
-    "fix": "use one gap between sections (all within 25% of each other)",
-    "widths": [
-     1440,
-     390
-    ],
-    "from": "consistency"
-   },
-   {
-    "check": "section-gaps",
-    "where": "section#homes / section#areas",
-    "msg": "184px between these sections, -29% against the median 260px",
+    "where": "section#guides / section#contact",
+    "msg": "289px between these sections, +27% against the median 227px",
     "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      1440
@@ -1347,7 +284,7 @@
    {
     "check": "section-gaps",
     "where": "section#contact / footer#close",
-    "msg": "334px between these sections, +28% against the median 260px",
+    "msg": "324px between these sections, +43% against the median 227px",
     "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      1440
@@ -1405,26 +342,6 @@
     "from": "consistency"
    },
    {
-    "check": "nav-labels",
-    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(6) > a.nav__link \"Contact\"",
-    "msg": "\"Contact\" opens a section headed \"Send an enquiry\"",
-    "fix": "name each nav link after the heading of the section it opens",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
-    "check": "orphan",
-    "where": "div.wrap > div.launches > div.launch:nth-of-type(1) > p.launch__cell:nth-of-type(5) \"Plan 60/40\"",
-    "msg": "its last line holds only \"60/40\" (and 4 more like it: \"Plan 80/20\", \"Plan 80/20\", \"Plan 90/10\", \"Plan 50/50\")",
-    "fix": "rebalance the text (text-wrap: pretty, or a shorter line) so the last line holds more than one short word",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "nav-current",
     "where": "header.nav",
     "msg": "the nav stays on screen with 6 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
@@ -1435,12 +352,13 @@
     "from": "consistency"
    },
    {
-    "check": "empty-area",
-    "where": "section#guides \"Guides for off-plan buyers\"",
-    "msg": "40% of the section is empty: 288px under its last (article.guide.span-4:nth-of-type(1)), in its 720px of rows (WARN over 35%, FAIL over 50%)",
-    "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+    "check": "visual-caption",
+    "where": "div.span-7.start-6 > dl.figures > div:nth-of-type(1) > dt \"Properties matched\"",
+    "msg": "a muted 14px line of 1 row sits 32px under the drawing (svg): it reads as a caption: \"Properties matched\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
     "widths": [
-     1440
+     1440,
+     390
     ],
     "from": "consistency"
    },
@@ -1455,18 +373,8 @@
     "from": "consistency"
    },
    {
-    "check": "form-fields",
-    "where": "div.wrap > div.hero-text.grid > div.hero-copy.span-5:nth-of-type(1) > form.finder",
-    "msg": "the form has no status line (role=\"status\"): sending, sent and errors are never read out",
-    "fix": "give each field its type, autocomplete and inputmode, never block paste or disable the button before a submit, and add the status line (references/system.md, Forms)",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "form-send",
-    "where": "section#contact > div.wrap > div.grid.grid--top > form.form.span-7 \"mailto:hello@homespartner.example\"",
+    "where": "section#contact > div.wrap > div.grid.grid--top > form.form.contact-form \"mailto:hello@homespartner.example\"",
     "msg": "the form opens a mail to hello@homespartner.example: a stand-in until the client gives its form address; list it in the report",
     "fix": "send the form to the client's address (data-endpoint) and show the confirmation only after it answers; list a mailto stand-in in the report",
     "widths": [
@@ -1475,40 +383,40 @@
     "from": "consistency"
    },
    {
-    "check": "section-air",
-    "where": "section#guides / section#contact",
-    "msg": "517px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
-    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
-    "check": "section-air",
-    "where": "section#guides \"Guides for off-plan buyers Short guides \"",
-    "msg": "the content fills 42.5% of the section's height (383 of 900px): 55% or more (40% WARN) (SR-3)",
-    "fix": "fill the section to 55%: more content, a picture or a background layer, or merge it into the section above as its last block",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
-    "check": "cut-text",
-    "where": "h2#launches-h \"New launches by developer\"",
-    "msg": "sits across the edge of a panel behind it",
-    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "check": "nav",
+    "where": "header.nav > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
     "widths": [
      390
     ],
     "from": "consistency"
    },
    {
-    "check": "off-grid",
-    "where": "div.wrap > div.launches > div.launch:nth-of-type(3) > p.launch__cell:nth-of-type(3) \"Handover Q4 2028\"",
-    "msg": "left edge at 305px, 2px off a common edge of its section at 307px (8 elements, like span); 1 more in this section off the grid too (span at 305px)",
-    "fix": "move it onto the page margin, or the column edge its section uses",
+    "check": "tap-size",
+    "where": "div.wrap > div.grid.grid--top > div.areas.span-5 > a:nth-of-type(3) \"Palm Jebel Ali\"",
+    "msg": "a 163x41px tap target (and 5 more like it on this screen): under the 44px a phone needs",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cta",
+    "where": "section#uk-desk \"Buying in Dubai from the UK\"",
+    "msg": "a section over 1.5 screens long with no link or button in it",
+    "fix": "add the action: a button in the hero, one on every priced item, one in the closing section",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--split / section#launches",
+    "msg": "115px between these sections, -26% against the median 155px",
+    "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      390
     ],
@@ -1526,11 +434,77 @@
   ],
   "crashed": [],
   "seconds": {
-   "consistency": 160,
+   "consistency": 158,
    "layout": 4
   }
  },
  "open": [
+  {
+   "check": "container-edges",
+   "where": "div.wrap > div.grid.grid--top > div.span-7.start-6 > svg.area-map \"Palm Jebel Ali Dubai Marina Dubai South \"",
+   "msg": "a <svg> over half the container wide runs 623-1360px, not on the container's lines at 80-1360px (SR-6)",
+   "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "div.wrap > div.grid.grid--top > div.span-7.start-6 > svg.area-map \"Palm Jebel Ali Dubai Marina Dubai South \""
+   ]
+  },
+  {
+   "check": "row-gap",
+   "where": "div.hero-text.grid > div.hero-copy.span-5 > div.finder > a.btn.btn--primary \"Find a launch\"",
+   "msg": "fills 52% of its grid row and leaves 48% of it empty on the right",
+   "fix": "fill the row at this width: span the columns, or stack the split",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "row-gap"
+   ],
+   "wheres": [
+    "div.hero-text.grid > div.hero-copy.span-5 > div.finder > a.btn.btn--primary \"Find a launch\""
+   ]
+  },
+  {
+   "check": "no-visual",
+   "where": "section#uk-desk \"Buying in Dubai from the UK\"",
+   "msg": "pictures, effects and mocks cover 11% of this section; a feature section needs a visual (about 25% or more)",
+   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "no-visual"
+   ],
+   "wheres": [
+    "section#uk-desk \"Buying in Dubai from the UK\""
+   ]
+  },
+  {
+   "check": "photo-print",
+   "where": "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"sobha-one.webp\"",
+   "msg": "the photograph sobha-one.webp is drawn over by a print (a halftone, dither or engraving canvas) in the hero on a service page: its sky and light parts drop out to the page's ground",
+   "fix": "show the photograph plain (in colour, or greyed into the palette with CSS); a print belongs on a software page's secondary picture at most",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "photo-print"
+   ],
+   "wheres": [
+    "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"sobha-one.webp\""
+   ]
+  }
+ ],
+ "waived": [
   {
    "check": "shader-lint",
    "where": "vendor/three.module.min.js \"gl_DrawID\"",
@@ -1545,7 +519,8 @@
    ],
    "wheres": [
     "vendor/three.module.min.js \"gl_DrawID\""
-   ]
+   ],
+   "reason": "three.js r170's own multi-draw shader chunk, not page code; it compiles on every GPU three.js supports, and model.js falls back to the still image if a shader ever fails."
   },
   {
    "check": "shader-lint",
@@ -1561,11 +536,12 @@
    ],
    "wheres": [
     "vendor/three.module.min.js \"common\""
-   ]
+   ],
+   "reason": "\"#include <common>\" is a three.js chunk include, replaced before compiling; the word never reaches the GPU."
   },
   {
    "check": "placeholder",
-   "where": "div.grid.grid--top > dl.figures.span-5 > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\"",
+   "where": "div.span-7.start-6 > dl.figures > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\"",
    "msg": "\"to be confirmed\" is a placeholder left on the page (and 3 more like it: \"Figure to be confirmed\", \"Figure to be confirmed\", \"Figure to be confirmed\")",
    "fix": "write the real words: take the name or figure from the brief, or remove the claim; no bracketed placeholder ships",
    "widths": [
@@ -1576,8 +552,9 @@
     "placeholder"
    ],
    "wheres": [
-    "div.grid.grid--top > dl.figures.span-5 > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\""
-   ]
+    "div.span-7.start-6 > dl.figures > div:nth-of-type(1) > span.to-confirm \"Figure to be confirmed\""
+   ],
+   "reason": "Client decision: the four figures stay on the page, marked 'Figure to be confirmed', until HomesPartner supplies the real numbers."
   },
   {
    "check": "nav",
@@ -1594,174 +571,8 @@
    ],
    "wheres": [
     "header.nav > div.wrap.nav__bar > a.nav__logo.hp-logo \"HomesPartner REAL ESTATE\""
-   ]
-  },
-  {
-   "check": "no-visual",
-   "where": "section#launches \"New launches by developer\"",
-   "msg": "no picture, effect or mock in this section; a feature section needs a visual",
-   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
-   "widths": [
-    1440,
-    390
    ],
-   "from": "consistency",
-   "ids": [
-    "no-visual"
-   ],
-   "wheres": [
-    "section#launches \"New launches by developer\""
-   ]
-  },
-  {
-   "check": "no-visual",
-   "where": "section#uk-desk \"Buying in Dubai from the UK\"",
-   "msg": "no picture, effect or mock in this section; a feature section needs a visual",
-   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "no-visual"
-   ],
-   "wheres": [
-    "section#uk-desk \"Buying in Dubai from the UK\""
-   ]
-  },
-  {
-   "check": "text-only",
-   "where": "section#plans \"Payment plans before you call\"",
-   "msg": "the section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-   "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "text-only"
-   ],
-   "wheres": [
-    "section#plans \"Payment plans before you call\""
-   ]
-  },
-  {
-   "check": "text-only",
-   "where": "section#guides \"Guides for off-plan buyers\"",
-   "msg": "the section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-   "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "text-only"
-   ],
-   "wheres": [
-    "section#guides \"Guides for off-plan buyers\""
-   ]
-  },
-  {
-   "check": "text-only",
-   "where": "section#contact \"Send an enquiry\"",
-   "msg": "the closing section is only text: no picture, icon, mock or effect in it (3 sections like it at this width)",
-   "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "text-only"
-   ],
-   "wheres": [
-    "section#contact \"Send an enquiry\""
-   ]
-  },
-  {
-   "check": "button-styles",
-   "where": "div.hero-text.grid > div.hero-copy.span-5 > form.finder > button.btn.btn--primary \"Find a launch\"",
-   "msg": "one button style (soft, fill #20275c) in 2 heights: 36, 44px (\"Find a launch\" 44px, \"Ask on WhatsApp\" 36px)",
-   "fix": "one primary and one secondary button: one shape, one height per size, one label size",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "button-styles"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-copy.span-5 > form.finder > button.btn.btn--primary \"Find a launch\""
-   ]
-  },
-  {
-   "check": "copy-headings",
-   "where": "h2#launches-h \"New launches by developer\"",
-   "msg": "\"New launches by developer\" names no product, part, place or section (12 headings like it; at most one brand line per page) (and 11 more like it: \"During construction\", \"Ready homes to buy or re\", \"Video viewing\", \"Reservation\", ...)",
-   "fix": "name the thing in every heading: the product, a part, the place or a section noun",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "copy-headings"
-   ],
-   "wheres": [
-    "h2#launches-h \"New launches by developer\""
-   ]
-  },
-  {
-   "check": "heading-scale",
-   "where": "h2#launches-h \"New launches by developer\"",
-   "msg": "h2 headings in 2 sizes, 21px (\"Sobha One\") to 48px (x2.29)",
-   "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "heading-scale"
-   ],
-   "wheres": [
-    "h2#launches-h \"New launches by developer\""
-   ]
-  },
-  {
-   "check": "text-contrast",
-   "where": "ol.steps > li:nth-of-type(1) > div > p \"We walk the show unit and the site with \"",
-   "msg": "body text in #565c78 on #ffffff reads 6.57:1 (needs 7:1); 7 like it, like \"You sign the SPA elect\", \"We inspect the unit at\", \"A property worth AED 2\"",
-   "fix": "body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "text-contrast"
-   ],
-   "wheres": [
-    "ol.steps > li:nth-of-type(1) > div > p \"We walk the show unit and the site with \""
-   ]
-  },
-  {
-   "check": "section-gaps",
-   "where": "section#guides / section#contact",
-   "msg": "492px between these sections, +89% against the median 260px",
-   "fix": "use one gap between sections (all within 25% of each other)",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "section-gaps"
-   ],
-   "wheres": [
-    "section#guides / section#contact"
-   ]
+   "reason": "The brand guideline's logo is a two-line lockup (wordmark over REAL ESTATE) that must not be altered; the nav bar itself is one line."
   },
   {
    "check": "effects-fit",
@@ -1777,984 +588,13 @@
    ],
    "wheres": [
     "(the page)"
-   ]
-  },
-  {
-   "check": "gl-fallback",
-   "where": "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"Dubai off‑plan property for UK and UAE b\"",
-   "msg": "with its shader rejected (as a strict GPU rejects a reserved word) the WebGL picture shows only its ground (100% one colour, #ffffff): it needs a still fallback picture",
-   "fix": "give the WebGL piece a still fallback (a picture or a CSS ground) that shows when its shader fails to compile or link",
-   "widths": [
-    1440
    ],
-   "from": "consistency",
-   "ids": [
-    "gl-fallback"
-   ],
-   "wheres": [
-    "section.hero.hero--split > div.wrap > div.hero-text.grid > div.hero-visual.model \"Dubai off‑plan property for UK and UAE b\""
-   ]
-  },
-  {
-   "check": "section-air",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > hr.plaque__rule",
-   "msg": "a rule (<hr>) between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-   "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "section-air"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > hr.plaque__rule"
-   ]
-  },
-  {
-   "check": "section-air",
-   "where": "section#launches > div.wrap > div.launches \"Sobha OneSobha AreaSobha Hartland 2 Hand\"",
-   "msg": "a top border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-   "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "section-air"
-   ],
-   "wheres": [
-    "section#launches > div.wrap > div.launches \"Sobha OneSobha AreaSobha Hartland 2 Hand\""
-   ]
-  },
-  {
-   "check": "section-air",
-   "where": "section#plans > div.wrap > div.wall \"10% 50% 40%\"",
-   "msg": "a bottom border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
-   "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "section-air"
-   ],
-   "wheres": [
-    "section#plans > div.wrap > div.wall \"10% 50% 40%\""
-   ]
-  },
-  {
-   "check": "one-heading",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-   "msg": "the hero holds an h2 (1): its heading is the h1, and an h2 opens the next section (SR-5)",
-   "fix": "give each section one h2, first in its .wrap, and the hero only its h1",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "one-heading"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
-   ]
-  },
-  {
-   "check": "one-heading",
-   "where": "h2#launches-h \"New launches by developer\"",
-   "msg": "headings of two sections show whole on one screen at 8 of 181 scroll positions (4.4%; at scroll 200, 250, 300, 350px), here with \"Sobha One\": at most 3% on a desktop (SR-5)",
-   "fix": "make the sections one screen tall so their headings sit a screen apart and two never share one",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "one-heading"
-   ],
-   "wheres": [
-    "h2#launches-h \"New launches by developer\""
-   ]
-  },
-  {
-   "check": "container-edges",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-   "msg": "the h2 starts 564px right of the container's left: every h1 and h2 starts on it, 2px either way (SR-6)",
-   "fix": "start the text on the container's left, or on the one split line every split shares",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "container-edges"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
-   ]
-  },
-  {
-   "check": "row-lines",
-   "where": "section#contact > div.wrap > div.grid.grid--top > form.form.span-7 \"Name Write the name we should use. Whats\"",
-   "msg": "a row of 2 items: its first item starts at 623px, the container's left line at 80px (2px either way) (SR-7)",
-   "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "row-lines"
-   ],
-   "wheres": [
-    "section#contact > div.wrap > div.grid.grid--top > form.form.span-7 \"Name Write the name we should use. Whats\""
-   ]
-  },
-  {
-   "check": "row-lines",
-   "where": "section#areas > div.wrap > div.grid.grid--top > div.areas.span-8 \"Dubai Creek HarbourNew towers on the cre\"",
-   "msg": "a row of 2 items: its first item starts at 515px, the container's left line at 80px (2px either way) (SR-7)",
-   "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "row-lines"
-   ],
-   "wheres": [
-    "section#areas > div.wrap > div.grid.grid--top > div.areas.span-8 \"Dubai Creek HarbourNew towers on the cre\""
-   ]
-  },
-  {
-   "check": "row-lines",
-   "where": "section#launches > div.wrap > div.launches > div.launch:nth-of-type(1) \"Sobha OneSobha AreaSobha Hartland 2 Hand\"",
-   "msg": "a row of 4 items: its first item starts at 392px, the container's left line at 80px; its last item ends at 1044px, the container's right line at 1360px (2px either way) (and 4 more like it: \"Safa TwoDAMAC AreaBusine\", \"Palm Jebel Ali Beach Vil\", \"Creek Waters 2Emaar Area\") (SR-7)",
-   "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "row-lines"
-   ],
-   "wheres": [
-    "section#launches > div.wrap > div.launches > div.launch:nth-of-type(1) \"Sobha OneSobha AreaSobha Hartland 2 Hand\""
-   ]
-  },
-  {
-   "check": "split-pair",
-   "where": "section#uk-desk > div.wrap > div.grid.grid--top \"Buying in Dubai from the UK The UK desk \"",
-   "msg": "the two columns of the split start 16px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
-   "fix": "top-align both columns of the split (align-items: start)",
-   "widths": [
-    1440
-   ],
-   "from": "consistency",
-   "ids": [
-    "split-pair"
-   ],
-   "wheres": [
-    "section#uk-desk > div.wrap > div.grid.grid--top \"Buying in Dubai from the UK The UK desk \""
-   ]
-  },
-  {
-   "check": "flush",
-   "where": "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \"",
-   "msg": "section.hero.hero--split and section#launches run together: -295px between their content, on one ground",
-   "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "flush"
-   ],
-   "wheres": [
-    "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \""
-   ]
-  },
-  {
-   "check": "nav",
-   "where": "header.nav",
-   "msg": "the nav has no bar, and its pieces sit past the content's edges (24-403px against 24-366px)",
-   "fix": "make the nav one bar from the content's left edge to its right edge, with every link and action inside it",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "nav"
-   ],
-   "wheres": [
-    "header.nav"
-   ]
-  },
-  {
-   "check": "overlap-text",
-   "where": "h2#launches-h \"New launches by developer\"",
-   "msg": "lies over the text \"Sobha One\" (div.plaque__pick > button:nth-of-type(1))",
-   "fix": "move the box off the text (or the text off the box)",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "overlap-text"
-   ],
-   "wheres": [
-    "h2#launches-h \"New launches by developer\""
-   ]
-  },
-  {
-   "check": "overlap-text",
-   "where": "section#launches > div.wrap > div.section-head > p \"Each launch shows its handover quarter, \"",
-   "msg": "lies over the text \"Sobha One\" (div.plaque > h2)",
-   "fix": "move the box off the text (or the text off the box)",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "overlap-text"
-   ],
-   "wheres": [
-    "section#launches > div.wrap > div.section-head > p \"Each launch shows its handover quarter, \""
-   ]
-  },
-  {
-   "check": "overlap-text",
-   "where": "section#launches > div.wrap > div.filters > button:nth-of-type(1) \"All developers\"",
-   "msg": "lies over the text \"Ask about this launch\" (div.plaque > a.btn.btn--secondary)",
-   "fix": "move the box off the text (or the text off the box)",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "overlap-text"
-   ],
-   "wheres": [
-    "section#launches > div.wrap > div.filters > button:nth-of-type(1) \"All developers\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(1) \"Sobha One\"",
-   "msg": "the words \"Sobha One\" lie over \"New launches by developer\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(1) \"Sobha One\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(2) \"Safa Two\"",
-   "msg": "the words \"Safa Two\" lie over \"New launches by developer\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > div.plaque__pick > button:nth-of-type(2) \"Safa Two\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\"",
-   "msg": "the words \"Sobha One\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > h2 \"Sobha One\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > p.plaque__dev \"Sobha, Sobha Hartland 2\"",
-   "msg": "the words \"Sobha, Sobha Hartland 2\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > p.plaque__dev \"Sobha, Sobha Hartland 2\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(1) \"Handover\"",
-   "msg": "the words \"Handover\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(1) \"Handover\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(1) \"Q4 2027\"",
-   "msg": "the words \"Q4 2027\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(1) \"Q4 2027\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(2) \"From\"",
-   "msg": "the words \"From\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > dl > dt:nth-of-type(2) \"From\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-text.grid > div.hero-visual.model > div.plaque > a.btn.btn--secondary \"Ask about this launch\"",
-   "msg": "the words \"Ask about this launch\" lie over \"All developers\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-text.grid > div.hero-visual.model > div.plaque > a.btn.btn--secondary \"Ask about this launch\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \"",
-   "msg": "the words \"New launches by developer\" and the card div.hero-visual.model > div.plaque of another section lie in one place: the card runs out of its section, which is shorter than what it holds",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    390,
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.wrap > div.hero-text.grid > div.hero-visual.model > div.plaque \"Sobha One Safa Two Palm Jebel Ali Sobha \""
-   ]
-  },
-  {
-   "check": "button-styles",
-   "where": "footer#close > div.wrap > div.closing__cta.close--type > a.btn.btn--primary \"Find a launch\"",
-   "msg": "one button style (soft, fill #20275c) with labels in 3 sizes: 14, 16, 18px (\"Find a launch\", \"Ask on WhatsApp\")",
-   "fix": "one primary and one secondary button: one shape, one height per size, one label size",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "button-styles"
-   ],
-   "wheres": [
-    "footer#close > div.wrap > div.closing__cta.close--type > a.btn.btn--primary \"Find a launch\""
-   ]
-  },
-  {
-   "check": "heading-scale",
-   "where": "div.wrap > div.grid > article.guide.span-4:nth-of-type(1) > h3 \"Golden Visa through property\"",
-   "msg": "h3 headings in 4 sizes, 14px (\"Booking deposit\") to 19px (x1.36)",
-   "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
-   "widths": [
-    390
-   ],
-   "from": "consistency",
-   "ids": [
-    "heading-scale"
-   ],
-   "wheres": [
-    "div.wrap > div.grid > article.guide.span-4:nth-of-type(1) > h3 \"Golden Visa through property\""
-   ]
-  },
-  {
-   "check": "collide",
-   "where": "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(2) \"AED 1.65M\"",
-   "msg": "the words \"AED 1.65M\" lie over \"Each launch shows its handover q\" of another section: two lines in one place (they run out of their own section, which is shorter than what it holds)",
-   "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
-   "widths": [
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "collide"
-   ],
-   "wheres": [
-    "div.hero-visual.model > div.plaque > dl > dd:nth-of-type(2) \"AED 1.65M\""
-   ]
-  },
-  {
-   "check": "off-viewport",
-   "where": "header.nav > div.wrap.nav__bar \"Skip to content HomesPartner REAL ESTATE\"",
-   "msg": "at 320px wide it runs 21px past the screen's right edge (the page is 365px wide and scrolls sideways)",
-   "fix": "keep it inside the screen at this width: let it shrink, wrap or stack",
-   "widths": [
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "off-viewport"
-   ],
-   "wheres": [
-    "header.nav > div.wrap.nav__bar \"Skip to content HomesPartner REAL ESTATE\""
-   ]
-  },
-  {
-   "check": "off-viewport",
-   "where": "div.plaque > div.plaque__pick > button \"Palm Jebel Ali\"",
-   "msg": "at 320px wide it runs 45px past the screen's right edge (the page is 365px wide and scrolls sideways)",
-   "fix": "keep it inside the screen at this width: let it shrink, wrap or stack",
-   "widths": [
-    320
-   ],
-   "from": "consistency",
-   "ids": [
-    "off-viewport"
-   ],
-   "wheres": [
-    "div.plaque > div.plaque__pick > button \"Palm Jebel Ali\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"AreaSobha Hartland 2\"",
-   "msg": "starts at x 391.5; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"AreaSobha Hartland 2\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell.is-keep \"HandoverQ4 2027\"",
-   "msg": "starts at x 609; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell.is-keep \"HandoverQ4 2027\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"FromAED 1.65M\"",
-   "msg": "starts at x 759.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"FromAED 1.65M\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"Plan60/40\"",
-   "msg": "starts at x 909.7; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"Plan60/40\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"AreaBusiness Bay\"",
-   "msg": "starts at x 391.5; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"AreaBusiness Bay\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell.is-keep \"HandoverQ2 2028\"",
-   "msg": "starts at x 609; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell.is-keep \"HandoverQ2 2028\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"FromAED 2.1M\"",
-   "msg": "starts at x 759.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"FromAED 2.1M\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"Plan80/20\"",
-   "msg": "starts at x 909.7; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"Plan80/20\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"AreaPalm Jebel Ali\"",
-   "msg": "starts at x 391.5; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"AreaPalm Jebel Ali\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell.is-keep \"HandoverQ4 2028\"",
-   "msg": "starts at x 609; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell.is-keep \"HandoverQ4 2028\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"FromAED 18.5M\"",
-   "msg": "starts at x 759.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"FromAED 18.5M\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"AreaDubai Creek Harbour\"",
-   "msg": "starts at x 391.5; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"AreaDubai Creek Harbour\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell.is-keep \"HandoverQ1 2028\"",
-   "msg": "starts at x 609; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440,
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell.is-keep \"HandoverQ1 2028\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"FromAED 1.4M\"",
-   "msg": "starts at x 759.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"FromAED 1.4M\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"Plan90/10\"",
-   "msg": "starts at x 909.7; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"Plan90/10\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"AreaDubai South\"",
-   "msg": "starts at x 391.5; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"AreaDubai South\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"FromAED 690K\"",
-   "msg": "starts at x 759.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"FromAED 690K\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#launches p.launch__cell \"Plan50/50\"",
-   "msg": "starts at x 909.7; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#launches p.launch__cell \"Plan50/50\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#guides h3 \"Golden Visa through property\"",
-   "msg": "starts at x 105; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#guides h3 \"Golden Visa through property\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#guides p \"A property worth AED 2 million o\"",
-   "msg": "starts at x 105; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#guides p \"A property worth AED 2 million o\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#guides h3 \"Paying from a UK bank\"",
-   "msg": "starts at x 974.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#guides h3 \"Paying from a UK bank\""
-   ]
-  },
-  {
-   "check": "edge-left",
-   "where": "#guides p \"What to send, what to sign, and \"",
-   "msg": "starts at x 974.3; the lines are 80 and the column starts",
-   "fix": "start it on the .wrap left line",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-left"
-   ],
-   "wheres": [
-    "#guides p \"What to send, what to sign, and \""
-   ]
-  },
-  {
-   "check": "sparse",
-   "where": "#guides section.section \"Guides for off-plan buyers Short\"",
-   "msg": "its content fills 42% of its screen; merge it or give it its visual (0.55 is the aim)",
-   "fix": "fill the section or make it a screen shorter",
-   "widths": [
-    1440
-   ],
-   "from": "layout",
-   "ids": [
-    "sparse"
-   ],
-   "wheres": [
-    "#guides section.section \"Guides for off-plan buyers Short\""
-   ]
-  },
-  {
-   "check": "edge-right",
-   "where": "nav actions",
-   "msg": "end at x 416, the page's right line is 366",
-   "fix": "end it on the .wrap right line",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "edge-right"
-   ],
-   "wheres": [
-    "nav actions"
-   ]
-  },
-  {
-   "check": "neighbour",
-   "where": "#launches section.section \"New launches by developer Each l\"",
-   "msg": "framed, 44px of section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\" shows",
-   "fix": "keep the next section's heading and picture out of this screen",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "neighbour"
-   ],
-   "wheres": [
-    "#launches section.section \"New launches by developer Each l\""
-   ]
-  },
-  {
-   "check": "screen-height",
-   "where": "#homes section.section.g2 \"Ready homes to buy or rent Apart\"",
-   "msg": "2971px, 3.52 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills",
-   "fix": "make the section exactly one or two screens (--h: 1 or 2)",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "screen-height"
-   ],
-   "wheres": [
-    "#homes section.section.g2 \"Ready homes to buy or rent Apart\""
-   ]
-  },
-  {
-   "check": "neighbour",
-   "where": "#areas section.section \"Dubai areas we sell in Choose an\"",
-   "msg": "framed, 39px of #advisor section.section.statement \"One advisor for the whole purcha\" shows",
-   "fix": "keep the next section's heading and picture out of this screen",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "neighbour"
-   ],
-   "wheres": [
-    "#areas section.section \"Dubai areas we sell in Choose an\""
-   ]
-  },
-  {
-   "check": "neighbour",
-   "where": "#contact section.section \"Send an enquiry Tell us what you\"",
-   "msg": "framed, 301px of the footer shows",
-   "fix": "keep the next section's heading and picture out of this screen",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "neighbour"
-   ],
-   "wheres": [
-    "#contact section.section \"Send an enquiry Tell us what you\""
-   ]
-  },
-  {
-   "check": "hero-fold",
-   "where": "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\"",
-   "msg": "ends at y 974, past the fold (844): 1.15 screens tall",
-   "fix": "the hero fills the first screen alone, its button inside it",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "hero-fold"
-   ],
-   "wheres": [
-    "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\""
-   ]
-  },
-  {
-   "check": "hero-maxchars",
-   "where": "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\"",
-   "msg": "with a 45-character h1 (heroes.json maxChars): ends at y 974, past the fold (844): 1.15 screens tall",
-   "fix": "shorten the h1 or give the hero room for the longest headline",
-   "widths": [
-    390
-   ],
-   "from": "layout",
-   "ids": [
-    "hero-maxchars"
-   ],
-   "wheres": [
-    "section.hero.hero--split section.hero.hero--split \"Dubai off‑plan property for UK a\""
-   ]
+   "reason": "The client picked the sales-gallery direction: one WebGL scale model of the off-plan building being sold, with stills for phones and reduced motion. It is the product, not a decorative effect."
   }
  ],
- "waived": [],
- "warnCount": 26,
- "at": "2026-11-23T19:58:56.490Z",
- "session": "2ada10d3-adca-511f-83b2-5d3158ea15e2"
+ "warnCount": 20,
+ "at": "2026-11-23T20:19:58.375Z",
+ "session": "2ada10d3-adca-511f-83b2-5d3158ea15e2",
+ "manual": true,
+ "openTold": true
 }
