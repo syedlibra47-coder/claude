@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Off-Plan Project | HomesPartner Real Estate</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="offplan.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="offplan-detail-topbar">
+  <div class="container">
+    <nav class="offplan-breadcrumb" id="offplanBreadcrumb" aria-label="Breadcrumb"></nav>
+  </div>
+</div>
+
+<!-- ===== GALLERY ===== -->
+<section class="offplan-gallery-section">
+  <div class="container">
+    <div class="offplan-gallery-frame">
+      <img id="offplanGalleryMain" src="" alt="">
+      <div class="offplan-gallery-badges" id="offplanGalleryBadges"></div>
+    </div>
+    <div class="offplan-gallery-thumbs" id="offplanGalleryThumbs"></div>
+  </div>
+</section>
+
+<!-- ===== TITLE BAR ===== -->
+<section class="offplan-titlebar">
+  <div class="container offplan-titlebar-inner">
+    <div>
+      <p class="eyebrow eyebrow--dark" id="offplanDeveloperEyebrow"></p>
+      <h1 class="display" id="offplanTitle"></h1>
+      <p class="offplan-titlebar-location">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span id="offplanLocation"></span>
+      </p>
+    </div>
+    <div class="offplan-titlebar-price">
+      <div class="price-label" id="offplanPrice"></div>
+      <div class="price-sub">Starting price</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAIN CONTENT ===== -->
+<section class="offplan-main">
+  <div class="container offplan-grid-layout">
+    <div class="offplan-content">
+
+      <div class="offplan-fact-grid" id="offplanFactGrid"></div>
+
+      <div class="offplan-section-block">
+        <h2>Overview</h2>
+        <p id="offplanDescription"></p>
+        <p class="detail-ref" id="offplanRefRow">DLD/Trakheesi Permit No.: <span id="offplanRef" class="mono"></span></p>
+      </div>
+
+      <div class="offplan-section-block">
+        <h2>Unit Types &amp; Sizes</h2>
+        <table class="unit-type-table">
+          <thead><tr><th>Type</th><th>Size</th><th>Starting Price</th></tr></thead>
+          <tbody id="offplanUnitTypes"></tbody>
+        </table>
+      </div>
+
+      <div class="offplan-section-block">
+        <h2>Payment Plan</h2>
+        <div class="payment-plan-block">
+          <div class="payment-plan-tabs" id="offplanPlanTabs"></div>
+          <div class="payment-plan-timeline" id="offplanPlanTimeline"></div>
+          <div class="payment-plan-legend" id="offplanPlanLegend"></div>
+          <p class="payment-plan-note" id="offplanPlanNote"></p>
+        </div>
+      </div>
+
+      <div class="offplan-section-block">
+        <h2>Amenities</h2>
+        <ul class="amenities-grid" id="offplanAmenities"></ul>
+      </div>
+
+      <div class="offplan-section-block">
+        <h2>Location Highlights</h2>
+        <div class="location-highlights" id="offplanLocationHighlights"></div>
+      </div>
+    </div>
+
+    <aside class="offplan-sidebar">
+      <div class="developer-card">
+        <h4>Developer</h4>
+        <div class="developer-name" id="offplanDeveloperName"></div>
+        <p id="offplanDeveloperBlurb"></p>
+      </div>
+      <div class="enquiry-card">
+        <h4>Register Your Interest</h4>
+        <form id="offplanEnquiryForm">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Email address" required>
+          <input type="tel" placeholder="Phone number" required>
+          <textarea placeholder="Any questions about this project?"></textarea>
+          <button type="submit" class="btn btn-gold">Register Interest</button>
+        </form>
+        <p class="enquiry-note" id="offplanEnquiryNote"></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== SIMILAR PROJECTS ===== -->
+<section class="similar-offplan-section">
+  <div class="container">
+    <div class="row-head reveal">
+      <div>
+        <p class="eyebrow eyebrow--dark">You May Also Like</p>
+        <h2 class="display">Similar Off-Plan Projects</h2>
+      </div>
+      <a href="offplan-listings.html" class="card-link">All Projects &rarr;</a>
+    </div>
+    <div class="offplan-grid-full" id="similarOffplanGrid" style="margin-top:28px;"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/offplan-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="script.js"></script>
+<script src="offplan-detail.js"></script>
+
+</body>
+</html>

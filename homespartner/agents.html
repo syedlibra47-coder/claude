@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Our Team — HomesPartner Real Estate</title>
+<meta name="description" content="Meet the HomesPartner Real Estate team — property consultants ready to help you buy, rent, sell or invest in Dubai property.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="listing-detail.css">
+<link rel="stylesheet" href="team.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero" data-page="agents">
+  <div class="hero-bg">
+    <div class="hero-bg-media"></div>
+    <svg class="grid-map" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g class="grid-lines">
+        <line x1="0" y1="120" x2="1600" y2="120"/>
+        <line x1="0" y1="280" x2="1600" y2="280"/>
+        <line x1="270" y1="0" x2="270" y2="500"/>
+        <line x1="800" y1="0" x2="800" y2="500"/>
+        <line x1="1330" y1="0" x2="1330" y2="500"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container page-hero-inner">
+    <p class="eyebrow">Meet The Team</p>
+    <h1 class="display">Our Agents</h1>
+    <p>Meet and connect with the people behind HomesPartner — local specialists across Dubai's buying, renting and off-plan markets.</p>
+  </div>
+</section>
+
+<!-- ===== AGENTS GRID ===== -->
+<section class="agents-section">
+  <div class="container">
+    <div class="agents-filter-bar" id="agentsFilterBar">
+      <input type="text" id="agentsSearchInput" class="agents-filter-input" placeholder="Search by name&hellip;">
+      <select id="agentsLanguageFilter" class="agents-filter-select">
+        <option value="all">All Languages</option>
+      </select>
+      <select id="agentsSpecialtyFilter" class="agents-filter-select">
+        <option value="all">All Specialties</option>
+      </select>
+    </div>
+    <p class="agents-filter-empty" id="agentsFilterEmpty" style="display:none;">No agents match your filters. Try clearing a filter above.</p>
+    <div class="agents-grid" id="agentsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <h2 class="display">Interested in Joining Our Team?</h2>
+    <p>We're always glad to meet driven, client-first people who want to build a career in Dubai real estate.</p>
+    <a href="careers.html" class="btn btn-gold">View Careers &rarr;</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/agents-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="assets/page-header-bg.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="script.js"></script>
+<script src="agents-page.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,2 @@
-.taste-skill/chrome*
-.taste-skill/gate/
-.taste-skill/tmp*
-shots/
-.taste-skill/consistency/
+node_modules/
+_qa_*

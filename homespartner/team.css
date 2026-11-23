@@ -1,0 +1,161 @@
+/* ===== AGENTS / CAREERS PAGES ===== */
+.main-nav a.is-active, .nav-dropdown-menu a.is-active { color: var(--gold-dark); }
+
+.agents-section { padding: 90px 0 100px; background: var(--paper); }
+.agents-filter-bar {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.agents-filter-input, .agents-filter-select {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: var(--paper);
+}
+.agents-filter-input { flex: 1 1 220px; min-width: 180px; }
+.agents-filter-select { flex: 0 1 200px; min-width: 160px; }
+.agents-filter-empty { text-align: center; color: var(--gray); padding: 40px 0; }
+@media (max-width: 640px) {
+  .agents-filter-bar { flex-direction: column; }
+  .agents-filter-input, .agents-filter-select { flex: 1 1 auto; width: 100%; }
+}
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.team-agent-card {
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.team-agent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.team-agent-card .agent-avatar { width: 76px; height: 76px; font-size: 1.5rem; text-decoration: none; overflow: hidden; }
+.team-agent-card .agent-avatar--photo { background: none; padding: 0; }
+.team-agent-card .agent-avatar--photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.team-agent-card h3 { font-size: 1.2rem; margin-bottom: 2px; }
+.team-agent-card h3 a { color: inherit; text-decoration: none; }
+.team-agent-card h3 a:hover { color: var(--gold-dark); }
+.team-agent-card .agent-role { margin-bottom: 10px; }
+.agent-languages { font-size: 0.8rem; color: var(--gray); margin-bottom: 14px; }
+.agent-specialty-pills { justify-content: center; margin-bottom: 18px; }
+.agent-view-profile { display: block; margin-top: 12px; font-size: 0.85rem; }
+
+/* ===== AGENT PROFILE PAGE ===== */
+.agent-profile-header {
+  background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-soft) 100%);
+  padding: 50px 0 60px;
+  color: #fff;
+}
+.agent-profile-inner { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.agent-profile-avatar {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--gold-light), var(--gold-dark));
+  color: var(--navy-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 2rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.agent-profile-avatar--photo { background: none; }
+.agent-profile-avatar--photo img { width: 100%; height: 100%; object-fit: cover; }
+.agent-profile-body { flex: 1; min-width: 240px; }
+.agent-profile-body h1 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 6px; }
+.agent-profile-title { color: var(--gold-light); font-weight: 600; margin-bottom: 6px; }
+.agent-profile-languages { color: rgba(255,255,255,0.65); font-size: 0.88rem; margin-bottom: 14px; }
+.agent-profile-specialties { display: flex; gap: 8px; flex-wrap: wrap; }
+.agent-profile-specialties .pill { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #fff; }
+.agent-profile-contact { display: flex; flex-direction: column; gap: 10px; align-items: stretch; min-width: 200px; }
+.agent-profile-contact .btn { white-space: nowrap; }
+.agent-profile-email { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-align: center; text-decoration: underline; }
+
+.agent-profile-bio { background: var(--paper-flat); padding: 50px 0; }
+.agent-profile-bio p { max-width: 760px; margin: 0 auto; color: var(--gray); font-size: 1.02rem; line-height: 1.8; text-align: center; }
+
+.agent-profile-listings { background: var(--paper); padding: 70px 0 100px; }
+.agent-no-listings { text-align: center; color: var(--gray); padding: 40px 0; }
+
+@media (max-width: 640px) {
+  .agent-profile-inner { flex-direction: column; text-align: center; }
+  .agent-profile-specialties { justify-content: center; }
+  .agent-profile-contact { width: 100%; }
+}
+
+/* ===== CAREERS PAGE ===== */
+.careers-intro { padding: 90px 0 40px; background: var(--paper); }
+.careers-intro-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.careers-intro-inner p { color: var(--gray); font-size: 1rem; line-height: 1.75; margin-top: 16px; }
+
+.careers-values { padding: 50px 0 100px; background: var(--paper); }
+.careers-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 12px;
+}
+.careers-value-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-soft);
+}
+.careers-value-card .service-icon { margin-bottom: 16px; }
+.careers-value-card h4 { color: var(--navy); font-size: 1.05rem; margin-bottom: 8px; }
+.careers-value-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+
+.careers-roles { padding: 0 0 100px; background: var(--paper); }
+.careers-roles-list { display: flex; flex-direction: column; gap: 14px; max-width: 800px; margin: 0 auto; }
+.careers-role-row--full {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 26px;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.careers-role-row--full:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.careers-role-info { flex: 1; }
+.careers-role-title { display: block; font-weight: 700; color: var(--navy); font-size: 1.05rem; margin-bottom: 4px; }
+.careers-role-meta { display: block; font-family: var(--font-mono); font-size: 0.78rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+.careers-role-desc { color: var(--gray); font-size: 0.9rem; line-height: 1.6; margin: 0; }
+.careers-role-row--full .btn { flex-shrink: 0; }
+
+/* ===== CORE VALUES ===== */
+.core-values-section { background: var(--paper-flat); padding: 90px 0; }
+.core-values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 10px; }
+.core-value-card { text-align: center; padding: 20px 14px; }
+.core-value-card h4 { color: var(--navy); font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 8px; }
+.core-value-card p { color: var(--gray); font-size: 0.88rem; }
+
+@media (max-width: 980px) {
+  .core-values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .core-values-grid { grid-template-columns: 1fr; }
+  .careers-role-row--full { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 980px) {
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .careers-values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .agents-grid { grid-template-columns: 1fr; }
+  .careers-values-grid { grid-template-columns: 1fr; }
+}

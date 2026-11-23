@@ -1,0 +1,158 @@
+/* ===== SERVICES PAGE ===== */
+
+.main-nav a.is-active { color: var(--gold-dark); }
+
+/* ===== CALCULATORS (rental yield, buy vs rent) ===== */
+.calc-section { padding: 90px 0; background: var(--paper); }
+.calc-section:nth-of-type(even) { background: var(--paper-flat); }
+.calc-block {
+  background: linear-gradient(160deg, var(--navy), var(--navy-soft));
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  color: #fff;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.calc-block h2 { color: #fff; text-align: center; }
+.calc-block .section-sub { color: rgba(255,255,255,0.65); margin: 12px auto 32px; text-align: center; }
+
+.calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: center; }
+.calc-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+.calc-field span:first-child { font-size: 0.85rem; color: rgba(255,255,255,0.75); }
+.calc-input-row { display: flex; align-items: center; gap: 14px; }
+.calc-input-row input[type="range"] { flex: 1; accent-color: var(--gold-light); height: 4px; }
+.calc-value { font-size: 0.9rem; min-width: 56px; text-align: right; color: var(--gold-light); }
+.calc-number-input {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08);
+  color: #fff; font-family: var(--font-body); font-size: 0.95rem;
+}
+.calc-number-input:focus { outline: none; border-color: var(--gold-light); background: rgba(255,255,255,0.12); }
+
+.calc-result {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 26px;
+  text-align: center;
+}
+.calc-result-label { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+.calc-result-value { display: block; font-size: 2rem; font-weight: 600; color: var(--gold-light); margin-bottom: 20px; }
+.calc-result-rows { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; }
+.calc-result-rows div { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.75); }
+.calc-note { font-size: 0.78rem; color: rgba(255,255,255,0.55); text-align: center; margin-top: 20px; }
+
+@media (max-width: 720px) {
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-block { padding: 28px 22px; }
+}
+
+.service-jump {
+  position: sticky;
+  top: 84px;
+  z-index: 40;
+  background: var(--paper-flat);
+  border-bottom: 1px solid var(--line);
+}
+.service-jump-inner {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  padding: 16px 28px;
+  scrollbar-width: none;
+}
+.service-jump-inner::-webkit-scrollbar { display: none; }
+.service-jump-inner a {
+  white-space: nowrap;
+  color: var(--gray);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.service-jump-inner a:hover { color: var(--navy); }
+
+.service-detail { padding: 90px 0; background: var(--paper); }
+.service-detail--alt { background: var(--paper-flat); }
+
+.service-detail-inner {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 44px;
+  max-width: 800px;
+}
+
+.service-detail-icon {
+  width: 84px; height: 84px;
+  border-radius: 20px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.service-detail-icon svg { width: 42px; height: 42px; color: var(--gold-light); }
+
+.service-detail-body .eyebrow { margin-bottom: 8px; }
+.service-detail-body h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 16px; }
+.service-detail-body > p { color: var(--gray); line-height: 1.75; margin-bottom: 22px; }
+
+.service-checklist { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 11px; }
+.service-checklist li {
+  position: relative;
+  padding-left: 30px;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+.service-checklist li::before {
+  content: '';
+  position: absolute; left: 0; top: 3px;
+  width: 18px; height: 18px;
+  background: var(--gold-dark);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* ===== PROPERTY VALUATION ===== */
+.valuation-section { padding: 100px 0; background: var(--navy); color: #fff; }
+.valuation-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1080px;
+}
+.valuation-copy .eyebrow { color: var(--gold-light); margin-bottom: 10px; }
+.valuation-copy h2 { color: #fff; margin-bottom: 16px; }
+.valuation-copy p { color: rgba(255,255,255,0.72); line-height: 1.75; }
+
+.valuation-form {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.valuation-form h3 { color: var(--navy); font-size: 1.15rem; margin-bottom: 6px; }
+.valuation-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.valuation-form input, .valuation-form select {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper-flat);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.valuation-form input:focus, .valuation-form select:focus { outline: none; border-color: var(--gold-dark); }
+.valuation-form .form-note { color: var(--gold-dark); font-weight: 600; font-size: 0.85rem; min-height: 18px; }
+
+@media (max-width: 720px) {
+  .service-detail-inner { grid-template-columns: 1fr; }
+  .service-detail-icon { width: 64px; height: 64px; border-radius: 16px; }
+  .service-detail-icon svg { width: 32px; height: 32px; }
+  .service-jump { top: 0; }
+  .valuation-inner { grid-template-columns: 1fr; }
+  .valuation-form-row { grid-template-columns: 1fr; }
+  .valuation-section { padding: 70px 0; }
+}

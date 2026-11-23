@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Off-Plan Projects in Dubai — HomesPartner Real Estate</title>
+<meta name="description" content="Browse off-plan projects in Dubai with flexible payment plans. Filter by developer, status, property type and payment plan to find your next pre-launch or under-construction investment.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="offplan.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero" data-page="offplan">
+  <div class="hero-bg">
+    <div class="hero-bg-media"></div>
+    <svg class="grid-map" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g class="grid-lines">
+        <line x1="0" y1="120" x2="1600" y2="120"/>
+        <line x1="0" y1="280" x2="1600" y2="280"/>
+        <line x1="270" y1="0" x2="270" y2="500"/>
+        <line x1="800" y1="0" x2="800" y2="500"/>
+        <line x1="1330" y1="0" x2="1330" y2="500"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container page-hero-inner">
+    <p class="eyebrow">Off-Plan Projects</p>
+    <h1 class="display">Buy Off-Plan Property in Dubai</h1>
+    <p>Pre-launch and under-construction developments from trusted developers, with flexible payment plans and strong capital appreciation potential.</p>
+  </div>
+</section>
+
+<!-- ===== OFF-PLAN LISTINGS ===== -->
+<section class="all-listings">
+  <div class="container">
+    <div class="filters-bar reveal">
+      <div class="filter-status" id="offplanStatusFilter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="New Launch">New Launch</button>
+        <button class="filter-btn" data-filter="Selling Fast">Selling Fast</button>
+        <button class="filter-btn" data-filter="Pre-Launch">Pre-Launch</button>
+        <button class="filter-btn" data-filter="Under Construction">Under Construction</button>
+      </div>
+      <select class="filter-select" id="offplanTypeFilter">
+        <option value="all">All Types</option>
+        <option value="Apartments">Apartments</option>
+        <option value="Villas">Villas</option>
+        <option value="Townhouses">Townhouses</option>
+      </select>
+      <select class="filter-select" id="offplanDeveloperFilter">
+        <option value="all">All Developers</option>
+      </select>
+      <select class="filter-select" id="offplanPlanFilter">
+        <option value="all">Any Payment Plan</option>
+        <option value="10">10/90</option>
+        <option value="20">20/80</option>
+        <option value="30">30/70</option>
+        <option value="40">40/60</option>
+        <option value="50">50/50</option>
+        <option value="60">60/40</option>
+      </select>
+      <div class="filter-search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m21 21-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" id="offplanKeywordFilter" placeholder="Search by project, community or developer…">
+      </div>
+      <button type="button" class="filter-reset" id="offplanFilterReset">Reset</button>
+      <span class="filter-results" id="offplanResultsCount"></span>
+    </div>
+
+    <div class="offplan-grid-full" id="offplanListingsGrid"></div>
+
+    <div class="filter-empty" id="offplanEmptyState">
+      <p>No off-plan projects match those filters.</p>
+      <button type="button" class="filter-reset" data-mirror-reset>Clear filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/offplan-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="assets/page-header-bg.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="script.js"></script>
+<script src="offplan-listings.js"></script>
+
+</body>
+</html>

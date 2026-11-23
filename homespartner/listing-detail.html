@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Property Details — HomesPartner Real Estate</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="listing-detail.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="detail-topbar">
+  <div class="container">
+    <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+  </div>
+</div>
+
+<main id="detailRoot">
+  <!-- ===== GALLERY ===== -->
+  <section class="detail-gallery">
+    <div class="container">
+      <div class="gallery-frame">
+        <img id="galleryMain" src="" alt="">
+        <span class="badge listing-tag" id="galleryBadge"></span>
+      </div>
+      <div class="gallery-thumbs" id="galleryThumbs"></div>
+    </div>
+  </section>
+
+  <!-- ===== TITLE / PRICE BAR ===== -->
+  <section class="detail-titlebar">
+    <div class="container detail-titlebar-inner">
+      <div>
+        <div class="pill-row" id="detailTags"></div>
+        <h1 class="display" id="detailTitle">&nbsp;</h1>
+        <p class="detail-location" id="detailLocation"></p>
+      </div>
+      <div class="detail-price-block">
+        <div class="detail-price" id="detailPrice"></div>
+        <div class="detail-actions">
+          <a class="btn btn-gold" id="detailCallBtn" href="#">Call Agent</a>
+          <a class="whatsapp-btn whatsapp-btn--inline detail-whatsapp" id="detailWhatsapp" target="_blank" rel="noopener" aria-label="Enquire on WhatsApp">
+            <img src="assets/WhatsApp.svg.webp" alt="WhatsApp">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <section class="detail-main">
+    <div class="container detail-grid">
+      <div class="detail-content">
+
+        <div class="spec-grid" id="specGrid"></div>
+
+        <div class="detail-block">
+          <h2 class="display">Overview</h2>
+          <p class="detail-description" id="detailDescription"></p>
+          <p class="detail-ref" id="detailRefRow">DLD/Trakheesi Permit No.: <span id="detailRef" class="mono"></span></p>
+        </div>
+
+        <div class="detail-block">
+          <h2 class="display">Features &amp; Amenities</h2>
+          <ul class="amenities-list" id="amenitiesList"></ul>
+        </div>
+
+        <div class="detail-block" id="calculatorBlock">
+          <h2 class="display">Affordability Calculator</h2>
+          <p class="section-sub section-sub--left">Estimate your monthly payment. For guidance only — speak to our team for an exact quote.</p>
+          <div class="calc-grid">
+            <div class="calc-inputs">
+              <label class="calc-field">
+                <span>Down Payment</span>
+                <div class="calc-input-row">
+                  <input type="range" id="calcDownPct" min="10" max="80" value="20" step="5">
+                  <span class="calc-value mono" id="calcDownPctLabel">20%</span>
+                </div>
+              </label>
+              <label class="calc-field">
+                <span>Interest Rate (per year)</span>
+                <div class="calc-input-row">
+                  <input type="range" id="calcRate" min="2" max="8" value="4" step="0.25">
+                  <span class="calc-value mono" id="calcRateLabel">4.0%</span>
+                </div>
+              </label>
+              <label class="calc-field">
+                <span>Loan Term</span>
+                <div class="calc-input-row">
+                  <input type="range" id="calcTerm" min="5" max="25" value="20" step="1">
+                  <span class="calc-value mono" id="calcTermLabel">20 yrs</span>
+                </div>
+              </label>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-label">Est. Monthly Payment</span>
+              <span class="calc-result-value mono" id="calcMonthly">AED 0</span>
+              <div class="calc-result-rows">
+                <div><span>Down payment</span><span class="mono" id="calcDownAmount">AED 0</span></div>
+                <div><span>Loan amount</span><span class="mono" id="calcLoanAmount">AED 0</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="agent-card">
+          <div class="agent-avatar" id="agentAvatar"></div>
+          <h3 id="agentName"></h3>
+          <p class="agent-role">HomesPartner Advisor</p>
+          <a class="agent-contact-row" id="agentPhoneRow" href="#">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 2c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.2 1.1L6.6 10.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span id="agentPhoneText"></span>
+          </a>
+          <a class="agent-contact-row" id="agentEmailRow" href="#">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4.5" width="19" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="agentEmailText"></span>
+          </a>
+          <a class="btn btn-navy agent-whatsapp-btn" id="agentWhatsappBtn" target="_blank" rel="noopener">WhatsApp This Listing</a>
+        </div>
+
+        <form class="enquiry-card" id="enquiryForm">
+          <h3>Request a Viewing</h3>
+          <input type="text" id="enq_name" placeholder="Your name" required>
+          <input type="tel" id="enq_phone" placeholder="Phone number" required>
+          <input type="email" id="enq_email" placeholder="Email address" required>
+          <textarea id="enq_message" rows="3" placeholder="I'd like to arrange a viewing…"></textarea>
+          <button type="submit" class="btn btn-gold" id="enquirySubmitBtn">Send Enquiry</button>
+          <p class="form-note" id="enquiryNote"></p>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== SIMILAR PROPERTIES ===== -->
+  <section class="similar-section">
+    <div class="container">
+      <div class="row-head reveal">
+        <div>
+          <p class="eyebrow eyebrow--dark">You May Also Like</p>
+          <h2 class="display">Similar Properties</h2>
+        </div>
+        <a href="listings.html" class="row-head-link">All Listings &rarr;</a>
+      </div>
+      <div class="listing-grid-full" id="similarGrid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/listings-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="assets/contact-content-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="script.js"></script>
+<script src="listing-detail.js"></script>
+</body>
+</html>

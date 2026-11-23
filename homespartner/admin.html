@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — HomesPartner Real Estate</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="page-builder.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="admin-login-screen" id="loginScreen">
+  <form class="admin-login-card" id="loginForm">
+    <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate"></span>
+    <h1>Admin Login</h1>
+    <p class="admin-login-sub">Sign in to manage listings and off-plan projects.</p>
+    <input type="email" id="loginEmail" placeholder="Email address" required autocomplete="username">
+    <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+    <button type="submit" class="btn btn-navy">Sign In</button>
+    <p class="admin-login-error" id="loginError"></p>
+    <p class="admin-config-warning" id="configWarning" style="display:none;">
+      Supabase isn't configured yet — edit <code>assets/supabase-config.js</code> with your project URL and anon key.
+    </p>
+  </form>
+</div>
+
+<!-- ===== NO ROLE ASSIGNED ===== -->
+<div class="admin-login-screen" id="noRoleScreen" style="display:none;">
+  <div class="admin-login-card">
+    <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate"></span>
+    <h1>No Access Yet</h1>
+    <p class="admin-login-sub">Your login works, but no role has been assigned to it yet. Ask a super admin or admin to invite you (or assign your role) from the Users tab.</p>
+    <button type="button" class="btn btn-navy" id="noRoleLogoutBtn">Log Out</button>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="admin-dashboard" id="dashboard" style="display:none;">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-brand">
+        <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate"></span>
+      </div>
+      <nav class="admin-sidebar-nav">
+        <div class="admin-nav-group">
+          <p class="admin-nav-group-label">Properties</p>
+          <button type="button" class="admin-tab active" data-tab="listings"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M8 22 24 8l16 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v18h24V20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 38v-10h8v10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="listingsTabLabel">Listings</span></button>
+          <button type="button" class="admin-tab" data-tab="offplan" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 6 6 16v6h36v-6L24 6Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M10 22v16M18 22v16M30 22v16M38 22v16" stroke="currentColor" stroke-width="3"/><path d="M6 42h36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>Off-Plan Projects</span></button>
+          <button type="button" class="admin-tab" data-tab="services" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M33 8a9 9 0 0 0-11.8 11.8L9 32l7 7 12.2-12.2A9 9 0 0 0 40 15l-6.5 6.5-5-5L34.5 10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Services</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">Leads</p>
+          <button type="button" class="admin-tab" data-tab="leads" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M6 10h36v28H6z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M6 14l18 13 18-13" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></span><span id="leadsTabLabel">Leads</span></button>
+          <button type="button" class="admin-tab" data-tab="newsletter" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="12" width="36" height="26" rx="2" stroke="currentColor" stroke-width="3"/><path d="M8 14l16 13 16-13" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span id="newsletterTabLabel">Newsletter</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">Pages</p>
+          <button type="button" class="admin-tab" data-tab="homepage" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M6 40h36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><rect x="10" y="28" width="6" height="12" stroke="currentColor" stroke-width="3"/><rect x="21" y="20" width="6" height="20" stroke="currentColor" stroke-width="3"/><rect x="32" y="12" width="6" height="28" stroke="currentColor" stroke-width="3"/></svg></span><span>Homepage</span></button>
+          <button type="button" class="admin-tab" data-tab="contact" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 42s12-11 12-20a12 12 0 1 0-24 0c0 9 12 20 12 20Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="22" r="4" stroke="currentColor" stroke-width="3"/></svg></span><span>Contact Page</span></button>
+          <button type="button" class="admin-tab" data-tab="careers" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="16" cy="24" r="8" stroke="currentColor" stroke-width="3"/><path d="M24 24h16M34 24v6M40 24v4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>Careers</span></button>
+          <button type="button" class="admin-tab" data-tab="custompages" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="2" stroke="currentColor" stroke-width="3"/><path d="M15 16h18M15 24h18M15 32h10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>Custom Pages</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">Marketing</p>
+          <button type="button" class="admin-tab" data-tab="popups" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="26" rx="2" stroke="currentColor" stroke-width="3"/><path d="M6 30l11-10 8 7 8-9 9 8" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="16" cy="18" r="3" stroke="currentColor" stroke-width="3"/></svg></span><span id="popupsTabLabel">Popup Banners</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">People</p>
+          <button type="button" class="admin-tab" data-tab="agents" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 6l14 5v11c0 9-6 15-14 18-8-3-14-9-14-18V11l14-5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M18 24l4 4 8-8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Agents</span></button>
+          <button type="button" class="admin-tab" data-tab="testimonials" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4 29.5 18 44 20l-11 10.5L36 45 24 37 12 45l3-14.5L4 20l14.5-2z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></span><span>Reviews</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">Site Settings</p>
+          <button type="button" class="admin-tab" data-tab="chrome" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6h14l8 8v28H14V6Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M28 6v8h8" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M18 26h12M18 32h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>Header &amp; Footer</span></button>
+          <button type="button" class="admin-tab" data-tab="theme" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M24 6l5.5 11.5L42 19l-9 8.8 2.1 12.2L24 34l-11.1 6 2.1-12.2L6 19l12.5-1.5L24 6Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></span><span>Theme</span></button>
+          <button type="button" class="admin-tab" data-tab="pagebg" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="3"/><path d="M6 19h36" stroke="currentColor" stroke-width="3"/><circle cx="12" cy="14.5" r="1.6" fill="currentColor"/></svg></span><span>Page Backgrounds</span></button>
+        </div>
+        <div class="admin-nav-group" data-roles="admin,super_admin">
+          <p class="admin-nav-group-label">Administration</p>
+          <button type="button" class="admin-tab" data-tab="users" data-roles="admin,super_admin"><span class="admin-tab-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="18" cy="16" r="7" stroke="currentColor" stroke-width="3"/><path d="M6 41c0-8 5.4-13 12-13s12 5 12 13" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M31 10.5a7 7 0 0 1 0 13.6M36 41c0-6.5-3.6-11-9-12.6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span><span>Users</span></button>
+        </div>
+      </nav>
+      <div class="admin-sidebar-foot">
+        <span class="admin-user-email" id="userEmail"></span>
+        <div class="admin-sidebar-foot-actions">
+          <a href="index.html" target="_blank" class="btn btn-sm btn-navy">View Site</a>
+          <button type="button" class="btn btn-sm" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-content">
+
+  <!-- LISTINGS TAB (full list for admin/super_admin, own-listings-only for agents) -->
+  <section class="admin-panel active" id="panel-listings">
+    <div class="admin-panel-head">
+      <h2 id="listingsPanelTitle">Listings</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addListingBtn">+ Add New Listing</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="listingsTable">
+        <thead><tr><th>Title</th><th>Type</th><th>Price</th><th>Community</th><th>Featured</th><th></th></tr></thead>
+        <tbody id="listingsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- OFF-PLAN TAB -->
+  <section class="admin-panel" id="panel-offplan">
+    <div class="admin-panel-head">
+      <h2>Off-Plan Projects</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addOffplanBtn">+ Add New Project</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="offplanTable">
+        <thead><tr><th>Title</th><th>Developer</th><th>Price</th><th>Status</th><th>Featured</th><th></th></tr></thead>
+        <tbody id="offplanTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SERVICES TAB -->
+  <section class="admin-panel" id="panel-services">
+    <div class="admin-panel-head">
+      <h2>Services</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addServiceBtn">+ Add New Service</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="servicesTable">
+        <thead><tr><th>Order</th><th>Title</th><th>CTA</th><th>Links To</th><th></th></tr></thead>
+        <tbody id="servicesTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LEADS TAB (admin/super_admin only) -->
+  <section class="admin-panel" id="panel-leads">
+    <div class="admin-panel-head">
+      <h2>Leads</h2>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">Property enquiries ("Request a Viewing"), valuation requests, and saved-search alerts, newest first. Update status as you work each one. Saved searches aren't emailed automatically yet — that needs an email-sending service connected first.</p>
+    <div class="admin-leads-filter" id="leadsFilter">
+      <button type="button" class="filter-btn active" data-lead-filter="all">All</button>
+      <button type="button" class="filter-btn" data-lead-filter="enquiry">Enquiries</button>
+      <button type="button" class="filter-btn" data-lead-filter="valuation">Valuations</button>
+      <button type="button" class="filter-btn" data-lead-filter="saved_search">Saved Searches</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="leadsTable">
+        <thead><tr><th>Date</th><th>Type</th><th>Name</th><th>Contact</th><th>Details</th><th>Status</th></tr></thead>
+        <tbody id="leadsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER TAB (admin/super_admin only) -->
+  <section class="admin-panel" id="panel-newsletter">
+    <div class="admin-panel-head">
+      <h2>Newsletter Subscribers</h2>
+      <button type="button" class="btn btn-sm btn-navy" id="exportSubscribersBtn">Export CSV</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">Captured from the homepage footer signup. No automated sending sequence is wired up yet — export this list into whatever email tool gets connected (Mailchimp, Resend, etc.).</p>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="subscribersTable">
+        <thead><tr><th>Email</th><th>Subscribed</th><th></th></tr></thead>
+        <tbody id="subscribersTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTACT PAGE TAB -->
+  <section class="admin-panel" id="panel-contact">
+    <div class="admin-panel-head">
+      <h2>Contact Page — Text</h2>
+    </div>
+    <form id="contactContentForm" class="admin-form admin-form-card">
+      <h4 class="admin-form-subhead">Hero Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cc_heroEyebrow" required></label>
+        <label>Heading <input type="text" id="cc_heroHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cc_heroSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">"Who We Are" Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cc_introEyebrow" required></label>
+        <label>Heading <input type="text" id="cc_introHeading" required></label>
+      </div>
+      <label class="admin-form-full">Paragraph 1 <textarea id="cc_introParagraph1" rows="3" required></textarea></label>
+      <label class="admin-form-full">Paragraph 2 <textarea id="cc_introParagraph2" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">Global Network / Map Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cc_networkEyebrow" required></label>
+        <label>Heading <input type="text" id="cc_networkHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cc_networkSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">Enquiry Form Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cc_formEyebrow" required></label>
+        <label>Heading <input type="text" id="cc_formHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cc_formSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">General Contact Info</h4>
+      <p style="font-size:0.82rem;color:var(--gray);margin-bottom:14px;">Used for the WhatsApp buttons on listing cards and general enquiries site-wide. Office-specific phone/email are edited under Offices below.</p>
+      <div class="admin-form-grid">
+        <label>WhatsApp Number (digits only, with country code) <input type="text" id="cc_whatsappNumber" placeholder="971501234567" required></label>
+        <label>General Phone (optional, digits only) <input type="text" id="cc_generalPhone" placeholder="971501234567"></label>
+      </div>
+      <label class="admin-form-full">General Email <input type="email" id="cc_generalEmail" required></label>
+
+      <h4 class="admin-form-subhead">FAQ Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cc_faqEyebrow" required></label>
+        <label>Heading <input type="text" id="cc_faqHeading" required></label>
+      </div>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="contactContentSaveBtn">Save Page Text</button>
+      </div>
+      <p class="admin-form-error" id="contactContentFormError"></p>
+      <p class="admin-form-success" id="contactContentFormSuccess"></p>
+    </form>
+
+    <div class="admin-panel-head" style="margin-top:44px;">
+      <h2>Offices</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addOfficeBtn">+ Add New Office</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="officesTable">
+        <thead><tr><th>Order</th><th>Title</th><th>Badge</th><th>Hub?</th><th>On Map?</th><th></th></tr></thead>
+        <tbody id="officesTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="admin-panel-head" style="margin-top:44px;">
+      <h2>FAQs</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addFaqBtn">+ Add New FAQ</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="faqsTable">
+        <thead><tr><th>Order</th><th>Question</th><th></th></tr></thead>
+        <tbody id="faqsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- AGENTS TAB -->
+  <section class="admin-panel" id="panel-agents">
+    <div class="admin-panel-head">
+      <h2>Agents</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addAgentBtn">+ Add New Agent</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="agentsTable">
+        <thead><tr><th>Order</th><th>Name</th><th>Title</th><th>Phone</th><th></th></tr></thead>
+        <tbody id="agentsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS / REVIEWS TAB -->
+  <section class="admin-panel" id="panel-testimonials">
+    <div class="admin-panel-head">
+      <h2>Reviews</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addTestimonialBtn">+ Add Review</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">Shown on the homepage (featured only) and on an agent's page if linked to that agent. These are entered manually rather than pulled live from Google — mark the real source so it stays honest.</p>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="testimonialsTable">
+        <thead><tr><th>Order</th><th>Author</th><th>Rating</th><th>Agent</th><th>Featured</th><th></th></tr></thead>
+        <tbody id="testimonialsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CAREERS TAB -->
+  <section class="admin-panel" id="panel-careers">
+    <div class="admin-panel-head">
+      <h2>Careers Page — Text</h2>
+    </div>
+    <form id="careersContentForm" class="admin-form admin-form-card">
+      <h4 class="admin-form-subhead">Hero Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_heroEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_heroHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cr_heroSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">"Why Join" Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_whyJoinEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_whyJoinHeading" required></label>
+      </div>
+      <label class="admin-form-full">Intro <textarea id="cr_whyJoinIntro" rows="2" required></textarea></label>
+
+      <label>Why-Join Value Cards</label>
+      <div class="admin-repeat-list" id="cr_valuePropsList"></div>
+      <button type="button" class="admin-add-row" id="cr_addValuePropRow">+ Add Value Card</button>
+
+      <h4 class="admin-form-subhead">Core Values Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_valuesEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_valuesHeading" required></label>
+      </div>
+      <label>Core Values (title + short tagline)</label>
+      <div class="admin-repeat-list" id="cr_coreValuesList"></div>
+      <button type="button" class="admin-add-row" id="cr_addCoreValueRow">+ Add Value</button>
+
+      <h4 class="admin-form-subhead">Job Listings Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_jobsEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_jobsHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cr_jobsSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">CV Submission Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_cvEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_cvHeading" required></label>
+        <label>Applications Email <input type="email" id="cr_cvEmail" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="cr_cvSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">FAQ Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="cr_faqEyebrow" required></label>
+        <label>Heading <input type="text" id="cr_faqHeading" required></label>
+      </div>
+      <label>FAQ Items</label>
+      <div class="admin-repeat-list" id="cr_faqsList"></div>
+      <button type="button" class="admin-add-row" id="cr_addFaqRow">+ Add FAQ</button>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="careersContentSaveBtn">Save Page Text</button>
+      </div>
+      <p class="admin-form-error" id="careersContentFormError"></p>
+      <p class="admin-form-success" id="careersContentFormSuccess"></p>
+    </form>
+
+    <div class="admin-panel-head" style="margin-top:44px;">
+      <h2>Job Listings</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addJobBtn">+ Add New Job</button>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="jobsTable">
+        <thead><tr><th>Order</th><th>Title</th><th>Location</th><th>Active?</th><th></th></tr></thead>
+        <tbody id="jobsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CUSTOM PAGES TAB (admin/super_admin only) -->
+  <section class="admin-panel" id="panel-custompages">
+    <div class="admin-panel-head">
+      <h2>Custom Pages</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addCustomPageBtn">+ New Page</button>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div id="cpListView">
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">Build standalone pages — neighborhood guides, blog posts, campaign landing pages — from content blocks you add, reorder and edit below. Nothing goes live until its status is set to Published.</p>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="customPagesTable">
+          <thead><tr><th>Title</th><th>URL</th><th>Status</th><th></th></tr></thead>
+          <tbody id="customPagesTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EDITOR VIEW -->
+    <div id="cpEditView" style="display:none;">
+      <button type="button" class="btn btn-sm" id="cpBackToListBtn">&larr; Back to Custom Pages</button>
+
+      <div class="admin-form admin-form-card" style="margin-top:16px;">
+        <div class="admin-form-grid">
+          <label>Page Title <input type="text" id="cp_title" required placeholder="Living in Dubai Marina"></label>
+          <label>URL Slug
+            <input type="text" id="cp_slug" required pattern="[a-z0-9\-]+" placeholder="dubai-marina-guide">
+          </label>
+        </div>
+        <p style="font-size:0.78rem;color:var(--gray);margin:-8px 0 14px;">Lowercase letters, numbers and hyphens only. Live URL: <code id="cp_slugPreview">custom-page.html?slug=</code></p>
+        <label class="admin-form-full">SEO Description <textarea id="cp_seoDescription" rows="2" placeholder="Shown in Google search results and social shares"></textarea></label>
+        <label class="admin-form-full">Status
+          <select id="cp_status">
+            <option value="draft">Draft (not visible on the live site)</option>
+            <option value="published">Published (live)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="admin-pb-editor">
+        <div class="admin-pb-blocks">
+          <label>Page Content</label>
+          <div id="cpBlocksList"></div>
+          <div class="admin-pb-add-palette" id="cpAddPalette"></div>
+        </div>
+        <div class="admin-pb-preview">
+          <label>Live Preview</label>
+          <div class="admin-pb-preview-frame">
+            <div class="page-hero" style="padding:50px 0 34px;">
+              <div class="container page-hero-inner">
+                <h1 class="display" id="cpPreviewHeading" style="font-size:1.7rem;">Page Title</h1>
+              </div>
+            </div>
+            <div id="cpPreviewBlocks"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-form-actions" style="margin-top:24px;">
+        <button type="button" class="btn btn-navy" id="cpSaveBtn">Save Page</button>
+        <button type="button" class="btn admin-btn-danger" id="cpDeleteBtn">Delete Page</button>
+      </div>
+      <p class="admin-form-error" id="cpFormError"></p>
+      <p class="admin-form-success" id="cpFormSuccess"></p>
+    </div>
+  </section>
+
+  <!-- POPUP BANNERS TAB -->
+  <section class="admin-panel" id="panel-popups">
+    <div class="admin-panel-head">
+      <h2>Popup Banners</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addPopupBtn">+ Add Popup Banner</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);margin-bottom:16px;">Image popups that appear over the site, either everywhere or on pages you choose. Only one shows on screen at a time — if more than one is active and eligible for the same page, they queue up in Display Order. Each one closes (the visitor closes it, or its own "Show For" timer runs out), then — after that banner's own "Delay Before Next Popup" — the next one in the queue appears.</p>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="popupsTable">
+        <thead><tr><th>Order</th><th>Preview</th><th>Title</th><th>Shows On</th><th>Active</th><th></th></tr></thead>
+        <tbody id="popupsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- HOMEPAGE TAB -->
+  <section class="admin-panel" id="panel-homepage">
+    <div class="admin-panel-head">
+      <h2>Homepage — Every Section</h2>
+    </div>
+    <form id="homepageContentForm" class="admin-form admin-form-card">
+      <h4 class="admin-form-subhead">Hero Section</h4>
+      <label class="admin-form-full">Trust Badge Text <input type="text" id="hp_heroBadgeText" required></label>
+      <label class="admin-form-full">Heading <input type="text" id="hp_heroHeading" required></label>
+      <label class="admin-form-full">Subtitle (optional — leave blank to hide it) <textarea id="hp_heroSubtitle" rows="2"></textarea></label>
+
+      <label>Background</label>
+      <div class="admin-herobg-toggle" id="hp_heroBgTypeToggle">
+        <button type="button" class="admin-herobg-option" data-bgtype="image">Image</button>
+        <button type="button" class="admin-herobg-option" data-bgtype="video">YouTube Video</button>
+      </div>
+      <input type="hidden" id="hp_heroBgType" value="image">
+
+      <div id="hp_heroBgImageFields">
+        <label class="admin-form-full">Background Image
+          <input type="file" id="hp_heroBgImageFile" accept="image/*">
+          <input type="hidden" id="hp_heroBgImage">
+          <img class="admin-preview" id="hp_heroBgImagePreview" style="display:none;">
+        </label>
+      </div>
+      <div id="hp_heroBgVideoFields" style="display:none;">
+        <label class="admin-form-full">YouTube Video URL
+          <input type="text" id="hp_heroBgVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+        </label>
+        <input type="hidden" id="hp_heroBgVideoId">
+        <p style="font-size:0.78rem;color:var(--gray);margin:-8px 0 14px;">Plays muted and on loop as the background. Paste any YouTube link — we'll pull the video ID from it.</p>
+      </div>
+
+      <label>Dark Overlay Tint &amp; Opacity</label>
+      <div id="hp_heroOverlayPicker"></div>
+      <p class="admin-typo-role-hint" style="margin:8px 0 14px;">Darkens the photo/video so the hero text stays readable. Lower opacity shows more of the photo through; 0% removes the tint entirely.</p>
+
+      <label class="admin-form-full">Search Box Placeholder Text <input type="text" id="hp_heroSearchPlaceholder" required></label>
+
+      <label>Search Filters (dropdowns shown next to the search box)</label>
+      <div id="hp_heroFiltersList"></div>
+      <button type="button" class="admin-add-row" id="hp_addHeroFilterRow">+ Add Filter</button>
+
+      <label>Stat Counters (4 shown in the strip)</label>
+      <div class="admin-repeat-list" id="hp_statsList"></div>
+      <button type="button" class="admin-add-row" id="hp_addStatRow">+ Add Stat</button>
+
+      <h4 class="admin-form-subhead">Quick Action Cards</h4>
+      <label>Cards below the hero (icon, title, description, link)</label>
+      <div class="admin-repeat-list" id="hp_quickActionsList"></div>
+      <button type="button" class="admin-add-row" id="hp_addQuickActionRow">+ Add Card</button>
+
+      <h4 class="admin-form-subhead">Services Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_servicesEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_servicesHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_servicesSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">Featured Listings Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_listingsEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_listingsHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_listingsSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">Off-Plan Projects Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_offplanEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_offplanHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_offplanSubtitle" rows="2" required></textarea></label>
+      <label>Feature Strip (e.g. "0% Commission")</label>
+      <div class="admin-repeat-list" id="hp_offplanFeaturesList"></div>
+      <button type="button" class="admin-add-row" id="hp_addOffplanFeatureRow">+ Add Feature</button>
+
+      <h4 class="admin-form-subhead">Offices Section</h4>
+      <p style="font-size:0.82rem;color:var(--gray);margin-bottom:14px;">Office cards and the map pull from the Offices list under the Contact Page tab — edit them there.</p>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_officesEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_officesHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_officesSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">YouTube Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_youtubeEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_youtubeHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_youtubeSubtitle" rows="2" required></textarea></label>
+
+      <h4 class="admin-form-subhead">Why Us Section</h4>
+      <div class="admin-form-grid">
+        <label>Eyebrow <input type="text" id="hp_whyusEyebrow" required></label>
+        <label>Heading <input type="text" id="hp_whyusHeading" required></label>
+      </div>
+      <label class="admin-form-full">Subtitle <textarea id="hp_whyusSubtitle" rows="2" required></textarea></label>
+      <label>Value Points (4 shown)</label>
+      <div class="admin-repeat-list" id="hp_whyusItemsList"></div>
+      <button type="button" class="admin-add-row" id="hp_addWhyusItemRow">+ Add Item</button>
+
+      <h4 class="admin-form-subhead">Contact CTA Banner</h4>
+      <label class="admin-form-full">Heading <input type="text" id="hp_ctaHeading" required></label>
+      <label class="admin-form-full">Subtitle <textarea id="hp_ctaSubtitle" rows="2" required></textarea></label>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="homepageContentSaveBtn">Save Homepage Text</button>
+      </div>
+      <p class="admin-form-error" id="homepageContentFormError"></p>
+      <p class="admin-form-success" id="homepageContentFormSuccess"></p>
+    </form>
+  </section>
+
+  <!-- HEADER & FOOTER TAB -->
+  <section class="admin-panel" id="panel-chrome">
+    <div class="admin-panel-head">
+      <h2>Header &amp; Footer</h2>
+    </div>
+    <form id="chromeForm" class="admin-form admin-form-card">
+      <p style="font-size:0.82rem;color:var(--gray);margin-bottom:14px;">These appear on every page of the site — header nav, the "Get in Touch" button and the whole footer.</p>
+
+      <h4 class="admin-form-subhead">Main Navigation</h4>
+      <label>Nav Links (shown before the Why Us dropdown)</label>
+      <div class="admin-repeat-list" id="ch_navLinksList"></div>
+      <button type="button" class="admin-add-row" id="ch_addNavLinkRow">+ Add Link</button>
+
+      <h4 class="admin-form-subhead">"Why Us" Dropdown</h4>
+      <div class="admin-form-grid">
+        <label>Label <input type="text" id="ch_whyusLabel" required></label>
+        <label>Link <input type="text" id="ch_whyusHref" required></label>
+      </div>
+      <label>Dropdown Items</label>
+      <div class="admin-repeat-list" id="ch_whyusSubmenuList"></div>
+      <button type="button" class="admin-add-row" id="ch_addWhyusSubmenuRow">+ Add Item</button>
+
+      <h4 class="admin-form-subhead">Contact Link &amp; CTA Button</h4>
+      <div class="admin-form-grid">
+        <label>"Contact" Link Text <input type="text" id="ch_contactLabel" required></label>
+        <label>"Contact" Link URL <input type="text" id="ch_contactHref" required></label>
+      </div>
+      <div class="admin-form-grid">
+        <label>CTA Button Text <input type="text" id="ch_ctaText" required></label>
+        <label>CTA Button Link <input type="text" id="ch_ctaHref" required></label>
+      </div>
+
+      <h4 class="admin-form-subhead">Footer</h4>
+      <label class="admin-form-full">Brand Blurb <textarea id="ch_footerBlurb" rows="2" required></textarea></label>
+      <div class="admin-form-grid">
+        <label>Contact Email <input type="text" id="ch_footerEmail" required></label>
+        <label>Copyright Line (year is added automatically) <input type="text" id="ch_footerCopyright" required></label>
+      </div>
+
+      <label>Footer Columns</label>
+      <div id="ch_footerColumnsList"></div>
+      <button type="button" class="admin-add-row" id="ch_addFooterColumnRow">+ Add Column</button>
+
+      <h4 class="admin-form-subhead">Legal &amp; Compliance</h4>
+      <p style="font-size:0.82rem;color:var(--gray);margin:-8px 0 14px;">Shown in the footer of every page. Required for Dubai real estate advertising — leave blank to hide the line entirely until you have these.</p>
+      <div class="admin-form-grid">
+        <label>RERA Broker Registration No. <input type="text" id="ch_reraBrokerNumber" placeholder="e.g. 12345"></label>
+        <label>Trade License No. <input type="text" id="ch_tradeLicenseNumber" placeholder="e.g. 987654"></label>
+      </div>
+      <label class="admin-form-full">Registered Office Address <input type="text" id="ch_registeredOfficeAddress" placeholder="Matching your trade license"></label>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="chromeSaveBtn">Save Header &amp; Footer</button>
+      </div>
+      <p class="admin-form-error" id="chromeFormError"></p>
+      <p class="admin-form-success" id="chromeFormSuccess"></p>
+    </form>
+  </section>
+
+  <!-- THEME TAB -->
+  <section class="admin-panel" id="panel-theme">
+    <div class="admin-panel-head">
+      <h2>Site-Wide Theme</h2>
+    </div>
+    <form id="themeForm" class="admin-form admin-form-card">
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">Applies instantly across every page — header, sections and footer all re-skin at once. Every combination here is pre-designed to stay readable.</p>
+
+      <label>Color Palette</label>
+      <div class="admin-theme-palette-grid" id="themePaletteGrid"></div>
+
+      <h4 class="admin-form-subhead">Typography</h4>
+      <p style="font-size:0.82rem;color:var(--gray);margin:-8px 0 16px;">Pick a font from the list, or type any other Google Fonts name — plus its own text color, for each part of the site below. Colors apply to standard light-background text; dark sections (hero, footer, off-plan banner) keep their own tuned light-on-dark colors so nothing loses contrast. The contact page's enquiry form is a third-party embed, so it isn't styleable here — but the "Request a Viewing" form on listing pages is.</p>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Headings</p>
+        <p class="admin-typo-role-hint">Page and section titles, site-wide.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_headingFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_headingColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_headingFont" required></label>
+        <p class="admin-typo-preview" id="ty_headingPreview">Dubai Real Estate, Handled Right</p>
+      </div>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Body Text</p>
+        <p class="admin-typo-role-hint">Paragraphs, site-wide.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_bodyFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_bodyColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_bodyFont" required></label>
+        <p class="admin-typo-preview" id="ty_bodyPreview">Buy, rent, sell or invest off-plan in Dubai.</p>
+      </div>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Data &amp; Prices</p>
+        <p class="admin-typo-role-hint">Listing prices, stats, specs.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_dataFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_dataColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_dataFont" required></label>
+        <p class="admin-typo-preview" id="ty_dataPreview">AED 2,150,000</p>
+      </div>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Listing &amp; Project Cards</p>
+        <p class="admin-typo-role-hint">Card titles on listings, off-plan projects and similar-properties grids.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_cardFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_cardColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_cardFont" required></label>
+        <p class="admin-typo-preview" id="ty_cardPreview">Palm Vista Villa</p>
+      </div>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Blog &amp; Video Cards</p>
+        <p class="admin-typo-role-hint">Titles on the "Latest From Our Channel" YouTube cards.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_blogFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_blogColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_blogFont" required></label>
+        <p class="admin-typo-preview" id="ty_blogPreview">Learning Never Stops</p>
+      </div>
+
+      <div class="admin-typo-role">
+        <p class="admin-typo-role-label">Enquiry Form</p>
+        <p class="admin-typo-role-hint">The "Request a Viewing" form heading on listing pages.</p>
+        <div class="admin-form-grid">
+          <label>Font Family <select id="ty_formFontPreset"></select></label>
+          <label>Color <input type="color" id="ty_formColor" required></label>
+        </div>
+        <label class="admin-form-full" style="margin-top:8px;">Or type any other Google Font <input type="text" id="ty_formFont" required></label>
+        <p class="admin-typo-preview" id="ty_formPreview">Request a Viewing</p>
+      </div>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="themeSaveBtn">Save Theme</button>
+      </div>
+      <p class="admin-form-error" id="themeFormError"></p>
+      <p class="admin-form-success" id="themeFormSuccess"></p>
+    </form>
+  </section>
+
+  <!-- PAGE BACKGROUNDS TAB (admin/super_admin only) -->
+  <section class="admin-panel" id="panel-pagebg">
+    <div class="admin-panel-head">
+      <h2>Page Header Backgrounds</h2>
+    </div>
+    <form id="pageHeadersForm" class="admin-form admin-form-card">
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">Controls the banner behind each page's title (e.g. "All Listings", "Buy Off-Plan Property in Dubai"). Leave a page on Default to keep its original navy look.</p>
+      <div id="pageHeadersList"></div>
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-navy" id="pageHeadersSaveBtn">Save All Page Backgrounds</button>
+      </div>
+      <p class="admin-form-error" id="pageHeadersFormError"></p>
+      <p class="admin-form-success" id="pageHeadersFormSuccess"></p>
+    </form>
+  </section>
+
+  <!-- USERS TAB (super_admin / admin only) -->
+  <section class="admin-panel" id="panel-users">
+    <div class="admin-panel-head">
+      <h2>Users</h2>
+      <button type="button" class="btn btn-gold btn-sm" id="addUserBtn">+ Invite User</button>
+    </div>
+    <p style="font-size:0.82rem;color:var(--gray);margin-bottom:16px;">Inviting someone sends them an email to set their own password. Agents can only edit listings assigned to them (matched by email) — link their login to their agent profile below.</p>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="usersTable">
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Linked Agent</th><th></th></tr></thead>
+        <tbody id="usersTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ===== LISTING FORM MODAL ===== -->
+<div class="admin-modal" id="listingModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="listingModalTitle">Add Listing</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="listingModal">&times;</button>
+    </div>
+    <form id="listingForm" class="admin-form">
+      <input type="hidden" id="l_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="l_id" placeholder="palm-vista-villa" required></label>
+        <label>Title <input type="text" id="l_title" required></label>
+        <label>Community <input type="text" id="l_community" required></label>
+        <label>City <input type="text" id="l_city" value="Dubai" required></label>
+        <label>Listing Type
+          <select id="l_type" required><option value="sale">For Sale</option><option value="rent">For Rent</option></select>
+        </label>
+        <label>Category <input type="text" id="l_category" placeholder="Villa, Apartment, Studio…" required></label>
+        <label>Price (number) <input type="number" id="l_price" required></label>
+        <label>Price Label <input type="text" id="l_priceLabel" placeholder="AED 2,150,000" required></label>
+        <label>Price Suffix (rentals only) <input type="text" id="l_priceSuffix" placeholder="/month"></label>
+        <label>Beds <input type="text" id="l_beds" placeholder="4 or Studio" required></label>
+        <label>Baths <input type="text" id="l_baths" required></label>
+        <label>Size (sqft) <input type="text" id="l_sqft" required></label>
+        <label>Tags (comma-separated) <input type="text" id="l_tags" placeholder="Villa, Sea View, Private Pool"></label>
+        <label>Permit No. (Trakheesi/DLD) <input type="text" id="l_permitNumber" placeholder="Required for Dubai advertising compliance"></label>
+        <label>Map Latitude (optional) <input type="number" id="l_latitude" step="any" placeholder="Leave blank to use the community's default location"></label>
+        <label>Map Longitude (optional) <input type="number" id="l_longitude" step="any" placeholder="Leave blank to use the community's default location"></label>
+      </div>
+
+      <label class="admin-form-full">Hero Image
+        <input type="file" id="l_heroFile" accept="image/*">
+        <input type="hidden" id="l_hero">
+        <img class="admin-preview" id="l_heroPreview" style="display:none;">
+      </label>
+      <label class="admin-form-full">Gallery Images (select multiple)
+        <input type="file" id="l_galleryFiles" accept="image/*" multiple>
+        <div class="admin-gallery-preview" id="l_galleryPreview"></div>
+      </label>
+
+      <label class="admin-form-full">Description <textarea id="l_description" rows="3" required></textarea></label>
+      <label class="admin-form-full">Amenities (comma-separated) <textarea id="l_amenities" rows="2" placeholder="Private Pool, Maid's Room, Covered Parking (3)…"></textarea></label>
+
+      <div class="admin-form-grid">
+        <label>Agent Name <input type="text" id="l_agentName" required></label>
+        <label>Agent Phone (digits only, e.g. 971585210926) <input type="text" id="l_agentPhone" required></label>
+        <label>Agent Phone Display <input type="text" id="l_agentPhoneDisplay" placeholder="+971 58 521 0926" required></label>
+        <label>Agent Email <input type="email" id="l_agentEmail" required></label>
+      </div>
+
+      <label class="admin-checkbox"><input type="checkbox" id="l_featured"> Show on homepage featured carousel</label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="listingModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="listingSaveBtn">Save Listing</button>
+      </div>
+      <p class="admin-form-error" id="listingFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== OFF-PLAN FORM MODAL ===== -->
+<div class="admin-modal" id="offplanModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="offplanModalTitle">Add Off-Plan Project</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="offplanModal">&times;</button>
+    </div>
+    <form id="offplanForm" class="admin-form">
+      <input type="hidden" id="o_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="o_id" placeholder="the-archive-dlrc" required></label>
+        <label>Title <input type="text" id="o_title" required></label>
+        <label>Developer <input type="text" id="o_developer" required></label>
+        <label>Community <input type="text" id="o_community" required></label>
+        <label>City <input type="text" id="o_city" value="Dubai" required></label>
+        <label>Status <input type="text" id="o_status" placeholder="New Launch, Selling Fast…" required></label>
+        <label>Status Badge Color
+          <select id="o_statusBadge"><option value="badge--gold">Gold</option><option value="badge--navy">Navy</option></select>
+        </label>
+        <label>Category <input type="text" id="o_category" placeholder="Apartments, Villas, Townhouses" required></label>
+        <label>Tags (comma-separated) <input type="text" id="o_tags" placeholder="Studios, Apartments"></label>
+        <label>Starting Price (number) <input type="number" id="o_price" required></label>
+        <label>Price Label <input type="text" id="o_priceLabel" placeholder="AED 666,000" required></label>
+        <label>Handover <input type="text" id="o_handover" placeholder="Q3 2028" required></label>
+        <label>Estimated ROI <input type="text" id="o_roi" placeholder="5%"></label>
+        <label>Permit No. (Trakheesi/DLD) <input type="text" id="o_permitNumber" placeholder="Required for Dubai advertising compliance"></label>
+      </div>
+
+      <label class="admin-form-full">Hero Image
+        <input type="file" id="o_heroFile" accept="image/*">
+        <input type="hidden" id="o_hero">
+        <img class="admin-preview" id="o_heroPreview" style="display:none;">
+      </label>
+      <label class="admin-form-full">Gallery Images (select multiple)
+        <input type="file" id="o_galleryFiles" accept="image/*" multiple>
+        <div class="admin-gallery-preview" id="o_galleryPreview"></div>
+      </label>
+
+      <label class="admin-form-full">Description <textarea id="o_description" rows="3" required></textarea></label>
+
+      <div class="admin-form-full">
+        <label>Unit Types</label>
+        <div class="admin-repeat-list" id="o_unitTypesList"></div>
+        <button type="button" class="admin-add-row" data-add="unitTypes">+ Add Unit Type</button>
+      </div>
+
+      <div class="admin-form-full">
+        <label>Payment Plans</label>
+        <div class="admin-repeat-list" id="o_paymentPlansList"></div>
+        <button type="button" class="admin-add-row" data-add="paymentPlans">+ Add Payment Plan</button>
+      </div>
+
+      <label class="admin-form-full">Amenities (comma-separated) <textarea id="o_amenities" rows="2"></textarea></label>
+
+      <div class="admin-form-full">
+        <label>Location Highlights</label>
+        <div class="admin-repeat-list" id="o_locationHighlightsList"></div>
+        <button type="button" class="admin-add-row" data-add="locationHighlights">+ Add Location Highlight</button>
+      </div>
+
+      <label class="admin-form-full">Developer Blurb <textarea id="o_developerBlurb" rows="2"></textarea></label>
+
+      <label class="admin-checkbox"><input type="checkbox" id="o_featured"> Show on homepage featured carousel</label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="offplanModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="offplanSaveBtn">Save Project</button>
+      </div>
+      <p class="admin-form-error" id="offplanFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SERVICE FORM MODAL ===== -->
+<div class="admin-modal" id="serviceModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="serviceModalTitle">Add Service</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="serviceModal">&times;</button>
+    </div>
+    <form id="serviceForm" class="admin-form">
+      <input type="hidden" id="s_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="s_id" placeholder="buying" required></label>
+        <label>Title <input type="text" id="s_title" placeholder="Buying" required></label>
+        <label>Icon
+          <select id="s_icon"></select>
+        </label>
+        <label>Display Order (lower shows first) <input type="number" id="s_sortOrder" value="0" required></label>
+      </div>
+
+      <div class="admin-icon-preview-row">
+        <span>Preview:</span>
+        <div class="admin-icon-preview" id="s_iconPreview"><svg viewBox="0 0 24 24" fill="none"></svg></div>
+      </div>
+
+      <label class="admin-form-full">Homepage Card Summary (short, 1-2 sentences)
+        <textarea id="s_cardSummary" rows="2" required></textarea>
+      </label>
+
+      <label class="admin-form-full">Services Page Heading (large heading)
+        <input type="text" id="s_pageHeading" placeholder="Find and Secure Your Next Property" required>
+      </label>
+
+      <label class="admin-form-full">Services Page Description (paragraph)
+        <textarea id="s_pageDescription" rows="3" required></textarea>
+      </label>
+
+      <div class="admin-form-full">
+        <label>What's Included (checklist)</label>
+        <div class="admin-repeat-list" id="s_checklistList"></div>
+        <button type="button" class="admin-add-row" id="s_addChecklistRow">+ Add Item</button>
+      </div>
+
+      <div class="admin-form-grid">
+        <label>Button Label <input type="text" id="s_ctaLabel" placeholder="Start Buying" required></label>
+        <label>Button Links To <input type="text" id="s_ctaHref" placeholder="listings.html or index.html#contact" required></label>
+      </div>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="serviceModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="serviceSaveBtn">Save Service</button>
+      </div>
+      <p class="admin-form-error" id="serviceFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== OFFICE FORM MODAL ===== -->
+<div class="admin-modal" id="officeModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="officeModalTitle">Add Office</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="officeModal">&times;</button>
+    </div>
+    <form id="officeForm" class="admin-form">
+      <input type="hidden" id="of_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="of_id" placeholder="dubai-hq" required></label>
+        <label>Badge Label <input type="text" id="of_badgeLabel" placeholder="Main Office" required></label>
+        <label>Title <input type="text" id="of_title" placeholder="Dubai Headquarters" required></label>
+        <label>Display Order (lower shows first) <input type="number" id="of_sortOrder" value="0" required></label>
+      </div>
+
+      <label class="admin-form-full">Address / Description <textarea id="of_address" rows="2" required></textarea></label>
+
+      <div class="admin-form-grid">
+        <label>Phone (digits only, optional) <input type="text" id="of_phone" placeholder="97144456705"></label>
+        <label>Phone Display (optional) <input type="text" id="of_phoneDisplay" placeholder="+971 4 445 6705"></label>
+        <label>Email (optional) <input type="email" id="of_email"></label>
+        <label>"By Appointment" Note (optional — shows instead of Get Directions) <input type="text" id="of_byAppointmentNote" placeholder="By appointment — enquire via the form below"></label>
+      </div>
+
+      <h4 class="admin-form-subhead">World Map Pin (optional)</h4>
+      <p style="font-size:0.82rem;color:var(--gray);margin-bottom:14px;">Only offices in the UK–Middle East–South Asia region will show correctly on the map (that's the only landmass drawn). Leave blank to skip the map pin — the office will still appear as a card.</p>
+      <div class="admin-form-grid">
+        <label>Map Label <input type="text" id="of_mapLabel" placeholder="DUBAI — MAIN OFFICE"></label>
+        <label class="admin-checkbox-row" style="margin-top:22px;"><input type="checkbox" id="of_isHub"> This is the main hub office (routes drawn from here)</label>
+        <label>Latitude <input type="number" step="any" id="of_latitude" placeholder="25.2048"></label>
+        <label>Longitude <input type="number" step="any" id="of_longitude" placeholder="55.2708"></label>
+      </div>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="officeModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="officeSaveBtn">Save Office</button>
+      </div>
+      <p class="admin-form-error" id="officeFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== FAQ FORM MODAL ===== -->
+<div class="admin-modal" id="faqModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="faqModalTitle">Add FAQ</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="faqModal">&times;</button>
+    </div>
+    <form id="faqForm" class="admin-form">
+      <input type="hidden" id="fq_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="fq_id" placeholder="main-office-location" required></label>
+        <label>Display Order (lower shows first) <input type="number" id="fq_sortOrder" value="0" required></label>
+      </div>
+      <label class="admin-form-full">Question <input type="text" id="fq_question" required></label>
+      <label class="admin-form-full">Answer <textarea id="fq_answer" rows="3" required></textarea></label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="faqModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="faqSaveBtn">Save FAQ</button>
+      </div>
+      <p class="admin-form-error" id="faqFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== AGENT FORM MODAL ===== -->
+<div class="admin-modal" id="agentModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="agentModalTitle">Add Agent</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="agentModal">&times;</button>
+    </div>
+    <form id="agentForm" class="admin-form">
+      <input type="hidden" id="ag_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="ag_id" placeholder="jane-doe" required></label>
+        <label>Full Name <input type="text" id="ag_name" required></label>
+        <label>Title <input type="text" id="ag_title" placeholder="Property Consultant" required></label>
+        <label>Display Order (lower shows first) <input type="number" id="ag_sortOrder" value="0" required></label>
+      </div>
+
+      <label class="admin-form-full">Photo (optional — falls back to initials avatar)
+        <input type="file" id="ag_photoFile" accept="image/*">
+        <input type="hidden" id="ag_photoUrl">
+        <img class="admin-preview" id="ag_photoPreview" style="display:none;">
+      </label>
+
+      <div class="admin-form-grid">
+        <label>Phone (digits only, e.g. 971585210926) <input type="text" id="ag_phone" required></label>
+        <label>Phone Display <input type="text" id="ag_phoneDisplay" placeholder="+971 58 521 0926" required></label>
+        <label>Email <input type="email" id="ag_email" required></label>
+      </div>
+
+      <label class="admin-form-full">Languages (comma-separated) <input type="text" id="ag_languages" placeholder="English, Urdu"></label>
+      <label class="admin-form-full">Specialty Areas (comma-separated) <input type="text" id="ag_specialties" placeholder="Dubai Marina, Palm Jumeirah"></label>
+      <label class="admin-form-full">Bio <textarea id="ag_bio" rows="3"></textarea></label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="agentModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="agentSaveBtn">Save Agent</button>
+      </div>
+      <p class="admin-form-error" id="agentFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== TESTIMONIAL FORM MODAL ===== -->
+<div class="admin-modal" id="testimonialModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="testimonialModalTitle">Add Review</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="testimonialModal">&times;</button>
+    </div>
+    <form id="testimonialForm" class="admin-form">
+      <input type="hidden" id="ts_id">
+      <div class="admin-form-grid">
+        <label>Author Name <input type="text" id="ts_authorName" required></label>
+        <label>Author Context <input type="text" id="ts_authorContext" placeholder="e.g. Buyer, Dubai Marina"></label>
+        <label>Rating
+          <select id="ts_rating" required>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+        </label>
+        <label>Source <input type="text" id="ts_source" placeholder="Google" value="Google" required></label>
+        <label>Linked Agent (optional)
+          <select id="ts_agentId"><option value="">— None —</option></select>
+        </label>
+        <label>Display Order (lower shows first) <input type="number" id="ts_sortOrder" value="0" required></label>
+      </div>
+      <label class="admin-form-full">Review Text <textarea id="ts_reviewText" rows="4" required></textarea></label>
+      <label class="admin-checkbox"><input type="checkbox" id="ts_featured"> Feature on homepage</label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="testimonialModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="testimonialSaveBtn">Save Review</button>
+      </div>
+      <p class="admin-form-error" id="testimonialFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== POPUP BANNER FORM MODAL ===== -->
+<div class="admin-modal" id="popupModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="popupModalTitle">Add Popup Banner</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="popupModal">&times;</button>
+    </div>
+    <form id="popupForm" class="admin-form">
+      <input type="hidden" id="pu_id">
+      <label class="admin-form-full">Title (internal label — not shown to visitors) <input type="text" id="pu_title" required placeholder="e.g. Ramadan Offer"></label>
+
+      <label class="admin-form-full">Banner Image
+        <input type="file" id="pu_imageFile" accept="image/*">
+        <input type="hidden" id="pu_imageUrl">
+        <img class="admin-preview" id="pu_imagePreview" style="display:none;">
+      </label>
+      <label class="admin-form-full">Image Alt Text (optional, for accessibility) <input type="text" id="pu_imageAlt"></label>
+
+      <div class="admin-form-grid">
+        <label>Width (px) <input type="number" id="pu_width" value="480" min="50" required></label>
+        <label>Height (px) <input type="number" id="pu_height" value="600" min="50" required></label>
+      </div>
+      <p style="font-size:0.78rem;color:var(--gray);margin:-8px 0 14px;">Set these to match your image's real proportions. The popup always scales down to fit smaller screens without cropping or distorting.</p>
+
+      <label class="admin-form-full">Click-Through URL (optional — makes the banner clickable) <input type="text" id="pu_linkUrl" placeholder="https://... or listings.html"></label>
+
+      <label class="admin-form-full">Show On
+        <select id="pu_targetScope">
+          <option value="all">Every Page</option>
+          <option value="specific">Specific Pages Only</option>
+        </select>
+      </label>
+      <div id="pu_targetPagesFields" class="admin-form-full" style="display:none;">
+        <label style="font-size:0.78rem;font-weight:600;color:var(--gray);display:block;margin-bottom:8px;">Choose which pages</label>
+        <div class="admin-checkbox-grid" id="pu_targetPagesList">
+          <label class="admin-checkbox"><input type="checkbox" value="index.html"> Home</label>
+          <label class="admin-checkbox"><input type="checkbox" value="listings.html"> Listings (Buy/Rent search)</label>
+          <label class="admin-checkbox"><input type="checkbox" value="listing-detail.html"> Property Detail Pages</label>
+          <label class="admin-checkbox"><input type="checkbox" value="offplan-listings.html"> Off-Plan Listings</label>
+          <label class="admin-checkbox"><input type="checkbox" value="offplan-detail.html"> Off-Plan Detail Pages</label>
+          <label class="admin-checkbox"><input type="checkbox" value="services.html"> Services</label>
+          <label class="admin-checkbox"><input type="checkbox" value="agents.html"> Agent Directory</label>
+          <label class="admin-checkbox"><input type="checkbox" value="agent-detail.html"> Agent Profile Pages</label>
+          <label class="admin-checkbox"><input type="checkbox" value="contact.html"> Contact</label>
+          <label class="admin-checkbox"><input type="checkbox" value="careers.html"> Careers</label>
+          <label class="admin-checkbox"><input type="checkbox" value="custom-page.html"> Custom Pages (guides, area guides, legal pages)</label>
+        </div>
+      </div>
+
+      <div class="admin-form-grid">
+        <label>Show For (seconds, 0 = stays until closed) <input type="number" id="pu_autoDismissSeconds" value="0" min="0" required></label>
+        <label>Display Order (queue position — lower shows first) <input type="number" id="pu_sortOrder" value="0" required></label>
+      </div>
+      <label class="admin-form-full">Delay Before Next Popup (seconds, 0 = appears right away)
+        <input type="number" id="pu_nextPopupDelaySeconds" value="0" min="0" required>
+      </label>
+      <p style="font-size:0.78rem;color:var(--gray);margin:-10px 0 14px;">If another popup is queued behind this one, this is how long to wait after this one closes before the next one appears.</p>
+      <label class="admin-form-full">Show Again After (0 = every eligible page visit)
+        <div class="admin-input-with-unit">
+          <input type="number" id="pu_reshowValue" value="0" min="0">
+          <select id="pu_reshowUnit">
+            <option value="1">Seconds</option>
+            <option value="60" selected>Minutes</option>
+            <option value="3600">Hours</option>
+            <option value="86400">Days</option>
+          </select>
+        </div>
+      </label>
+      <p style="font-size:0.78rem;color:var(--gray);margin:-10px 0 14px;">Once a visitor closes this banner, how long before it's allowed to show them again. Each banner tracks this on its own — closing one doesn't affect the cooldown on the others.</p>
+      <label class="admin-checkbox"><input type="checkbox" id="pu_active" checked> Active</label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="popupModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="popupSaveBtn">Save Popup Banner</button>
+      </div>
+      <p class="admin-form-error" id="popupFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== JOB LISTING FORM MODAL ===== -->
+<div class="admin-modal" id="jobModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3 id="jobModalTitle">Add Job Listing</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="jobModal">&times;</button>
+    </div>
+    <form id="jobForm" class="admin-form">
+      <input type="hidden" id="jb_originalId">
+      <div class="admin-form-grid">
+        <label>Slug / ID (URL-safe, unique) <input type="text" id="jb_id" placeholder="property-consultant-dubai" required></label>
+        <label>Job Title <input type="text" id="jb_title" required></label>
+        <label>Location <input type="text" id="jb_location" placeholder="Dubai, UAE" required></label>
+        <label>Department (optional) <input type="text" id="jb_department" placeholder="Sales"></label>
+        <label>Job Type <input type="text" id="jb_jobType" placeholder="Full-time / Onsite" required></label>
+        <label>Experience Level (optional) <input type="text" id="jb_experienceLevel" placeholder="Senior"></label>
+        <label>Display Order (lower shows first) <input type="number" id="jb_sortOrder" value="0" required></label>
+      </div>
+      <label class="admin-form-full">Description <textarea id="jb_description" rows="3"></textarea></label>
+      <label class="admin-checkbox"><input type="checkbox" id="jb_isActive" checked> Active (show on careers page)</label>
+
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="jobModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="jobSaveBtn">Save Job Listing</button>
+      </div>
+      <p class="admin-form-error" id="jobFormError"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== INVITE USER MODAL ===== -->
+<div class="admin-modal" id="userModal">
+  <div class="admin-modal-card">
+    <div class="admin-modal-head">
+      <h3>Invite User</h3>
+      <button type="button" class="admin-modal-close" data-close-modal="userModal">&times;</button>
+    </div>
+    <form id="userForm" class="admin-form">
+      <label class="admin-form-full">Email <input type="email" id="us_email" required></label>
+      <label class="admin-form-full">Full Name <input type="text" id="us_fullName" required></label>
+      <label class="admin-form-full">Role
+        <select id="us_role" required>
+          <option value="agent">Agent — sees only their own listings</option>
+          <option value="admin">Admin — full content &amp; user access</option>
+          <option value="super_admin">Super Admin — every right, including other super admins</option>
+        </select>
+      </label>
+      <label class="admin-form-full" id="us_agentRow">Linked Agent Profile (so their listings can be matched)
+        <select id="us_agentId">
+          <option value="">— None —</option>
+        </select>
+      </label>
+      <p style="font-size:0.78rem;color:var(--gray);margin:-8px 0 14px;">They'll get an email with a link to set their own password. This can't be used to edit an existing user's role — delete and re-invite instead.</p>
+      <div class="admin-form-actions">
+        <button type="button" class="btn btn-sm" data-close-modal="userModal">Cancel</button>
+        <button type="submit" class="btn btn-navy" id="userSaveBtn">Send Invite</button>
+      </div>
+      <p class="admin-form-error" id="userFormError"></p>
+      <p class="admin-form-success" id="userFormSuccess"></p>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/icon-library.js"></script>
+<script src="assets/page-blocks-render.js"></script>
+<script src="assets/color-opacity-picker.js"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>

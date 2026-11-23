@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Agent Profile | HomesPartner Real Estate</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="listing-detail.css">
+<link rel="stylesheet" href="team.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="offplan-detail-topbar">
+  <div class="container">
+    <nav class="offplan-breadcrumb" id="agentBreadcrumb" aria-label="Breadcrumb"></nav>
+  </div>
+</div>
+
+<!-- ===== PROFILE HEADER ===== -->
+<section class="agent-profile-header">
+  <div class="container agent-profile-inner">
+    <div class="agent-profile-avatar" id="agentProfileAvatar"></div>
+    <div class="agent-profile-body">
+      <h1 class="display" id="agentProfileName"></h1>
+      <p class="agent-profile-title" id="agentProfileTitle"></p>
+      <p class="agent-profile-languages" id="agentProfileLanguages"></p>
+      <div class="agent-profile-specialties" id="agentProfileSpecialties"></div>
+    </div>
+    <div class="agent-profile-contact">
+      <a href="#" id="agentProfilePhone" class="btn btn-navy">Call</a>
+      <a href="#" id="agentProfileWhatsapp" class="btn btn-gold" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#" id="agentProfileEmail" class="agent-profile-email"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BIO ===== -->
+<section class="agent-profile-bio">
+  <div class="container">
+    <p id="agentProfileBio"></p>
+  </div>
+</section>
+
+<!-- ===== ACTIVE LISTINGS ===== -->
+<section class="agent-profile-listings" id="agentListingsSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--dark">Active Listings</p>
+      <h2 class="display" id="agentListingsHeading"></h2>
+    </div>
+    <div class="listing-grid-full" id="agentListingsGrid"></div>
+    <p class="agent-no-listings" id="agentNoListings" style="display:none;">No active listings from this agent right now — get in touch directly to ask what's available.</p>
+  </div>
+</section>
+
+<!-- ===== AGENT REVIEWS ===== -->
+<section class="reviews" id="agentReviewsSection" style="display:none;">
+  <div class="container">
+    <div class="row-head reveal">
+      <div>
+        <p class="eyebrow eyebrow--dark">Client Reviews</p>
+        <h2 class="display" id="agentReviewsHeading"></h2>
+      </div>
+      <div class="reviews-summary" id="agentReviewsSummary"></div>
+    </div>
+    <div class="reviews-grid" id="agentReviewsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/agents-data.js"></script>
+<script src="assets/listings-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="script.js"></script>
+<script src="agent-detail.js"></script>
+
+</body>
+</html>

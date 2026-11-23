@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services — HomesPartner Real Estate</title>
+<meta name="description" content="Buy, rent, sell, invest off-plan, or hand over property management and maintenance to HomesPartner Real Estate — full-service Dubai real estate, end to end.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="services.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero" data-page="services">
+  <div class="hero-bg">
+    <div class="hero-bg-media"></div>
+    <svg class="grid-map" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g class="grid-lines">
+        <line x1="0" y1="120" x2="1600" y2="120"/>
+        <line x1="0" y1="280" x2="1600" y2="280"/>
+        <line x1="270" y1="0" x2="270" y2="500"/>
+        <line x1="800" y1="0" x2="800" y2="500"/>
+        <line x1="1330" y1="0" x2="1330" y2="500"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container page-hero-inner">
+    <p class="eyebrow">What We Do</p>
+    <h1 class="display">Every Real Estate Need, One Partner</h1>
+    <p>From your first Dubai purchase to the day-to-day upkeep after — explore how our team guides you end-to-end.</p>
+  </div>
+</section>
+
+<!-- ===== SERVICES NAV JUMP ===== -->
+<nav class="service-jump" aria-label="Jump to service" id="serviceJumpNav">
+  <div class="container service-jump-inner" id="serviceJumpInner"></div>
+</nav>
+
+<div id="serviceSectionsContainer"></div>
+
+<!-- ===== PROPERTY VALUATION ===== -->
+<section class="valuation-section" id="valuation">
+  <div class="container valuation-inner">
+    <div class="valuation-copy">
+      <p class="eyebrow">Free Valuation</p>
+      <h2 class="display">What's Your Property Worth?</h2>
+      <p>Tell us a few details and a HomesPartner advisor will follow up with an honest, data-backed estimate — no obligation, no automated guesswork.</p>
+    </div>
+    <form class="valuation-form" id="valuationForm">
+      <h3>Request a Free Valuation</h3>
+      <input type="text" id="val_address" placeholder="Property address / community" required>
+      <div class="valuation-form-row">
+        <select id="val_propertyType" required>
+          <option value="">Property Type</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Villa">Villa</option>
+          <option value="Townhouse">Townhouse</option>
+          <option value="Loft">Loft</option>
+          <option value="Studio">Studio</option>
+        </select>
+        <select id="val_bedrooms" required>
+          <option value="">Bedrooms</option>
+          <option value="Studio">Studio</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5+">5+</option>
+        </select>
+      </div>
+      <input type="text" id="val_sizeSqft" placeholder="Size (sqft, approx.)">
+      <div class="valuation-form-row">
+        <input type="text" id="val_name" placeholder="Your name" required>
+        <input type="tel" id="val_phone" placeholder="Phone number" required>
+      </div>
+      <input type="email" id="val_email" placeholder="Email address" required>
+      <button type="submit" class="btn btn-gold" id="valuationSubmitBtn">Get My Free Valuation</button>
+      <p class="form-note" id="valuationNote"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== RENTAL YIELD CALCULATOR ===== -->
+<section class="calc-section" id="rental-yield-calculator">
+  <div class="container">
+    <div class="calc-block">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.6);text-align:center;">Investment Tools</p>
+      <h2 class="display">Rental Yield Calculator</h2>
+      <p class="section-sub">Estimate the gross and net rental yield on a Dubai investment property.</p>
+      <div class="calc-grid">
+        <div class="calc-inputs">
+          <label class="calc-field">
+            <span>Property Price (AED)</span>
+            <div class="calc-input-row"><input type="number" class="calc-number-input" id="ry_price" value="1000000" min="0" step="10000"></div>
+          </label>
+          <label class="calc-field">
+            <span>Annual Rental Income (AED)</span>
+            <div class="calc-input-row"><input type="number" class="calc-number-input" id="ry_rent" value="70000" min="0" step="1000"></div>
+          </label>
+          <label class="calc-field">
+            <span>Annual Expenses (AED) — service charges, maintenance, management fees</span>
+            <div class="calc-input-row"><input type="number" class="calc-number-input" id="ry_expenses" value="0" min="0" step="500"></div>
+          </label>
+        </div>
+        <div class="calc-result">
+          <span class="calc-result-label">Gross Rental Yield</span>
+          <span class="calc-result-value mono" id="ry_grossYield">0.0%</span>
+          <div class="calc-result-rows">
+            <div><span>Net Rental Yield</span><span class="mono" id="ry_netYield">0.0%</span></div>
+            <div><span>Net Annual Income</span><span class="mono" id="ry_netIncome">AED 0</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="calc-note">For guidance only. Speak to a HomesPartner advisor for a full investment assessment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUY VS RENT CALCULATOR ===== -->
+<section class="calc-section" id="buy-vs-rent-calculator">
+  <div class="container">
+    <div class="calc-block">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.6);text-align:center;">Investment Tools</p>
+      <h2 class="display">Buy vs. Rent Calculator</h2>
+      <p class="section-sub">A simple side-by-side estimate of the cost of buying versus renting over time.</p>
+      <div class="calc-grid">
+        <div class="calc-inputs">
+          <label class="calc-field">
+            <span>Property Price (AED)</span>
+            <div class="calc-input-row"><input type="number" class="calc-number-input" id="bvr_price" value="1500000" min="0" step="10000"></div>
+          </label>
+          <label class="calc-field">
+            <span>Down Payment</span>
+            <div class="calc-input-row"><input type="range" id="bvr_downPct" min="10" max="80" value="20" step="5"><span class="calc-value mono" id="bvr_downPctLabel">20%</span></div>
+          </label>
+          <label class="calc-field">
+            <span>Interest Rate (per year)</span>
+            <div class="calc-input-row"><input type="range" id="bvr_rate" min="2" max="8" value="4" step="0.25"><span class="calc-value mono" id="bvr_rateLabel">4.0%</span></div>
+          </label>
+          <label class="calc-field">
+            <span>Loan Term</span>
+            <div class="calc-input-row"><input type="range" id="bvr_term" min="5" max="25" value="20" step="1"><span class="calc-value mono" id="bvr_termLabel">20 yrs</span></div>
+          </label>
+          <label class="calc-field">
+            <span>Equivalent Monthly Rent (AED)</span>
+            <div class="calc-input-row"><input type="number" class="calc-number-input" id="bvr_rent" value="7000" min="0" step="500"></div>
+          </label>
+          <label class="calc-field">
+            <span>Years You Plan to Stay</span>
+            <div class="calc-input-row"><input type="range" id="bvr_years" min="1" max="20" value="5" step="1"><span class="calc-value mono" id="bvr_yearsLabel">5 yrs</span></div>
+          </label>
+        </div>
+        <div class="calc-result">
+          <span class="calc-result-label">Est. Total Cost Over Period</span>
+          <div class="calc-result-rows">
+            <div><span>Buying (deposit + fees + payments)</span><span class="mono" id="bvr_buyTotal">AED 0</span></div>
+            <div><span>Renting (same period)</span><span class="mono" id="bvr_rentTotal">AED 0</span></div>
+            <div><span>Est. equity built by buying</span><span class="mono" id="bvr_equity">AED 0</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="calc-note">A simplified estimate — excludes property appreciation, opportunity cost and tax. For guidance only; speak to a HomesPartner advisor for full advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <h2 class="display">Not Sure Where to Start?</h2>
+    <p>Tell us what you need and a HomesPartner advisor from the office nearest you will point you in the right direction.</p>
+    <a href="contact.html" class="btn btn-gold">Talk to an Advisor</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/services-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="assets/page-header-bg.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="assets/icon-library.js"></script>
+<script src="script.js"></script>
+<script src="services-page.js"></script>
+<script src="services-calculators.js"></script>
+
+</body>
+</html>

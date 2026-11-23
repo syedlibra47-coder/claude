@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — HomesPartner Real Estate</title>
+<meta name="description" content="Build your career in Dubai real estate with HomesPartner Real Estate. See current openings and how to apply.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="team.css">
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html#top" class="brand" id="brandLink">
+      <span class="logo-crop logo-crop--header"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="brand-logo"></span>
+    </a>
+    <nav class="main-nav" id="mainNav"></nav>
+    <div class="header-actions">
+      <a href="index.html#contact" class="btn btn-gold btn-sm" id="headerCtaBtn">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero" data-page="careers">
+  <div class="hero-bg">
+    <div class="hero-bg-media"></div>
+    <svg class="grid-map" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g class="grid-lines">
+        <line x1="0" y1="120" x2="1600" y2="120"/>
+        <line x1="0" y1="280" x2="1600" y2="280"/>
+        <line x1="270" y1="0" x2="270" y2="500"/>
+        <line x1="800" y1="0" x2="800" y2="500"/>
+        <line x1="1330" y1="0" x2="1330" y2="500"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container page-hero-inner">
+    <p class="eyebrow" id="careersHeroEyebrow"></p>
+    <h1 class="display" id="careersHeroHeading"></h1>
+    <p id="careersHeroSubtitle"></p>
+  </div>
+</section>
+
+<!-- ===== WHY JOIN ===== -->
+<section class="careers-intro">
+  <div class="container careers-intro-inner">
+    <p class="eyebrow eyebrow--dark" id="careersWhyJoinEyebrow"></p>
+    <h2 class="display" id="careersWhyJoinHeading"></h2>
+    <p id="careersWhyJoinIntro"></p>
+  </div>
+</section>
+
+<section class="careers-values">
+  <div class="container">
+    <div class="careers-values-grid" id="careersValuePropsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CORE VALUES ===== -->
+<section class="core-values-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--dark" id="careersValuesEyebrow"></p>
+      <h2 class="display" id="careersValuesHeading"></h2>
+    </div>
+    <div class="core-values-grid" id="coreValuesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== JOB LISTINGS ===== -->
+<section class="careers-roles">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--dark" id="careersJobsEyebrow"></p>
+      <h2 class="display" id="careersJobsHeading"></h2>
+      <p class="section-sub" id="careersJobsSubtitle"></p>
+    </div>
+    <div class="careers-roles-list" id="jobListingsList"></div>
+    <p class="agent-no-listings" id="noJobsMessage" style="display:none;">There are no open positions right now — but we'd still love to hear from you below.</p>
+  </div>
+</section>
+
+<!-- ===== CV SUBMISSION ===== -->
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <p class="eyebrow" id="careersCvEyebrow"></p>
+    <h2 class="display" id="careersCvHeading"></h2>
+    <p id="careersCvSubtitle"></p>
+    <a href="#" id="careersCvButton" class="btn btn-gold">Email Your CV &rarr;</a>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="contact-faq">
+  <div class="container contact-faq-inner">
+    <p class="eyebrow eyebrow--dark" id="careersFaqEyebrow"></p>
+    <h2 class="display" id="careersFaqHeading"></h2>
+    <div class="faq-list" id="careersFaqList"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-crop logo-crop--footer"><img src="assets/logo.png" alt="HomesPartner Real Estate" class="footer-logo"></span>
+      <p id="footerBlurb"></p>
+      <a class="footer-email" id="footerEmail" href="mailto:info@homespartner.ae">info@homespartner.ae</a>
+    </div>
+    <div id="footerColumns"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> <span id="footerCopyright">HomesPartner Real Estate. All rights reserved.</span></p>
+    <p class="footer-compliance" id="footerCompliance"></p>
+    <p class="footer-legal-links" id="footerLegalLinks"></p>
+  </div>
+</footer>
+
+<script src="assets/career-content-data.js"></script>
+<script src="assets/job-listings-data.js"></script>
+<script src="assets/site-chrome-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/theme-presets.js"></script>
+<script src="assets/site-settings-data.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/data-loader.js"></script>
+<script src="assets/page-header-bg.js"></script>
+<script src="site-chrome.js"></script>
+<script src="assets/popup-banner.js"></script>
+<script src="assets/icon-library.js"></script>
+<script src="script.js"></script>
+<script src="careers-page.js"></script>
+
+</body>
+</html>

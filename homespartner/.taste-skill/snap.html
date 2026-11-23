@@ -1,7 +1,0 @@
-<!doctype html><html><body style="margin:0;background:#f3f4f8"><div id="h" style="position:relative;width:800px;height:600px"></div>
-<script type="module">
-import { mount } from '../assets/model.js';
-const m = mount(document.getElementById('h'), { live: false, preserve: true, offset: 0 });
-window.snap = async kind => { m.show(kind, true); await new Promise(r => setTimeout(r, 300)); m.renderNow(); return document.querySelector('canvas').toDataURL('image/webp', 0.9); };
-window.ready = true;
-</script></body></html>
