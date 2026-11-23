@@ -1,17 +1,17 @@
 window.SITE_SETTINGS_DATA = {
   colorPalette: "navy-gold",
   typography: {
-    headingFont: "Fraunces",
+    headingFont: "Poppins",
     headingColor: "#1F275C",
-    bodyFont: "Plus Jakarta Sans",
+    bodyFont: "Poppins",
     bodyColor: "#1B1D28",
     dataFont: "IBM Plex Mono",
     dataColor: "#1F275C",
-    cardFont: "Plus Jakarta Sans",
+    cardFont: "Poppins",
     cardColor: "#1F275C",
-    blogFont: "Plus Jakarta Sans",
+    blogFont: "Poppins",
     blogColor: "#1F275C",
-    formFont: "Plus Jakarta Sans",
+    formFont: "Poppins",
     formColor: "#1F275C"
   }
 };

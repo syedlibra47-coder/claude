@@ -14,9 +14,9 @@
   --line: #E4E6EE;
   --hairline: rgba(31, 39, 92, 0.10);
 
-  --font-head: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Fraunces', Georgia, serif;
+  --font-head: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', 'SF Mono', ui-monospace, monospace;
 
   /* Per-role text color, admin-editable under Theme > Typography. These
@@ -1589,17 +1589,18 @@ h3, h4 { font-weight: 700; letter-spacing: -0.01em; }
 
 /* ==========================================================================
    REFINEMENT PASS (Nov 2026) — same design language, clearer hierarchy.
-   Type: Fraunces for display headings, Plus Jakarta Sans for text,
+   Type: Poppins for headings and text (the brand typeface),
    IBM Plex Mono for figures and labels. Everything below only adjusts
    sizes, spacing and the homepage listing card; delete this block to revert.
    ========================================================================== */
 .container { max-width: 1240px; }
-body { font-size: 1rem; line-height: 1.65; }
+body { font-size: 1rem; line-height: 1.65; font-weight: 400; }
+.section-sub, .hero-sub, .service-card p, .office-card p, .why-item p, .quick-card p { font-weight: 300; }
 
 /* display headings: larger, tighter, optical sizing on */
-.display { font-weight: 500; letter-spacing: -0.022em; font-variation-settings: "opsz" 144; }
-.hero h1 { font-size: clamp(2.8rem, 6.2vw, 5rem); line-height: 1.02; margin-bottom: 26px; }
-.section-head h2, .row-head h2, .why-copy h2, .cta-inner h2 { font-size: clamp(2.1rem, 4vw, 3.15rem); line-height: 1.06; }
+.display { font-weight: 600; letter-spacing: -0.03em; }
+.hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.5rem); line-height: 1.05; margin-bottom: 26px; }
+.section-head h2, .row-head h2, .why-copy h2, .cta-inner h2 { font-size: clamp(2rem, 3.6vw, 2.85rem); line-height: 1.1; }
 .row-head h2 { margin-top: 2px; }
 .section-head { max-width: 720px; margin-bottom: 64px; }
 .section-sub { font-size: 1.08rem; line-height: 1.6; color: #5d5f6b; }
@@ -1680,7 +1681,7 @@ body { font-size: 1rem; line-height: 1.65; }
   color: var(--gold-light); margin-bottom: 6px; font-variant-numeric: tabular-nums;
 }
 .lc-price span { font-family: var(--font-body); font-weight: 500; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin-left: 4px; }
-.lc-title { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0 0 4px; color: #fff; }
+.lc-title { font-family: var(--font-head); font-weight: 600; font-size: 1.3rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 4px; color: #fff; }
 .lc-title a { color: inherit; text-decoration: none; }
 .lc-title a::after { content: ''; position: absolute; inset: 0; z-index: 0; } /* whole card opens the listing */
 .lc-wa, .lc-status { position: relative; z-index: 1; }
