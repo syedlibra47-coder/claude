@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
 
 <div class="noise-overlay"></div>
 
@@ -57,7 +57,17 @@
     <h1 class="display" id="heroHeading">Dubai Real Estate, Handled Right</h1>
     <p class="hero-sub" id="heroSubtitle">Buy, rent, sell or invest off-plan in Dubai, then leave the upkeep to us — property management and maintenance once you own it. Backed by our own desks in London, Karachi and Ahmedabad for clients investing from abroad.</p>
 
-    <div class="search-panel reveal">
+    <div class="hero-actions">
+      <a href="listings.html" class="btn btn-gold">Explore Properties</a>
+      <a href="#quiz" class="btn btn-ghost-light">Take the 2-Minute Quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUICK ACTIONS (overlaps hero) ===== -->
+<section class="quick-actions">
+  <div class="container">
+    <div class="search-panel search-panel--bar">
       <div class="search-toggle" id="searchToggle">
         <button type="button" class="toggle-pill active" data-mode="buy">Buy</button>
         <button type="button" class="toggle-pill" data-mode="rent">Rent</button>
@@ -77,13 +87,7 @@
       </div>
       <p class="search-alt">Looking to sell instead? <a href="#contact">Get a free valuation &rarr;</a></p>
     </div>
-  </div>
-</section>
-
-<!-- ===== QUICK ACTIONS (overlaps hero) ===== -->
-<section class="quick-actions">
-  <div class="container">
-    <div class="quick-grid" id="quickActionsGrid"></div>
+    <div class="quick-grid" id="quickActionsGrid" hidden></div>
     <div class="hero-stats hero-stats--strip reveal" id="heroStatsStrip"></div>
   </div>
 </section>
@@ -334,6 +338,20 @@
   </div>
 </section>
 
+<!-- ===== ADVISORS ===== -->
+<section class="advisors" id="advisors">
+  <div class="container">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow eyebrow--dark">Your Advisors</p>
+        <h2 class="display">The People You’ll Deal With</h2>
+      </div>
+      <p class="section-sub">One named advisor handles your search, viewing and paperwork from first message to handover, in person in Dubai or by video from abroad.</p>
+    </div>
+    <div class="advisor-grid" id="advisorGrid"></div>
+  </div>
+</section>
+
 <!-- ===== CLIENT REVIEWS ===== -->
 <section class="reviews" id="reviews">
   <div class="container">
@@ -409,6 +427,7 @@
 <script src="assets/homepage-content-data.js"></script>
 <script src="assets/site-chrome-data.js"></script>
 <script src="assets/contact-content-data.js"></script>
+<script src="assets/agents-data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/theme-presets.js"></script>
 <script src="assets/site-settings-data.js"></script>
@@ -426,6 +445,7 @@
 <script src="homepage-reviews.js"></script>
 <script src="newsletter-signup.js"></script>
 <script src="homepage-tools.js"></script>
+<script src="homepage-advisors.js"></script>
 
 </body>
 </html>

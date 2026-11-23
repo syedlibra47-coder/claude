@@ -72,28 +72,25 @@
       const plan = p.paymentPlans[0];
       const bookingPct = plan.segments[0].pct;
       const handoverPct = 100 - bookingPct;
+      // Full-photo card, same family as the listing cards: status and plan on top,
+      // developer, name, area, handover and price over a rising dark gradient.
       return `
-      <article class="offplan-project reveal in-view" data-offplan-id="${p.id}">
-        <div class="offplan-image">
-          <img src="${p.hero}" alt="${p.title}, ${p.community}">
-          <div class="badge-stack">
-            <span class="badge badge--red">${plan.label} Payment Plan</span>
-            <span class="badge ${p.statusBadge}">${p.status}</span>
-          </div>
-          <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      <article class="offplan-project offplan-project--photo reveal in-view" data-offplan-id="${p.id}">
+        <img class="lc-photo" src="${p.hero}" alt="${p.title}, ${p.community}" loading="lazy">
+        <div class="lc-shade" aria-hidden="true"></div>
+        <div class="lc-top">
+          <span class="lc-status">${p.status}</span>
+          <span class="lc-status lc-status--sale">${plan.label} Plan</span>
         </div>
-        <div class="offplan-project-body">
-          <div class="pill-row"><span class="pill pill--dark">${p.tags[0] || p.category}</span><span class="pill pill--dark">${p.tags[1] || p.category}</span></div>
-          <h3>${p.title}</h3>
-          <p class="listing-location">${p.community} &middot; Handover ${p.handover}</p>
+        <div class="lc-info">
+          <p class="op-dev">${p.developer || ''}</p>
+          <h3 class="lc-title"><a href="offplan-detail.html?id=${p.id}">${p.title}</a></h3>
+          <p class="lc-location">${p.community}</p>
           <div class="payment-plan">
             <div class="payment-plan-bar"><span style="width:${bookingPct}%"></span></div>
             <div class="payment-plan-labels"><span>${bookingPct}% booking</span><span>${handoverPct}% handover</span></div>
           </div>
-          <div class="offplan-project-footer">
-            <div class="offplan-price">from ${p.priceLabel}</div>
-            <a href="offplan-detail.html?id=${p.id}" class="card-link">Discover More &rarr;</a>
-          </div>
+          <p class="lc-meta"><span>From ${p.priceLabel}</span><span>Handover ${p.handover}</span></p>
         </div>
       </article>`;
     }
