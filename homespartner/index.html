@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en" data-type="service" data-radius="soft" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HomesPartner: off-plan property in Dubai for UK and UAE buyers</title>
+<meta name="description" content="Compare Dubai off-plan launches by developer, handover date and payment plan, then talk to one HomesPartner advisor on WhatsApp about the unit you want.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HomesPartner: off-plan property in Dubai">
+<meta property="og:description" content="New Dubai launches by developer, handover and payment plan, with one advisor from reservation to keys.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#ffffff">
+<!-- <link rel="canonical" href="https://homespartner.ae/"> -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preload" href="assets/fonts/poppins-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #ffffff; --p-surface: #f3f4f8; --p-ink: #20275c; --p-muted: #565c78;
+  --p-accent: #b59e5a; --p-accent-ink: #111111; --p-action: #b59e5a; --p-action-ink: #111111;
+  --p-inv-bg: #20275c; --p-inv-surface: #2c3567; --p-inv-ink: #ffffff; --p-inv-muted: #a1a8c0;
+  --p-inv-accent: #b59e5a; --p-inv-accent-ink: #111111; --p-inv-action: #b59e5a; --p-inv-action-ink: #111111;
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-text: "Outfit", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+}
+</style>
+<!-- brand commitments (Homes Partner Brand Guidelines): Poppins, HomesPartner Blue as the action colour,
+     the gold gradient as trim only -->
+<style>
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 300; font-display: swap; src: url(assets/fonts/poppins-300.woff2) format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap; src: url(assets/fonts/poppins-400.woff2) format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap; src: url(assets/fonts/poppins-500.woff2) format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600; font-display: swap; src: url(assets/fonts/poppins-600.woff2) format("woff2"); }
+:root {
+  --font-display: "Poppins", system-ui, sans-serif;
+  --font-text: "Poppins", system-ui, sans-serif;
+  --display-weight: 600;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+  --p-action: #20275c; --p-action-ink: #ffffff;
+  --p-accent-ink: #20275c; --p-inv-action-ink: #20275c;
+  --gold-1: #e2c980; --gold-2: #b59e5a; --gold-text: #715e30;
+  --brass: linear-gradient(100deg, var(--gold-1), var(--gold-2));
+  --stone: #f3f4f8;
+}
+body { font-weight: 300; }
+b, strong, .rows__name, .t-card, h3 { font-weight: 500; }
+::selection { background: color-mix(in oklab, var(--gold-1) 55%, white); color: var(--p-ink); }
+html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent; accent-color: var(--p-ink); caret-color: var(--p-ink); }
+
+/* the logo, drawn from the master artwork: three diamonds, the gold one interlocking */
+.hp-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--p-ink); text-decoration: none; }
+.hp-logo svg { width: 46px; height: 26px; flex: none; }
+.hp-logo__words { display: grid; line-height: 1; }
+.hp-logo__name { font: 600 19px/1 var(--font-display); letter-spacing: .06em; }
+.hp-logo__name span { background: var(--brass); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hp-logo__sub { font: 400 8.5px/1 var(--font-text); letter-spacing: .42em; color: #6f7280; margin-top: 5px; }
+
+/* hero: the scale model on its plinth, the plaque beside it */
+.hero .hero-split { align-items: stretch; }
+.hero-copy h1 { max-width: 15ch; font-size: clamp(42px, 4.3vw, 66px); }
+.finder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: var(--s-6); }
+.finder .field { font-size: 13px; }
+.finder .field select { height: 48px; }
+.finder .btn { grid-column: 1 / -1; justify-self: start; }
+.model { position: relative; min-height: 420px; }
+.model canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+.model canvas:active { cursor: grabbing; }
+.model__still { position: absolute; inset: 0; width: 100%; height: 100%; }
+.model.is-live .model__still { display: none; }
+.plaque { position: absolute; left: 0; bottom: 0; width: min(372px, 92%); background: #fff; border: 1px solid color-mix(in oklab, var(--gold-2) 55%, white);
+  border-radius: 6px; padding: 18px 20px 20px; box-shadow: 0 18px 40px -24px rgba(32, 39, 92, .45); z-index: 2; }
+.plaque__rule { height: 2px; border: 0; margin: 0 0 14px; background: var(--brass); border-radius: 2px; }
+.plaque h2 { font-size: 21px; letter-spacing: -0.01em; margin: 0; }
+.plaque__dev { color: var(--p-muted); font-size: 14px; margin: 2px 0 12px; }
+.plaque dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0 0 16px; font-size: 14px; }
+.plaque dt { color: var(--p-muted); }
+.plaque dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+.plaque__pick { display: flex; flex-wrap: nowrap; gap: 6px; margin: 0 0 14px; }
+.plaque__pick button, .filters button { font: 500 13px/1 var(--font-text); height: 44px; padding: 0 13px; white-space: nowrap; border-radius: 999px; border: 1px solid var(--line-strong, #d4d7e2);
+  background: #fff; color: var(--p-ink); cursor: pointer; transition: background-color var(--m-in, 150ms) var(--ease), border-color var(--m-in, 150ms) var(--ease), color var(--m-in, 150ms) var(--ease); }
+.plaque__pick button:hover, .filters button:hover { border-color: var(--p-ink); }
+.plaque__pick button[aria-pressed="true"], .filters button[aria-pressed="true"] { background: var(--p-ink); border-color: var(--p-ink); color: #fff; }
+.model__pause { position: absolute; right: 0; bottom: 0; z-index: 2; }
+
+/* launches: brass-ruled plaques in rows */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--s-5); }
+.launches { border-top: 1px solid var(--line); }
+.launch { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) 300px; gap: 16px; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.launch[hidden] { display: none; }
+.launch__name { font-weight: 500; font-size: 17px; }
+.launch__name small { display: block; font-weight: 300; font-size: 14px; color: var(--p-muted); }
+.launch__cell { font-size: 15px; }
+.launch__cell span { display: block; font-size: 12px; color: var(--p-muted); }
+.launch__actions { display: flex; gap: 8px; justify-content: flex-end; }
+.launches__empty { padding: 24px 0; color: var(--p-muted); }
+.launch-head { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)) auto; gap: 16px; padding-bottom: 10px; font-size: 13px; color: var(--p-muted); }
+
+/* payment plan: the milestone wall */
+.wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: end; height: clamp(260px, 38vh, 380px); margin-top: var(--s-6); padding: 0 0 0; border-bottom: 2px solid var(--p-ink); }
+.wall__bar { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.wall__fill { height: var(--h, var(--pct)); min-height: 44px; background: var(--p-ink); border-radius: 4px 4px 0 0; position: relative; transition: height 600ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)); }
+.wall__fill::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--brass); border-radius: 4px 4px 0 0; }
+.wall__pct { position: absolute; top: 14px; left: 16px; color: #fff; font: 600 clamp(28px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.wall__labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 16px; }
+.wall__labels h3 { font-size: 17px; margin: 0 0 4px; }
+.wall__labels p { margin: 0; color: var(--p-muted); font-size: 15px; }
+.plan-for { font-weight: 500; }
+
+/* ready homes: floorplate lightboxes */
+.lightbox { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: inherit; }
+.lightbox__plan { aspect-ratio: 4 / 3; background: var(--stone); border-radius: 6px; display: grid; place-items: center; overflow: hidden; padding: 9%; }
+.lightbox__plan svg { width: 100%; height: 100%; }
+.lightbox__plan .walls { fill: none; stroke: var(--p-ink); stroke-width: 2.2; stroke-linejoin: miter; }
+.lightbox__plan .inner { fill: none; stroke: var(--p-ink); stroke-width: 1; }
+.lightbox__plan .door { fill: none; stroke: var(--gold-2); stroke-width: 1.2; }
+.lightbox__plan text { font: 400 7px var(--font-text); fill: var(--p-muted); }
+.lightbox h3 { font-size: 17px; margin: 0; }
+.lightbox__meta { color: var(--p-muted); font-size: 14px; margin: 2px 0 0; }
+.lightbox__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; }
+.price { font-weight: 500; font-variant-numeric: tabular-nums; }
+.tag { font-size: 12px; font-weight: 500; color: var(--gold-text); }
+
+/* areas */
+.areas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--gutter); }
+.areas a { display: grid; gap: 4px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.areas a b { font-size: 19px; font-weight: 500; }
+.areas a span { color: var(--p-muted); font-size: 15px; }
+.areas a:hover b { text-decoration: underline; text-decoration-color: var(--gold-2); text-underline-offset: 5px; text-decoration-thickness: 2px; }
+
+.area-map { width: 100%; height: auto; margin-top: var(--s-6); }
+.area-map__sea { fill: #eef1f7; }
+.area-map__coast { fill: none; stroke: var(--p-ink); stroke-width: 1.5; }
+.area-map__creek { fill: none; stroke: #b9c3d8; stroke-width: 5; stroke-linecap: round; }
+.area-map__palm { stroke: var(--gold-2); stroke-width: 2.4; stroke-linecap: round; }
+.area-map__pins circle { fill: #fff; stroke: var(--p-ink); stroke-width: 2; }
+.area-map__pins circle.is-launch { fill: var(--p-ink); stroke: var(--gold-1); stroke-width: 3; }
+.area-map__pins text { font: 400 11px var(--font-text); fill: var(--p-muted); }
+
+/* the statement */
+.statement > .wrap { display: grid; align-content: center; min-height: 100%; }
+.statement .mo-wh__text { max-width: 30ch; font: 600 clamp(34px, 3.4vw, 56px)/1.15 var(--font-display); letter-spacing: -0.02em; }
+
+/* UK desk */
+.steps { counter-reset: step; display: grid; gap: 0; }
+.steps li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.steps li::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--gold-2); color: var(--p-ink); font-weight: 500; font-size: 14px; }
+.steps--short { margin: var(--s-5) 0 var(--s-5); }
+.steps h3 { font-size: 16px; margin: 4px 0 2px; }
+.steps p { margin: 0; color: var(--p-muted); font-size: 15px; }
+.figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px var(--gutter); align-content: start; }
+.figures div { display: grid; gap: 4px; padding-top: 14px; border-top: 1px solid var(--line); }
+.figures dd { margin: 0; font: 600 clamp(30px, 2.6vw, 44px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.figures dt { color: var(--p-muted); font-size: 14px; }
+.figures .to-confirm { font-size: 12px; color: var(--gold-text); font-weight: 500; }
+
+/* guides */
+.guide { display: grid; gap: 12px; align-content: start; padding: 24px; border: 1px solid var(--line); border-radius: 8px; }
+.guide h3 { font-size: 19px; margin: 0; }
+.guide p { margin: 0; color: var(--p-muted); }
+.guide .btn { justify-self: start; margin-top: 8px; }
+
+@media (max-width: 1023px) {
+  .launch, .launch-head { grid-template-columns: minmax(0, 1fr) auto; }
+  .launch-head { display: none; }
+  .launch__cell { display: none; }
+  .launch__cell.is-keep { display: block; }
+}
+@media (max-width: 639px) {
+  .finder { grid-template-columns: 1fr; }
+  .finder .btn { justify-self: stretch; }
+  .model { min-height: 360px; }
+  .plaque { position: relative; width: 100%; margin-top: 300px; }
+  .model__pause { top: 0; bottom: auto; }
+  .wall { height: 240px; gap: 10px; }
+  .wall__labels { gap: 10px; }
+  .wall__labels h3 { font-size: 14px; }
+  .wall__labels p { font-size: 13px; }
+  .areas { grid-template-columns: 1fr; }
+  .launch__actions .btn--secondary { display: none; }
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+</head>
+<body>
+<!-- type: service (a brokerage: people are hired)
+     deal: hero split 5/7 holding the client's scale model (impeccable direction: sales gallery), nav plain, close close--type,
+     footer columns, rhythm space, buttons solid, mark: the client's logo; palette: the client's brand colours via start.mjs brand
+     moments: word-highlight in #advisor (the one promise the page makes, lit word by word) -->
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo hp-logo" href="#top" aria-label="HomesPartner Real Estate, home">
+      <svg viewBox="0 0 100 56" aria-hidden="true"><defs><linearGradient id="hpg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2C980"/><stop offset="1" stop-color="#B59E5A"/></linearGradient></defs><g fill="none" stroke-width="5.5"><path d="M38 16 30 8 10 28 30 48 38 40" stroke="#20275C"/><path d="M62 16 70 8 90 28 70 48 62 40" stroke="#20275C"/><path d="M50 8 70 28 50 48 30 28Z" stroke="url(#hpg)"/></g></svg>
+      <span class="hp-logo__words" aria-hidden="true"><span class="hp-logo__name">Homes<span>Partner</span></span><span class="hp-logo__sub">REAL ESTATE</span></span>
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#launches">Launches</a></div>
+      <div class="nav__item"><a class="nav__link" href="#plans">Payment plans</a></div>
+      <div class="nav__item"><a class="nav__link" href="#homes">Ready homes</a></div>
+      <div class="nav__item"><a class="nav__link" href="#areas">Areas</a></div>
+      <div class="nav__item"><a class="nav__link" href="#uk-desk">UK desk</a></div>
+      <div class="nav__item"><a class="nav__link" href="#contact">Contact</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#launches">Find a launch</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero-text grid hero-split">
+        <div class="hero-copy span-5">
+          <h1 id="hero-h">Dubai off&#8209;plan property for UK and UAE buyers</h1>
+          <p class="t-lead">Compare new launches by developer, handover date and payment plan, then talk to one HomesPartner advisor on WhatsApp about the exact unit you want.</p>
+          <form class="finder" action="#launches" method="get" data-finder>
+            <div class="field"><label for="f-dev">Developer</label>
+              <select id="f-dev" name="developer"><option value="">Any</option><option>Emaar</option><option>DAMAC</option><option>Sobha</option><option>Nakheel</option><option>Azizi</option></select></div>
+            <div class="field"><label for="f-area">Area</label>
+              <select id="f-area" name="area"><option value="">Any</option><option>Sobha Hartland 2</option><option>Business Bay</option><option>Palm Jebel Ali</option><option>Dubai Creek Harbour</option><option>Dubai South</option></select></div>
+            <div class="field"><label for="f-year">Handover by</label>
+              <select id="f-year" name="year"><option value="">Any year</option><option>2027</option><option>2028</option></select></div>
+            <button class="btn btn--primary" type="submit">Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+          </form>
+        </div>
+        <div class="hero-visual model span-7 start-6" data-model>
+          <svg class="model__still" viewBox="0 0 700 520" role="img" aria-label="Scale model of Sobha One: a podium with three stepped towers on a round white plinth">
+            <ellipse cx="400" cy="430" rx="250" ry="58" fill="#eceef4"/>
+            <ellipse cx="400" cy="418" rx="250" ry="58" fill="#ffffff" stroke="#d8dbe6"/>
+            <path d="M150 418a250 58 0 0 0 500 0" fill="none" stroke="#c9ad6a" stroke-width="3"/>
+            <g fill="#ffffff" stroke="#20275c" stroke-width="1.4">
+              <path d="M290 400V350l110-30 110 30v50l-110 30z"/>
+              <path d="M330 360V130l40-12 40 12v230l-40 12z"/>
+              <path d="M410 350V190l34-10 34 10v160l-34 10z"/>
+              <path d="M300 372V240l28-8 28 8v132l-28 8z"/>
+            </g>
+            <g stroke="#20275c" stroke-width="1" opacity=".55">
+              <path d="M330 160l40 12 40-12M330 200l40 12 40-12M330 240l40 12 40-12M330 280l40 12 40-12M330 320l40 12 40-12"/>
+              <path d="M410 220l34 10 34-10M410 260l34 10 34-10M410 300l34 10 34-10"/>
+              <path d="M300 270l28 8 28-8M300 310l28 8 28-8"/>
+            </g>
+            <path d="M330 130l40-12 40 12" fill="none" stroke="#c9ad6a" stroke-width="3"/>
+          </svg>
+          <div class="plaque" data-plaque aria-live="polite">
+            <hr class="plaque__rule">
+            <div class="plaque__pick" role="group" aria-label="Choose the model">
+              <button type="button" aria-pressed="true" data-pick="sobha-one">Sobha One</button>
+              <button type="button" aria-pressed="false" data-pick="safa-two">Safa Two</button>
+              <button type="button" aria-pressed="false" data-pick="palm-jebel-ali">Palm Jebel Ali</button>
+            </div>
+            <h2 data-f="name">Sobha One</h2>
+            <p class="plaque__dev" data-f="where">Sobha, Sobha Hartland 2</p>
+            <dl>
+              <dt>Handover</dt><dd data-f="handover">Q4 2027</dd>
+              <dt>From</dt><dd data-f="price">AED 1.65M</dd>
+              <dt>Plan</dt><dd data-f="plan">60/40</dd>
+            </dl>
+            <a class="btn btn--secondary" data-f="ask" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener">Ask about this launch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="launches" aria-labelledby="launches-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="launches-h">New launches by developer</h2>
+        <p>Each launch shows its handover quarter, starting price and payment plan. Pick a developer to narrow the list.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by developer" data-filters>
+        <button type="button" aria-pressed="true" data-dev="">All developers</button>
+        <button type="button" aria-pressed="false" data-dev="Emaar">Emaar</button>
+        <button type="button" aria-pressed="false" data-dev="DAMAC">DAMAC</button>
+        <button type="button" aria-pressed="false" data-dev="Sobha">Sobha</button>
+        <button type="button" aria-pressed="false" data-dev="Nakheel">Nakheel</button>
+        <button type="button" aria-pressed="false" data-dev="Azizi">Azizi</button>
+      </div>
+      <div class="launches" data-launches>
+        <div class="launch" data-dev="Sobha" data-area="Sobha Hartland 2" data-year="2027" data-id="sobha-one">
+          <p class="launch__name">Sobha One<small>Sobha</small></p>
+          <p class="launch__cell"><span>Area</span>Sobha Hartland 2</p>
+          <p class="launch__cell is-keep"><span>Handover</span>Q4 2027</p>
+          <p class="launch__cell"><span>From</span>AED 1.65M</p>
+          <p class="launch__cell"><span>Plan</span>60/40</p>
+          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="sobha-one">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Sobha One">Ask on WhatsApp</a></div>
+        </div>
+        <div class="launch" data-dev="DAMAC" data-area="Business Bay" data-year="2028" data-id="safa-two">
+          <p class="launch__name">Safa Two<small>DAMAC</small></p>
+          <p class="launch__cell"><span>Area</span>Business Bay</p>
+          <p class="launch__cell is-keep"><span>Handover</span>Q2 2028</p>
+          <p class="launch__cell"><span>From</span>AED 2.1M</p>
+          <p class="launch__cell"><span>Plan</span>80/20</p>
+          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="safa-two">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Safa%20Two%20(ref%20HP-L02)%3A%20https%3A%2F%2Fhomespartner.ae%2Fbusiness-bay%2Fsafa-two%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Safa Two">Ask on WhatsApp</a></div>
+        </div>
+        <div class="launch" data-dev="Nakheel" data-area="Palm Jebel Ali" data-year="2028" data-id="palm-jebel-ali">
+          <p class="launch__name">Palm Jebel Ali Beach Villas<small>Nakheel</small></p>
+          <p class="launch__cell"><span>Area</span>Palm Jebel Ali</p>
+          <p class="launch__cell is-keep"><span>Handover</span>Q4 2028</p>
+          <p class="launch__cell"><span>From</span>AED 18.5M</p>
+          <p class="launch__cell"><span>Plan</span>80/20</p>
+          <div class="launch__actions"><a class="btn btn--secondary btn--sm" href="#top" data-show="palm-jebel-ali">See the model</a><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Palm%20Jebel%20Ali%20Beach%20Villas%20(ref%20HP-L03)%3A%20https%3A%2F%2Fhomespartner.ae%2Fpalm-jebel-ali%2Fbeach-villas%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Palm Jebel Ali Beach Villas">Ask on WhatsApp</a></div>
+        </div>
+        <div class="launch" data-dev="Emaar" data-area="Dubai Creek Harbour" data-year="2028" data-id="creek-waters-2">
+          <p class="launch__name">Creek Waters 2<small>Emaar</small></p>
+          <p class="launch__cell"><span>Area</span>Dubai Creek Harbour</p>
+          <p class="launch__cell is-keep"><span>Handover</span>Q1 2028</p>
+          <p class="launch__cell"><span>From</span>AED 1.4M</p>
+          <p class="launch__cell"><span>Plan</span>90/10</p>
+          <div class="launch__actions"><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Creek%20Waters%202%20(ref%20HP-L04)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-creek-harbour%2Fcreek-waters-2%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Creek Waters 2">Ask on WhatsApp</a></div>
+        </div>
+        <div class="launch" data-dev="Azizi" data-area="Dubai South" data-year="2027" data-id="azizi-venice">
+          <p class="launch__name">Azizi Venice<small>Azizi</small></p>
+          <p class="launch__cell"><span>Area</span>Dubai South</p>
+          <p class="launch__cell is-keep"><span>Handover</span>Q4 2027</p>
+          <p class="launch__cell"><span>From</span>AED 690K</p>
+          <p class="launch__cell"><span>Plan</span>50/50</p>
+          <div class="launch__actions"><a class="btn btn--primary btn--sm" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Azizi%20Venice%20(ref%20HP-L05)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-south%2Fazizi-venice%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Azizi Venice">Ask on WhatsApp</a></div>
+        </div>
+        <p class="launches__empty" data-empty hidden>No launch matches these choices yet. Ask on WhatsApp and an advisor will tell you what is coming in that area.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans" aria-labelledby="plans-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="plans-h">Payment plans before you call</h2>
+        <p>How the price of <span class="plan-for" data-plan-name>Sobha One</span> is paid, from the booking deposit to the keys. Developers change plans between phases, so we confirm the live plan in writing.</p>
+      </div>
+      <div class="wall" data-wall>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 10%; --h: 20%" data-bar="0"><span class="wall__pct" data-pct="0">10%</span></div></div>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 50%; --h: 100%" data-bar="1"><span class="wall__pct" data-pct="1">50%</span></div></div>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 40%; --h: 80%" data-bar="2"><span class="wall__pct" data-pct="2">40%</span></div></div>
+      </div>
+      <div class="wall__labels">
+        <div><h3>Booking deposit</h3><p>Paid by bank transfer when you reserve the unit.</p></div>
+        <div><h3>During construction</h3><p data-mid>In instalments until Q4 2027.</p></div>
+        <div><h3>On handover</h3><p>Paid when the keys are released, or financed with a mortgage.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section g2" id="homes" aria-labelledby="homes-h">
+    <div class="wrap">
+      <div class="group">
+        <div class="section-head section-head--row">
+          <h2 id="homes-h">Ready homes to buy or rent</h2>
+          <p>Apartments, townhouses and villas you can move into now. Every home opens a WhatsApp chat with its reference.</p>
+        </div>
+        <div class="grid">
+          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S101%20(2-bed%20apartment%2C%20Dubai%20Marina)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S101" target="_blank" rel="noopener">
+            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a two-bedroom apartment"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M70 5v58M70 63H5M110 5v40M110 45h45M70 80h40v25"/><path class="door" d="M70 40a10 10 0 0 1 10-10M110 30a8 8 0 0 0 8 8"/><text x="22" y="34">Bedroom</text><text x="80" y="24">Bath</text><text x="118" y="70">Bedroom</text><text x="24" y="88">Living</text></svg></div>
+            <span class="tag">For sale</span>
+            <div><h3>2-bed apartment, Dubai Marina</h3><p class="lightbox__meta">1,240 sq ft, marina view, ref HP-S101</p></div>
+            <div class="lightbox__foot"><span class="price">AED 2,450,000</span><span class="link">Ask on WhatsApp</span></div>
+          </a>
+          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R204%20(1-bed%20apartment%2C%20Dubai%20Hills%20Estate)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R204" target="_blank" rel="noopener">
+            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a one-bedroom apartment"><rect class="walls" x="15" y="10" width="130" height="90"/><path class="inner" d="M85 10v50M85 60h60M15 70h40v30"/><path class="door" d="M85 35a9 9 0 0 1 9-9"/><text x="98" y="38">Bedroom</text><text x="22" y="88">Bath</text><text x="34" y="40">Living</text></svg></div>
+            <span class="tag">For rent</span>
+            <div><h3>1-bed apartment, Dubai Hills Estate</h3><p class="lightbox__meta">780 sq ft, golf course side, ref HP-R204</p></div>
+            <div class="lightbox__foot"><span class="price">AED 145,000 a year</span><span class="link">Ask on WhatsApp</span></div>
+          </a>
+          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S118%20(4-bed%20townhouse%2C%20Dubai%20Hills%20Estate)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S118" target="_blank" rel="noopener">
+            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a four-bedroom townhouse"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M45 5v45M45 50H5M85 5v45M85 50h-40M120 5v45M120 50h35M60 50v55M105 70h50"/><path class="door" d="M45 30a8 8 0 0 1 8-8M85 30a8 8 0 0 1 8-8"/><text x="10" y="30">Bed</text><text x="52" y="30">Bed</text><text x="92" y="30">Bed</text><text x="126" y="30">Bed</text><text x="20" y="84">Living</text><text x="112" y="92">Kitchen</text></svg></div>
+            <span class="tag">For sale</span>
+            <div><h3>4-bed townhouse, Dubai Hills Estate</h3><p class="lightbox__meta">2,900 sq ft, private garden, ref HP-S118</p></div>
+            <div class="lightbox__foot"><span class="price">AED 5,800,000</span><span class="link">Ask on WhatsApp</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R231%20(3-bed%20apartment%2C%20Downtown%20Dubai)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R231" target="_blank" rel="noopener">
+          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a three-bedroom apartment"><rect class="walls" x="5" y="10" width="150" height="90"/><path class="inner" d="M55 10v40M55 50H5M105 10v40M105 50h50M55 50h50M80 50v10"/><path class="door" d="M55 32a8 8 0 0 1 8-8M105 32a8 8 0 0 0-8-8"/><text x="14" y="34">Bedroom</text><text x="64" y="34">Bedroom</text><text x="114" y="34">Bedroom</text><text x="60" y="84">Living and dining</text></svg></div>
+          <span class="tag">For rent</span>
+          <div><h3>3-bed apartment, Downtown Dubai</h3><p class="lightbox__meta">1,710 sq ft, boulevard view, ref HP-R231</p></div>
+          <div class="lightbox__foot"><span class="price">AED 260,000 a year</span><span class="link">Ask on WhatsApp</span></div>
+        </a>
+        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S126%20(studio%2C%20Business%20Bay)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S126" target="_blank" rel="noopener">
+          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a studio apartment"><rect class="walls" x="30" y="10" width="100" height="90"/><path class="inner" d="M30 72h34v28M100 10v24h30"/><path class="door" d="M64 86a8 8 0 0 0-8-8"/><text x="36" y="90">Bath</text><text x="56" y="48">Living and sleeping</text></svg></div>
+          <span class="tag">For sale</span>
+          <div><h3>Studio, Business Bay</h3><p class="lightbox__meta">460 sq ft, canal view, ref HP-S126</p></div>
+          <div class="lightbox__foot"><span class="price">AED 820,000</span><span class="link">Ask on WhatsApp</span></div>
+        </a>
+        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R240%20(5-bed%20villa%2C%20Palm%20Jumeirah)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R240" target="_blank" rel="noopener">
+          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a five-bedroom villa"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M35 5v40M35 45H5M65 5v40M95 5v40M125 5v40M35 45h120M90 45v60M5 80h40"/><path class="door" d="M35 28a7 7 0 0 1 7-7M65 28a7 7 0 0 1 7-7M95 28a7 7 0 0 1 7-7M125 28a7 7 0 0 1 7-7"/><text x="10" y="28">Bed</text><text x="40" y="28">Bed</text><text x="70" y="28">Bed</text><text x="100" y="28">Bed</text><text x="130" y="28">Bed</text><text x="104" y="80">Living</text><text x="50" y="66">Kitchen</text></svg></div>
+          <span class="tag">For rent</span>
+          <div><h3>5-bed villa, Palm Jumeirah</h3><p class="lightbox__meta">6,100 sq ft, private beach, ref HP-R240</p></div>
+          <div class="lightbox__foot"><span class="price">AED 1,100,000 a year</span><span class="link">Ask on WhatsApp</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="areas" aria-labelledby="areas-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="section-head span-4">
+          <h2 id="areas-h">Dubai areas we sell in</h2>
+          <p>Choose an area to see its launches. Each line says what kind of home it has.</p>
+          <svg class="area-map" viewBox="0 0 400 300" role="img" aria-label="Map of Dubai's coast with the eight areas marked, from Palm Jebel Ali in the south-west to Dubai Creek Harbour in the north-east">
+            <path class="area-map__sea" d="M0 0H400V40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268Z"/>
+            <path class="area-map__coast" d="M400 40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268"/>
+            <path class="area-map__creek" d="M318 82C326 100 324 118 334 134C342 148 352 156 362 166"/>
+            <path class="area-map__palm" d="M54 218l-22-26M54 218l-8-32M54 218l8-30M54 218l20-24M54 218l-30-12M54 218l30-8"/>
+            <g class="area-map__pins">
+              <circle class="is-launch" cx="54" cy="222" r="6"/><text x="64" y="244">Palm Jebel Ali</text>
+              <circle cx="112" cy="206" r="5"/><text x="96" y="194">Dubai Marina</text>
+              <circle class="is-launch" cx="92" cy="276" r="6"/><text x="104" y="280">Dubai South</text>
+              <circle cx="188" cy="214" r="5"/><text x="168" y="236">Dubai Hills Estate</text>
+              <circle cx="250" cy="146" r="5"/><text x="178" y="140">Downtown</text>
+              <circle class="is-launch" cx="268" cy="160" r="6"/><text x="280" y="164">Business Bay</text>
+              <circle class="is-launch" cx="292" cy="196" r="6"/><text x="246" y="214">Sobha Hartland 2</text>
+              <circle class="is-launch" cx="338" cy="136" r="6"/><text x="300" y="118">Creek Harbour</text>
+            </g>
+          </svg>
+        </div>
+        <div class="areas span-8 start-5">
+          <a href="#launches" data-area-link="Dubai Creek Harbour"><b>Dubai Creek Harbour</b><span>New towers on the creek, beside the Ras Al Khor wildlife sanctuary</span></a>
+          <a href="#launches" data-area-link="Business Bay"><b>Business Bay</b><span>Towers on the Dubai Water Canal, next to Downtown</span></a>
+          <a href="#launches" data-area-link="Palm Jebel Ali"><b>Palm Jebel Ali</b><span>Beachfront villas on Nakheel's second palm island</span></a>
+          <a href="#launches" data-area-link="Sobha Hartland 2"><b>Sobha Hartland 2</b><span>Towers and villas in Mohammed Bin Rashid City</span></a>
+          <a href="#launches" data-area-link="Dubai South"><b>Dubai South</b><span>Apartments near Al Maktoum International Airport</span></a>
+          <a href="#launches" data-area-link="Dubai Hills Estate"><b>Dubai Hills Estate</b><span>Villas and townhouses around an 18-hole golf course</span></a>
+          <a href="#launches" data-area-link="Dubai Marina"><b>Dubai Marina</b><span>Waterfront apartments along the marina walk</span></a>
+          <a href="#launches" data-area-link="Downtown Dubai"><b>Downtown Dubai</b><span>Apartments around Burj Khalifa and Dubai Mall</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement" id="advisor" data-moment="word-highlight" aria-labelledby="advisor-h">
+    <div class="wrap">
+      <h2 id="advisor-h" class="sr-only">One advisor for the whole purchase</h2>
+      <p class="mo-wh__text">One HomesPartner advisor handles your purchase from the first WhatsApp message to <strong>the keys</strong>, including the paperwork and handover checks you cannot do from abroad.</p>
+    </div>
+  </section>
+
+  <section class="section" id="uk-desk" aria-labelledby="uk-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-6">
+          <div class="section-head">
+            <h2 id="uk-h">Buying in Dubai from the UK</h2>
+            <p>The UK desk at homespartner.co.uk runs the same purchase for buyers who never fly out before handover.</p>
+          </div>
+          <ol class="steps">
+            <li><div><h3>Video viewing</h3><p>We walk the show unit and the site with you on a video call.</p></div></li>
+            <li><div><h3>Reservation</h3><p>You pay the booking deposit to the developer by bank transfer.</p></div></li>
+            <li><div><h3>Sales agreement</h3><p>You sign the SPA electronically; we check it against the plan you were quoted.</p></div></li>
+            <li><div><h3>Oqood registration</h3><p>We register the sale with the Dubai Land Department.</p></div></li>
+            <li><div><h3>Handover inspection</h3><p>We inspect the unit at handover and send you the snag list.</p></div></li>
+          </ol>
+        </div>
+        <dl class="figures span-5 start-8">
+          <div><dt>Properties matched</dt><dd>500+</dd><span class="to-confirm">Figure to be confirmed</span></div>
+          <div><dt>Developer partners</dt><dd>12</dd><span class="to-confirm">Figure to be confirmed</span></div>
+          <div><dt>Transacted since 2021</dt><dd>AED 1.2B</dd><span class="to-confirm">Figure to be confirmed</span></div>
+          <div><dt>Google rating</dt><dd>4.9</dd><span class="to-confirm">Figure to be confirmed</span></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guides" aria-labelledby="guides-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="guides-h">Guides for off-plan buyers</h2>
+        <p>Short guides an advisor sends on WhatsApp, written for buyers comparing their first Dubai launch.</p>
+      </div>
+      <div class="grid">
+        <article class="guide span-4">
+          <h3>Golden Visa through property</h3>
+          <p>A property worth AED 2 million or more can qualify you for a 10-year UAE Golden Visa, off-plan included.</p>
+          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20Golden%20Visa%20guide." target="_blank" rel="noopener">Request the guide</a>
+        </article>
+        <article class="guide span-4">
+          <h3>Off-plan or ready home</h3>
+          <p>A payment plan spreads the cost over the build; a ready home can earn rent from the month you buy it.</p>
+          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20off-plan%20or%20ready%20guide." target="_blank" rel="noopener">Request the guide</a>
+        </article>
+        <article class="guide span-4">
+          <h3>Paying from a UK bank</h3>
+          <p>What to send, what to sign, and how the deposit moves from a UK account to the developer's escrow.</p>
+          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20UK%20payments%20guide." target="_blank" rel="noopener">Request the guide</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="section-head span-4">
+          <h2 id="contact-h">Send an enquiry</h2>
+          <p>Tell us what you are looking for. An advisor replies by WhatsApp or email, from Dubai or the UK desk.</p>
+          <ol class="steps steps--short">
+            <li><div><h3>A reply from one advisor</h3><p>The same person stays with you to handover.</p></div></li>
+            <li><div><h3>A shortlist of launches</h3><p>Matched to your budget, area and handover year.</p></div></li>
+            <li><div><h3>A viewing</h3><p>In person in Dubai, or on a video call from the UK.</p></div></li>
+          </ol>
+          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor." target="_blank" rel="noopener">Ask on WhatsApp</a>
+        </div>
+        <form class="form span-7 start-6" action="mailto:hello@homespartner.example" method="post" enctype="text/plain" data-endpoint="" novalidate>
+          <div class="field"><label for="c-name">Name</label>
+            <input id="c-name" name="name" type="text" autocomplete="name" required aria-describedby="c-name-err">
+            <p class="field__error" id="c-name-err" hidden>Write the name we should use.</p></div>
+          <div class="field"><label for="c-phone">WhatsApp number</label>
+            <input id="c-phone" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="c-phone-err">
+            <p class="field__error" id="c-phone-err" hidden>Write a WhatsApp number with its country code, like +44 or +971.</p></div>
+          <div class="field"><label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="c-email-err">
+            <p class="field__error" id="c-email-err" hidden>Write an email address with an @, like name@example.com.</p></div>
+          <div class="field"><label for="c-want">Looking to</label>
+            <select id="c-want" name="looking-to"><option>Buy off-plan</option><option>Buy a ready home</option><option>Rent a home</option><option>Sell or let my property</option></select></div>
+          <div class="field field--full"><label for="c-msg">Message</label>
+            <textarea id="c-msg" name="message" rows="7"></textarea></div>
+          <div class="btn-row"><button class="btn btn--primary" type="submit">Send enquiry</button></div>
+          <p class="form__status" role="status" data-form-status></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="close" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Find a launch with one advisor</h2>
+        <p>Off-plan and ready homes across Dubai, with a UK desk for buyers abroad.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="#launches">Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo hp-logo" href="#top" aria-label="HomesPartner Real Estate, back to top">
+            <svg viewBox="0 0 100 56" aria-hidden="true"><g fill="none" stroke-width="5.5"><path d="M38 16 30 8 10 28 30 48 38 40" stroke="#20275C"/><path d="M62 16 70 8 90 28 70 48 62 40" stroke="#20275C"/><path d="M50 8 70 28 50 48 30 28Z" stroke="url(#hpg)"/></g></svg>
+            <span class="hp-logo__words" aria-hidden="true"><span class="hp-logo__name">Homes<span>Partner</span></span><span class="hp-logo__sub">REAL ESTATE</span></span>
+          </a>
+          <p class="footer__lede">A Dubai real estate brokerage for off-plan launches and ready homes, with a UK desk.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Buy</h3><ul><li><a href="#launches">Launches</a></li><li><a href="#plans">Payment plans</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Homes</h3><ul><li><a href="#homes">Ready homes</a></li><li><a href="#areas">Areas</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Abroad</h3><ul><li><a href="#uk-desk">UK desk</a></li><li><a href="#guides">Guides</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Talk to us</h3><ul><li><a href="#advisor">Your advisor</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 HomesPartner Real Estate, Dubai</span>
+        <span>Projects, prices and plans shown are previews until live listings are added.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/page.js"></script>
+</body>
+</html>
