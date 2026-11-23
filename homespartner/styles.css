@@ -1910,3 +1910,118 @@ body { font-size: 1rem; line-height: 1.65; font-weight: 400; }
   .home .hero-stats--strip .stat { padding-left: 14px; }
   .home .services, .home .listings, .home .offplan, .home .offices, .home .youtube, .home .why, .home .reviews, .home .mortgage, .home .quiz, .home .advisors { padding-top: 88px; padding-bottom: 88px; }
 }
+
+/* ==========================================================================
+   MINIMAL PASS — 60 / 30 / 10.
+   60% white and warm off-white, 30% near-black ink, 10% brand (the logo,
+   the gold accents: eyebrow marks, progress bars, the office routes, prices
+   on dark). Palette tokens match the "ink-minimal" preset in theme-presets.js.
+   ========================================================================== */
+:root {
+  --navy: #15171C; --navy-deep: #0E0F13; --navy-soft: #2A2D35;
+  --gold: #B59E5A; --gold-light: #D8C38C; --gold-dark: #97803F;
+  --gray: #6E6F75; --ink: #15171C;
+  --paper: #FFFFFF; --paper-flat: #F5F4F1; --line: #E8E6E1;
+  --heading-color: var(--ink); --card-color: var(--ink); --data-color: var(--ink);
+  --brand-navy: #1F275C;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+/* type: calmer weight, tighter tracking */
+.display { font-weight: 500; letter-spacing: -0.04em; }
+h1, h2, h3, h4 { color: var(--ink); }
+.section-sub { color: var(--gray); }
+
+/* labels: grey text, one small gold mark */
+.eyebrow, .eyebrow--dark { color: var(--gray); }
+.eyebrow::before { border-color: var(--gold); }
+.row-head--light .eyebrow, .offplan .eyebrow, .cta-banner .eyebrow { color: rgba(255,255,255,0.6); }
+
+/* buttons: ink on light, white on dark or photo */
+.btn { border-radius: 100px; font-weight: 500; }
+.btn-gold { background: var(--ink); color: #fff; }
+.btn-gold:hover { background: #2E3038; color: #fff; }
+.hero .btn-gold, .offplan .btn-gold, .cta-banner .btn-gold, .mortgage-result .btn-gold { background: #fff; color: var(--ink); }
+.hero .btn-gold:hover, .offplan .btn-gold:hover, .cta-banner .btn-gold:hover, .mortgage-result .btn-gold:hover { background: var(--paper-flat); }
+.card-link, .row-head-link, .search-alt a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gold); text-decoration-thickness: 1px; }
+.card-link:hover, .row-head-link:hover { color: var(--gray); }
+.main-nav a::after { background: var(--gold); height: 1px; }
+.home .site-header:not(.scrolled) .btn-gold { background: rgba(255,255,255,0.1); color: #fff; }
+.home .site-header.scrolled .btn-gold, .site-header .btn-gold { background: var(--ink); color: #fff; }
+
+/* search bar */
+.search-panel--bar .toggle-highlight { background: var(--ink); }
+.search-panel--bar .toggle-pill.active { color: #fff; }
+
+/* badges and pills: neutral */
+.badge, .badge--gold, .badge--navy { background: var(--paper-flat); color: var(--ink); border: 1px solid var(--line); }
+.office-card:hover { background: var(--ink); }
+.office-card h3::after { background: var(--gold); }
+.filter-btn.active { background: var(--ink); border-color: var(--ink); }
+.carousel-arrow:hover { background: var(--ink); }
+
+/* photo cards: white type, gold only on the price */
+.lc-status, .lc-status--sale { background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+.lc-status--sale { background: #fff; color: var(--ink); border-color: #fff; }
+.listing-card--photo, .offplan-project--photo, .advisor-portrait, .quiz-match { border-radius: 24px; }
+.listing-card--photo { box-shadow: none; }
+.listing-card--photo:hover, .offplan-project--photo:hover { transform: none; box-shadow: none; }
+.lc-title { font-weight: 500; letter-spacing: -0.025em; }
+
+/* sections: light everywhere but the off-plan band, the cta and the footer (the 30%) */
+.offplan { background: var(--ink); }
+.offplan-feature strong { color: #fff; font-weight: 500; }
+.services, .listings, .offices, .youtube, .advisors { background: #fff; }
+.why, .reviews { background: var(--paper-flat); }
+.home .service-icon { color: var(--ink); }
+.why-item { border-top: 1px solid var(--ink); }
+.why-item h4 { color: var(--ink); }
+.quiz { background: var(--paper-flat); color: var(--ink); }
+.quiz-head h2 { color: var(--ink); }
+.quiz .section-sub--light { color: var(--gray); }
+.quiz .eyebrow { color: var(--gray); }
+.quiz-card { box-shadow: 0 1px 0 var(--line), 0 30px 60px -40px rgba(21,23,28,0.25); border: 1px solid var(--line); }
+.quiz-option.is-picked { background: var(--ink); border-color: var(--ink); }
+.quiz-option:hover { border-color: var(--ink); }
+.quiz-step, .mf-field > span b { color: var(--gray); }
+.mortgage { background: #fff; }
+.mortgage-result { background: var(--ink); box-shadow: none; }
+.mr-label { color: rgba(255,255,255,0.55); }
+.mf-field input[type="range"] { accent-color: var(--ink); }
+.cta-banner { background: var(--ink); }
+.site-footer { background: var(--navy-deep); }
+.footer-email, .footer-col a:hover, .footer-newsletter-note { color: var(--gold-light); }
+.footer-newsletter-row button { background: #fff; color: var(--ink); }
+.advisor-portrait { background: var(--paper-flat); }
+.advisor-monogram { color: var(--ink); font-weight: 200; }
+.advisor-role { color: var(--gray); }
+.stat-num { color: var(--ink); font-family: var(--font-head); font-weight: 400; letter-spacing: -0.04em; }
+.home .hero-stats--strip .stat-num { color: var(--ink); }
+.hero-stats--strip .stat-label { color: var(--gray); }
+
+/* ===== Motion: slow, eased, staged ===== */
+.reveal { transform: translateY(40px); transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out); }
+@keyframes hp-hero-zoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes hp-rise { from { opacity: 0; transform: translateY(36px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+.home .hero-photo { animation: hp-hero-zoom 2.8s var(--ease-out) both; }
+.home .hero-inner > * { animation: hp-rise 1.2s var(--ease-out) both; }
+.home .hero-inner > :nth-child(1) { animation-delay: .25s; }
+.home .hero-inner > :nth-child(2) { animation-delay: .4s; }
+.home .hero-inner > :nth-child(3) { animation-delay: .55s; }
+.home .hero-inner > :nth-child(4) { animation-delay: .7s; }
+.home .site-header { animation: hp-rise 1s var(--ease-out) .1s both; }
+
+/* scroll-in for cards and rows, set up by homepage-motion.js */
+.anim-ready [data-anim] { opacity: 0; transform: translateY(44px); transition: opacity 1s var(--ease-out), transform 1.1s var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.anim-ready [data-anim].is-shown { opacity: 1; transform: none; }
+.anim-ready [data-anim="photo"] { opacity: 1; transform: none; clip-path: inset(12% 6% 0 6% round 24px); transition: clip-path 1.3s var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.anim-ready [data-anim="photo"] .lc-photo, .anim-ready [data-anim="photo"] > img { transform: scale(1.18); transition: transform 1.6s var(--ease-out); transition-delay: var(--anim-delay, 0s); }
+.anim-ready [data-anim="photo"].is-shown { clip-path: inset(0 0 0 0 round 24px); }
+.anim-ready [data-anim="photo"].is-shown .lc-photo, .anim-ready [data-anim="photo"].is-shown > img { transform: scale(1); }
+.anim-ready [data-anim="photo"].is-shown:hover .lc-photo { transform: scale(1.04); transition-delay: 0s; transition-duration: .8s; }
+@media (prefers-reduced-motion: reduce) {
+  .anim-ready [data-anim], .anim-ready [data-anim="photo"] { opacity: 1; transform: none; clip-path: none; }
+  .home .hero-photo, .home .hero-inner > *, .home .site-header { animation: none; }
+}
+.section-sub--light, .offplan .section-sub { color: rgba(255,255,255,0.66); }
+.quiz .section-sub--light { color: var(--gray); }

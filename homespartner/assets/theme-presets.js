@@ -6,6 +6,15 @@
 // Fonts family name works.
 
 window.THEME_PALETTES = {
+  "ink-minimal": {
+    label: "Ink & White (brand accents)",
+    tokens: {
+      "--navy": "#15171C", "--navy-deep": "#0E0F13", "--navy-soft": "#2A2D35",
+      "--gold": "#B59E5A", "--gold-light": "#D8C38C", "--gold-dark": "#97803F",
+      "--gray": "#6E6F75", "--ink": "#15171C",
+      "--paper": "#FFFFFF", "--paper-flat": "#F5F4F1", "--line": "#E8E6E1"
+    }
+  },
   "navy-gold": {
     label: "Navy & Gold",
     tokens: {

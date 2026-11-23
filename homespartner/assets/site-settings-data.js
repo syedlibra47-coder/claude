@@ -1,5 +1,5 @@
 window.SITE_SETTINGS_DATA = {
-  colorPalette: "navy-gold",
+  colorPalette: "ink-minimal",
   typography: {
     headingFont: "Poppins",
     headingColor: "#1F275C",
