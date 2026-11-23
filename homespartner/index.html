@@ -110,6 +110,8 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); align-items: end; height: clamp(260px, 38vh, 380px); margin-top: var(--s-6); }
 .wall__bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
 .wall__fill { height: var(--h, var(--pct)); min-height: 64px; background: var(--p-ink); border-radius: 6px 6px 0 0; position: relative; transition: height 600ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)); }
+.wall__fill.is-zero { min-height: 0; }
+.wall__fill.is-zero .wall__pct { top: -44px; color: var(--p-ink); }
 .wall__fill::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: var(--brass); border-radius: 6px 6px 0 0; }
 .wall__pct { position: absolute; top: 16px; left: 18px; color: #fff; font: 600 clamp(26px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
 .wall__labels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); margin-top: 16px; }
@@ -118,9 +120,12 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 .plan-for { font-weight: 500; }
 
 /* ready homes: floorplate lightboxes */
+#homes .lightbox { align-self: start; }
 .lightbox { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: inherit; }
 .lightbox__plan { aspect-ratio: 4 / 3; background: var(--stone); border-radius: 6px; display: grid; place-items: center; overflow: hidden; padding: 9%; }
 .lightbox__plan svg { width: 100%; height: 100%; }
+.lightbox__photo { padding: 0; }
+.lightbox__photo img { width: 100%; height: 100%; object-fit: cover; }
 .lightbox__plan .walls { fill: none; stroke: var(--p-ink); stroke-width: 2.2; stroke-linejoin: miter; }
 .lightbox__plan .inner { fill: none; stroke: var(--p-ink); stroke-width: 1; }
 .lightbox__plan .door { fill: none; stroke: var(--gold-2); stroke-width: 1.2; }
@@ -159,14 +164,13 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
   border: 1px solid var(--gold-2); color: var(--p-ink); font-weight: 500; font-size: 14px; }
 .step__title { margin: 4px 0 2px; font-weight: 500; font-size: 17px; }
 .steps p:not(.step__title) { margin: 0; color: var(--p-muted); font-size: 15px; }
-.route { width: 100%; height: min(300px, 32vh); background: #f6f8fc; border-radius: 8px; }
+.route { width: 100%; height: min(260px, 27vh); background: #f6f8fc; border-radius: 8px; }
 .route text { font: 400 13px var(--font-text); fill: var(--p-ink); }
 .route .city { font-weight: 500; font-size: 15px; }
-.figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px var(--gutter); margin: var(--s-6) 0 0; }
+.figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px var(--gutter); margin: var(--s-5) 0 0; }
 .figures div { display: grid; gap: 4px; }
 .figures dd { margin: 0; font: 600 clamp(28px, 2.4vw, 40px)/1 var(--font-display); font-variant-numeric: tabular-nums; }
 .figures dt { color: var(--p-muted); font-size: 14px; }
-.figures .to-confirm { font-size: 13px; color: var(--gold-text); font-weight: 500; }
 
 /* guides */
 .guide { display: grid; gap: 12px; align-content: start; }
@@ -178,6 +182,11 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
 
 /* contact */
 .contact-form { grid-template-columns: 1fr; }
+.office { display: grid; gap: 10px; margin: var(--s-5) 0 0; font-size: 15px; }
+.office div { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; }
+.office dt { color: var(--p-muted); }
+.office dd { margin: 0; }
+.office a { color: inherit; }
 .shortlist { width: 100%; height: auto; margin: var(--s-5) 0; background: var(--stone); border-radius: 8px; }
 .shortlist text { font: 400 11px var(--font-text); fill: var(--p-ink); }
 .shortlist .t { font-weight: 600; font-size: 13px; }
@@ -208,7 +217,10 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
   .hero .model { min-height: 0; height: 190px; margin-top: var(--s-4); }
   .hero .model__still { width: 100%; height: 100%; inset: 0; }
   .hero .plaque, .hero .model__pause { display: none; }
-  .board__frame { aspect-ratio: 2 / 1; margin-bottom: var(--s-4); }
+  .board__frame { aspect-ratio: 3 / 1; margin-bottom: var(--s-4); }
+  .launch__meta span:first-child { display: none; }
+  .office div { grid-template-columns: 1fr; gap: 0; }
+  #contact .shortlist { display: none; }
   #launches .section-head p { display: none; }
   #uk-desk .grid, #launches .grid { flex: 1 1 auto; align-content: space-between; }
   .wall { height: 240px; }
@@ -246,7 +258,7 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
       <div class="nav__item"><a class="nav__link" href="#plans">Payment plans</a></div>
       <div class="nav__item"><a class="nav__link" href="#homes">Ready homes</a></div>
       <div class="nav__item"><a class="nav__link" href="#areas">Areas</a></div>
-      <div class="nav__item"><a class="nav__link" href="#uk-desk">UK desk</a></div>
+      <div class="nav__item"><a class="nav__link" href="#uk-desk">Overseas desks</a></div>
       <div class="nav__item"><a class="nav__link" href="#contact">Contact</a></div>
     </nav>
     <div class="nav__actions">
@@ -263,34 +275,34 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
     <div class="wrap">
       <div class="hero-text grid hero-split">
         <div class="hero-copy span-5">
-          <h1 id="hero-h">Dubai off&#8209;plan property for UK and UAE buyers</h1>
+          <h1 id="hero-h">Dubai off&#8209;plan property for UAE and overseas buyers</h1>
           <p class="t-lead">Compare new launches by developer, handover date and payment plan, then talk to one HomesPartner advisor on WhatsApp about the exact unit you want.</p>
           <div class="finder" role="search" aria-label="Find a launch" data-finder>
             <div class="field"><label for="f-dev">Developer</label>
-              <select id="f-dev" name="developer"><option value="">Any</option><option>Emaar</option><option>DAMAC</option><option>Sobha</option><option>Nakheel</option><option>Azizi</option></select></div>
+              <select id="f-dev" name="developer"><option value="">Any</option><option>Imtiaz</option><option>Meridian Developments</option><option>Waterline Estates</option><option>Horizon Estates</option></select></div>
             <div class="field"><label for="f-area">Area</label>
-              <select id="f-area" name="area"><option value="">Any</option><option>Sobha Hartland 2</option><option>Business Bay</option><option>Palm Jebel Ali</option><option>Dubai Creek Harbour</option><option>Dubai South</option></select></div>
+              <select id="f-area" name="area"><option value="">Any</option><option>Dubai Land Residence Complex</option><option>Dubai Marina</option><option>Palm Jumeirah</option><option>Dubai Creek Harbour</option><option>Jumeirah Village Circle</option></select></div>
             <div class="field"><label for="f-year">Handover by</label>
               <select id="f-year" name="year"><option value="">Any year</option><option>2027</option><option>2028</option></select></div>
             <a class="btn btn--primary" href="#launches" data-find>Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
           </div>
         </div>
         <div class="hero-visual model span-7 start-6" data-model>
-          <img class="model__still" src="assets/models/sobha-one.webp" alt="Scale model of Sobha One: three stepped towers on a podium, on a round white plinth" width="1600" height="1200" fetchpriority="high" data-model-still>
+          <img class="model__still" src="assets/models/the-archive.webp" alt="Scale model of The Archive: three stepped residential towers on a podium, on a round white plinth" width="1600" height="1200" fetchpriority="high" data-model-still>
           <div class="plaque" data-plaque aria-live="polite">
             <div class="plaque__pick" role="group" aria-label="Choose the model">
-              <button type="button" aria-pressed="true" data-pick="sobha-one">Sobha One</button>
-              <button type="button" aria-pressed="false" data-pick="safa-two">Safa Two</button>
-              <button type="button" aria-pressed="false" data-pick="palm-jebel-ali">Palm Jebel Ali</button>
+              <button type="button" aria-pressed="true" data-pick="the-archive">The Archive</button>
+              <button type="button" aria-pressed="false" data-pick="marina-gold">Marina Gold</button>
+              <button type="button" aria-pressed="false" data-pick="palm-beach">Palm Beach</button>
             </div>
-            <p class="plaque__name" data-f="name">Sobha One</p>
-            <p class="plaque__dev" data-f="where">Sobha, Sobha Hartland 2</p>
+            <p class="plaque__name" data-f="name">The Archive</p>
+            <p class="plaque__dev" data-f="where">Imtiaz, Dubai Land Residence Complex</p>
             <dl>
-              <dt>Handover</dt><dd data-f="handover">Q4 2027</dd>
-              <dt>From</dt><dd data-f="price">AED 1.65M</dd>
-              <dt>Plan</dt><dd data-f="plan">60/40</dd>
+              <dt>Handover</dt><dd data-f="handover">Q3 2028</dd>
+              <dt>From</dt><dd data-f="price">AED 666K</dd>
+              <dt>Plan</dt><dd data-f="plan">50/50</dd>
             </dl>
-            <a class="btn btn--secondary" data-f="ask" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener">Ask about this launch</a>
+            <a class="btn btn--secondary" data-f="ask" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20The%20Archive%20%28Imtiaz%2C%20Dubai%20Land%20Residence%20Complex%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Dthe-archive-dlrc" target="_blank" rel="noopener">Ask about this launch</a>
           </div>
         </div>
       </div>
@@ -307,46 +319,45 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
         </div>
         <div class="filters" role="group" aria-label="Filter by developer" data-filters>
           <button type="button" aria-pressed="true" data-dev="">All developers</button>
-          <button type="button" aria-pressed="false" data-dev="Emaar">Emaar</button>
-          <button type="button" aria-pressed="false" data-dev="DAMAC">DAMAC</button>
-          <button type="button" aria-pressed="false" data-dev="Sobha">Sobha</button>
-          <button type="button" aria-pressed="false" data-dev="Nakheel">Nakheel</button>
-          <button type="button" aria-pressed="false" data-dev="Azizi">Azizi</button>
+          <button type="button" aria-pressed="false" data-dev="Imtiaz">Imtiaz</button>
+          <button type="button" aria-pressed="false" data-dev="Meridian Developments">Meridian</button>
+          <button type="button" aria-pressed="false" data-dev="Waterline Estates">Waterline</button>
+          <button type="button" aria-pressed="false" data-dev="Horizon Estates">Horizon</button>
         </div>
         <div class="frame board__frame">
-          <img class="frame__img" data-peek-for="sobha-one" src="assets/models/sobha-one.webp" alt="Scale model of Sobha One: three stepped towers on a podium" loading="lazy">
-          <img class="frame__img" data-peek-for="safa-two" src="assets/models/safa-two.webp" alt="Scale model of Safa Two: two slender towers joined by a sky bridge" loading="lazy" hidden>
-          <img class="frame__img" data-peek-for="palm-jebel-ali" src="assets/models/palm-jebel-ali.webp" alt="Scale model of Palm Jebel Ali Beach Villas: villas along a curved frond over water" loading="lazy" hidden>
-          <img class="frame__img" data-peek-for="creek-waters-2" src="assets/models/creek-waters-2.webp" alt="Scale model of Creek Waters 2: two stepped towers at the water's edge" loading="lazy" hidden>
-          <img class="frame__img" data-peek-for="azizi-venice" src="assets/models/azizi-venice.webp" alt="Scale model of Azizi Venice: mid-rise blocks around a lagoon" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="the-archive" src="assets/models/the-archive.webp" alt="Scale model of The Archive: three stepped residential towers on a podium" loading="lazy">
+          <img class="frame__img" data-peek-for="marina-gold" src="assets/models/marina-gold.webp" alt="Scale model of Marina Gold Residences: twin towers joined by a sky bridge" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="palm-beach" src="assets/models/palm-beach.webp" alt="Scale model of Palm Beach Collection: villas along a curved frond over water" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="creek-vista" src="assets/models/creek-vista.webp" alt="Scale model of Creek Vista Heights: stepped towers at the water's edge" loading="lazy" hidden>
+          <img class="frame__img" data-peek-for="jvc-skyline" src="assets/models/jvc-skyline.webp" alt="Scale model of JVC Skyline Residences: mid-rise blocks around a courtyard pool" loading="lazy" hidden>
         </div>
         </div>
         <div class="span-7 start-6">
           <ul class="rows" data-launches>
-            <li data-peek-to="sobha-one" tabindex="0" data-dev="Sobha" data-area="Sobha Hartland 2" data-year="2027">
-              <span class="rows__name">Sobha One, Sobha Hartland 2</span>
-              <p class="launch__meta"><span>Sobha</span><span>Handover <b>Q4 2027</b></span><span>From <b>AED 1.65M</b></span><span>Plan <b>60/40</b></span></p>
-              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="sobha-one">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Sobha%20One%20(ref%20HP-L01)%3A%20https%3A%2F%2Fhomespartner.ae%2Fsobha-hartland-2%2Fsobha-one%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Sobha One">Ask on WhatsApp</a></span>
+            <li data-peek-to="the-archive" tabindex="0" data-dev="Imtiaz" data-area="Dubai Land Residence Complex" data-year="2028">
+              <span class="rows__name">The Archive, Dubai Land Residence Complex</span>
+              <p class="launch__meta"><span>Imtiaz</span><span>Handover <b>Q3 2028</b></span><span>From <b>AED 666K</b></span><span>Plan <b>50/50</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="the-archive">See the model</a><a class="btn btn--primary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20The%20Archive%20%28Imtiaz%2C%20Dubai%20Land%20Residence%20Complex%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Dthe-archive-dlrc" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about The Archive">Ask on WhatsApp</a></span>
             </li>
-            <li data-peek-to="safa-two" tabindex="0" data-dev="DAMAC" data-area="Business Bay" data-year="2028">
-              <span class="rows__name">Safa Two, Business Bay</span>
-              <p class="launch__meta"><span>DAMAC</span><span>Handover <b>Q2 2028</b></span><span>From <b>AED 2.1M</b></span><span>Plan <b>80/20</b></span></p>
-              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="safa-two">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Safa%20Two%20(ref%20HP-L02)%3A%20https%3A%2F%2Fhomespartner.ae%2Fbusiness-bay%2Fsafa-two%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Safa Two">Ask on WhatsApp</a></span>
+            <li data-peek-to="marina-gold" tabindex="0" data-dev="Meridian Developments" data-area="Dubai Marina" data-year="2027">
+              <span class="rows__name">Marina Gold Residences, Dubai Marina</span>
+              <p class="launch__meta"><span>Meridian Developments</span><span>Handover <b>Q4 2027</b></span><span>From <b>AED 890K</b></span><span>Plan <b>20/80</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="marina-gold">See the model</a><a class="btn btn--primary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Marina%20Gold%20Residences%20%28Meridian%20Developments%2C%20Dubai%20Marina%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Dmarina-gold-residences" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Marina Gold Residences">Ask on WhatsApp</a></span>
             </li>
-            <li data-peek-to="palm-jebel-ali" tabindex="0" data-dev="Nakheel" data-area="Palm Jebel Ali" data-year="2028">
-              <span class="rows__name">Beach Villas, Palm Jebel Ali</span>
-              <p class="launch__meta"><span>Nakheel</span><span>Handover <b>Q4 2028</b></span><span>From <b>AED 18.5M</b></span><span>Plan <b>80/20</b></span></p>
-              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="palm-jebel-ali">See the model</a><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Palm%20Jebel%20Ali%20Beach%20Villas%20(ref%20HP-L03)%3A%20https%3A%2F%2Fhomespartner.ae%2Fpalm-jebel-ali%2Fbeach-villas%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Palm Jebel Ali Beach Villas">Ask on WhatsApp</a></span>
+            <li data-peek-to="palm-beach" tabindex="0" data-dev="Waterline Estates" data-area="Palm Jumeirah" data-year="2028">
+              <span class="rows__name">Palm Beach Collection, Palm Jumeirah</span>
+              <p class="launch__meta"><span>Waterline Estates</span><span>Handover <b>Q4 2028</b></span><span>From <b>AED 2.8M</b></span><span>Plan <b>20/80</b></span></p>
+              <span class="launch__actions"><a class="btn btn--secondary" href="#top" data-show="palm-beach">See the model</a><a class="btn btn--primary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Palm%20Beach%20Collection%20%28Waterline%20Estates%2C%20Palm%20Jumeirah%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Dpalm-beach-collection" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Palm Beach Collection">Ask on WhatsApp</a></span>
             </li>
-            <li data-peek-to="creek-waters-2" tabindex="0" data-dev="Emaar" data-area="Dubai Creek Harbour" data-year="2028">
-              <span class="rows__name">Creek Waters 2, Dubai Creek Harbour</span>
-              <p class="launch__meta"><span>Emaar</span><span>Handover <b>Q1 2028</b></span><span>From <b>AED 1.4M</b></span><span>Plan <b>90/10</b></span></p>
-              <span class="launch__actions"><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Creek%20Waters%202%20(ref%20HP-L04)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-creek-harbour%2Fcreek-waters-2%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Creek Waters 2">Ask on WhatsApp</a></span>
+            <li data-peek-to="creek-vista" tabindex="0" data-dev="Waterline Estates" data-area="Dubai Creek Harbour" data-year="2028">
+              <span class="rows__name">Creek Vista Heights, Dubai Creek Harbour</span>
+              <p class="launch__meta"><span>Waterline Estates</span><span>Handover <b>Q1 2028</b></span><span>From <b>AED 750K</b></span><span>Plan <b>10/90</b></span></p>
+              <span class="launch__actions"><a class="btn btn--primary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Creek%20Vista%20Heights%20%28Waterline%20Estates%2C%20Dubai%20Creek%20Harbour%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Dcreek-vista-heights" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Creek Vista Heights">Ask on WhatsApp</a></span>
             </li>
-            <li data-peek-to="azizi-venice" tabindex="0" data-dev="Azizi" data-area="Dubai South" data-year="2027">
-              <span class="rows__name">Azizi Venice, Dubai South</span>
-              <p class="launch__meta"><span>Azizi</span><span>Handover <b>Q4 2027</b></span><span>From <b>AED 690K</b></span><span>Plan <b>50/50</b></span></p>
-              <span class="launch__actions"><a class="btn btn--primary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20Azizi%20Venice%20(ref%20HP-L05)%3A%20https%3A%2F%2Fhomespartner.ae%2Fdubai-south%2Fazizi-venice%2F" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about Azizi Venice">Ask on WhatsApp</a></span>
+            <li data-peek-to="jvc-skyline" tabindex="0" data-dev="Horizon Estates" data-area="Jumeirah Village Circle" data-year="2027">
+              <span class="rows__name">JVC Skyline Residences, Jumeirah Village Circle</span>
+              <p class="launch__meta"><span>Horizon Estates</span><span>Handover <b>Q2 2027</b></span><span>From <b>AED 580K</b></span><span>Plan <b>30/70</b></span></p>
+              <span class="launch__actions"><a class="btn btn--primary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20details%20on%20JVC%20Skyline%20Residences%20%28Horizon%20Estates%2C%20Jumeirah%20Village%20Circle%29%3A%20https%3A%2F%2Fhomespartner.ae%2Foffplan-detail.html%3Fid%3Djvc-skyline-residences" target="_blank" rel="noopener" aria-label="Ask on WhatsApp about JVC Skyline Residences">Ask on WhatsApp</a></span>
             </li>
           </ul>
           <p class="launches__empty" data-empty hidden>No launch matches these choices yet. Ask on WhatsApp and an advisor will tell you what is coming in that area.</p>
@@ -359,16 +370,16 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
     <div class="wrap">
       <div class="section-head">
         <h2 id="plans-h">Payment plans before you call</h2>
-        <p>How the price of <span class="plan-for" data-plan-name>Sobha One</span> is paid, from the booking deposit to the keys. Developers change plans between phases, so we confirm the live plan in writing.</p>
+        <p>How the price of <span class="plan-for" data-plan-name>The Archive</span> is paid, from the booking deposit to the keys. Developers change plans between phases, so we confirm the live plan in writing.</p>
       </div>
-      <div class="wall" role="img" aria-label="Payment plan: 10% booking deposit, 50% during construction, 40% on handover" data-wall>
-        <div class="wall__bar"><div class="wall__fill" style="--pct: 10%; --h: 20%" data-bar="0"><span class="wall__pct" data-pct="0">10%</span></div></div>
-        <div class="wall__bar"><div class="wall__fill" style="--pct: 50%; --h: 100%" data-bar="1"><span class="wall__pct" data-pct="1">50%</span></div></div>
-        <div class="wall__bar"><div class="wall__fill" style="--pct: 40%; --h: 80%" data-bar="2"><span class="wall__pct" data-pct="2">40%</span></div></div>
+      <div class="wall" role="img" aria-label="Payment plan for The Archive: 20% on booking, 30% during construction, 50% on handover" data-wall>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 20%; --h: 40%" data-bar="0"><span class="wall__pct" data-pct="0">20%</span></div></div>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 30%; --h: 60%" data-bar="1"><span class="wall__pct" data-pct="1">30%</span></div></div>
+        <div class="wall__bar"><div class="wall__fill" style="--pct: 50%; --h: 100%" data-bar="2"><span class="wall__pct" data-pct="2">50%</span></div></div>
       </div>
       <div class="wall__labels">
         <div><p class="wall__title">Booking deposit</p><p>Paid by bank transfer when you reserve the unit.</p></div>
-        <div><p class="wall__title">During construction</p><p data-mid>In instalments until Q4 2027.</p></div>
+        <div><p class="wall__title">During construction</p><p data-mid>In instalments until Q3 2028.</p></div>
         <div><p class="wall__title">On handover</p><p>Paid when the keys are released, or financed with a mortgage.</p></div>
       </div>
     </div>
@@ -379,48 +390,44 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
       <div class="group">
         <div class="section-head">
           <h2 id="homes-h">Ready homes to buy or rent in Dubai</h2>
-          <p>Apartments, townhouses and villas you can move into now. Every home opens a WhatsApp chat with its reference.</p>
+          <p>Apartments, lofts and villas you can move into now. Every home opens a WhatsApp chat with its reference.</p>
         </div>
         <div class="grid">
-          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S101%20(2-bed%20apartment%2C%20Dubai%20Marina)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S101" target="_blank" rel="noopener">
-            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a two-bedroom apartment"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M70 5v58M70 63H5M110 5v40M110 45h45M70 80h40v25"/><path class="door" d="M70 40a10 10 0 0 1 10-10M110 30a8 8 0 0 0 8 8"/><text x="22" y="34">Bedroom</text><text x="80" y="24">Bath</text><text x="118" y="70">Bedroom</text><text x="24" y="88">Living</text></svg></div>
+          <a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-2451%20%28Palm%20Vista%20Villa%2C%20Palm%20Jumeirah%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Dpalm-vista-villa" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/palm-jumeirah.jpg" alt="Beachfront villa with a private pool on Palm Jumeirah" loading="lazy"></div>
             <span class="tag">For sale</span>
-            <div><h3>2-bed apartment, Dubai Marina</h3><p class="lightbox__meta">1,240 sq ft, marina view, ref HP-S101</p></div>
-            <div class="lightbox__foot"><span class="price">AED 2,450,000</span><span class="link">Ask on WhatsApp</span></div>
-          </a>
-          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R204%20(1-bed%20apartment%2C%20Dubai%20Hills%20Estate)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R204" target="_blank" rel="noopener">
-            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a one-bedroom apartment"><rect class="walls" x="15" y="10" width="130" height="90"/><path class="inner" d="M85 10v50M85 60h60M15 70h40v30"/><path class="door" d="M85 35a9 9 0 0 1 9-9"/><text x="98" y="38">Bedroom</text><text x="22" y="88">Bath</text><text x="34" y="40">Living</text></svg></div>
+            <div><h3>Palm Vista Villa, Palm Jumeirah</h3><p class="lightbox__meta">4 beds, 5 baths, 3,800 sq ft, ref HP-2451</p></div>
+            <div class="lightbox__foot"><span class="price">AED 2,150,000</span><span class="link">Ask on WhatsApp</span></div>
+          </a><a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-2318%20%28Marina%20Skyline%20Apartment%2C%20Dubai%20Marina%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Dmarina-skyline-apartment" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/dubai-marina-towers.jpg" alt="Dubai Marina towers over the yacht basin" loading="lazy"></div>
             <span class="tag">For rent</span>
-            <div><h3>1-bed apartment, Dubai Hills Estate</h3><p class="lightbox__meta">780 sq ft, golf course side, ref HP-R204</p></div>
-            <div class="lightbox__foot"><span class="price">AED 145,000 a year</span><span class="link">Ask on WhatsApp</span></div>
-          </a>
-          <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S118%20(4-bed%20townhouse%2C%20Dubai%20Hills%20Estate)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S118" target="_blank" rel="noopener">
-            <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a four-bedroom townhouse"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M45 5v45M45 50H5M85 5v45M85 50h-40M120 5v45M120 50h35M60 50v55M105 70h50"/><path class="door" d="M45 30a8 8 0 0 1 8-8M85 30a8 8 0 0 1 8-8"/><text x="10" y="30">Bed</text><text x="52" y="30">Bed</text><text x="92" y="30">Bed</text><text x="126" y="30">Bed</text><text x="20" y="84">Living</text><text x="112" y="92">Kitchen</text></svg></div>
+            <div><h3>Marina Skyline Apartment, Dubai Marina</h3><p class="lightbox__meta">2 beds, furnished, 1,150 sq ft, ref HP-2318</p></div>
+            <div class="lightbox__foot"><span class="price">AED 8,500 a month</span><span class="link">Ask on WhatsApp</span></div>
+          </a><a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-2277%20%28Downtown%20Vista%20Residence%2C%20Downtown%20Dubai%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Ddowntown-vista-residence" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/burj-khalifa.jpg" alt="Burj Khalifa above the Downtown Dubai towers" loading="lazy"></div>
             <span class="tag">For sale</span>
-            <div><h3>4-bed townhouse, Dubai Hills Estate</h3><p class="lightbox__meta">2,900 sq ft, private garden, ref HP-S118</p></div>
-            <div class="lightbox__foot"><span class="price">AED 5,800,000</span><span class="link">Ask on WhatsApp</span></div>
+            <div><h3>Downtown Vista Residence, Downtown Dubai</h3><p class="lightbox__meta">2 beds, Burj view, 1,240 sq ft, ref HP-2277</p></div>
+            <div class="lightbox__foot"><span class="price">AED 1,950,000</span><span class="link">Ask on WhatsApp</span></div>
           </a>
         </div>
       </div>
       <div class="grid">
-        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R231%20(3-bed%20apartment%2C%20Downtown%20Dubai)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R231" target="_blank" rel="noopener">
-          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a three-bedroom apartment"><rect class="walls" x="5" y="10" width="150" height="90"/><path class="inner" d="M55 10v40M55 50H5M105 10v40M105 50h50M55 50h50M80 50v10"/><path class="door" d="M55 32a8 8 0 0 1 8-8M105 32a8 8 0 0 0-8-8"/><text x="14" y="34">Bedroom</text><text x="64" y="34">Bedroom</text><text x="114" y="34">Bedroom</text><text x="60" y="84">Living and dining</text></svg></div>
-          <span class="tag">For rent</span>
-          <div><h3>3-bed apartment, Downtown Dubai</h3><p class="lightbox__meta">1,710 sq ft, boulevard view, ref HP-R231</p></div>
-          <div class="lightbox__foot"><span class="price">AED 260,000 a year</span><span class="link">Ask on WhatsApp</span></div>
-        </a>
-        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-S126%20(studio%2C%20Business%20Bay)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-S126" target="_blank" rel="noopener">
-          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a studio apartment"><rect class="walls" x="30" y="10" width="100" height="90"/><path class="inner" d="M30 72h34v28M100 10v24h30"/><path class="door" d="M64 86a8 8 0 0 0-8-8"/><text x="36" y="90">Bath</text><text x="56" y="48">Living and sleeping</text></svg></div>
-          <span class="tag">For sale</span>
-          <div><h3>Studio, Business Bay</h3><p class="lightbox__meta">460 sq ft, canal view, ref HP-S126</p></div>
-          <div class="lightbox__foot"><span class="price">AED 820,000</span><span class="link">Ask on WhatsApp</span></div>
-        </a>
-        <a class="lightbox card span-4" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-R240%20(5-bed%20villa%2C%20Palm%20Jumeirah)%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting%2FHP-R240" target="_blank" rel="noopener">
-          <div class="lightbox__plan"><svg viewBox="0 0 160 110" role="img" aria-label="Floor plan of a five-bedroom villa"><rect class="walls" x="5" y="5" width="150" height="100"/><path class="inner" d="M35 5v40M35 45H5M65 5v40M95 5v40M125 5v40M35 45h120M90 45v60M5 80h40"/><path class="door" d="M35 28a7 7 0 0 1 7-7M65 28a7 7 0 0 1 7-7M95 28a7 7 0 0 1 7-7M125 28a7 7 0 0 1 7-7"/><text x="10" y="28">Bed</text><text x="40" y="28">Bed</text><text x="70" y="28">Bed</text><text x="100" y="28">Bed</text><text x="130" y="28">Bed</text><text x="104" y="80">Living</text><text x="50" y="66">Kitchen</text></svg></div>
-          <span class="tag">For rent</span>
-          <div><h3>5-bed villa, Palm Jumeirah</h3><p class="lightbox__meta">6,100 sq ft, private beach, ref HP-R240</p></div>
-          <div class="lightbox__foot"><span class="price">AED 1,100,000 a year</span><span class="link">Ask on WhatsApp</span></div>
-        </a>
+        <a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-2190%20%28Business%20Bay%20Loft%2C%20Business%20Bay%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Dbusiness-bay-loft" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/business-bay.jpg" alt="Business Bay towers along the Dubai Water Canal" loading="lazy"></div>
+            <span class="tag">For rent</span>
+            <div><h3>Business Bay Loft, Business Bay</h3><p class="lightbox__meta">1 bed loft, canal view, 950 sq ft, ref HP-2190</p></div>
+            <div class="lightbox__foot"><span class="price">AED 6,200 a month</span><span class="link">Ask on WhatsApp</span></div>
+          </a><a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-2104%20%28JLT%20Lake%20View%20Apartment%2C%20Jumeirah%20Lake%20Towers%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Djlt-lake-view-apartment" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/interior-kitchen.jpg" alt="Upgraded open kitchen in the JLT apartment" loading="lazy"></div>
+            <span class="tag">For sale</span>
+            <div><h3>JLT Lake View Apartment, Jumeirah Lake Towers</h3><p class="lightbox__meta">2 beds, upgraded, 1,180 sq ft, ref HP-2104</p></div>
+            <div class="lightbox__foot"><span class="price">AED 1,450,000</span><span class="link">Ask on WhatsApp</span></div>
+          </a><a class="lightbox card span-4" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27m%20interested%20in%20HP-1902%20%28Creekside%20Family%20Villa%2C%20Dubai%20Creek%20Harbour%29%3A%20https%3A%2F%2Fhomespartner.ae%2Flisting-detail.html%3Fid%3Dcreekside-family-villa" target="_blank" rel="noopener">
+            <div class="lightbox__plan lightbox__photo"><img src="assets/photos/interior-living.jpg" alt="Living room of the Creekside Family Villa" loading="lazy"></div>
+            <span class="tag">For sale</span>
+            <div><h3>Creekside Family Villa, Dubai Creek Harbour</h3><p class="lightbox__meta">5 beds, waterfront, 4,100 sq ft, ref HP-1902</p></div>
+            <div class="lightbox__foot"><span class="price">AED 3,600,000</span><span class="link">Ask on WhatsApp</span></div>
+          </a>
       </div>
     </div>
   </section>
@@ -433,29 +440,29 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
       </div>
       <div class="grid grid--top">
         <div class="areas span-5">
-          <a href="#launches" data-area-link="Dubai Creek Harbour"><b>Dubai Creek Harbour</b><span>New towers on the creek, beside the Ras Al Khor wildlife sanctuary</span></a>
-          <a href="#launches" data-area-link="Business Bay"><b>Business Bay</b><span>Towers on the Dubai Water Canal, next to Downtown</span></a>
-          <a href="#launches" data-area-link="Palm Jebel Ali"><b>Palm Jebel Ali</b><span>Beachfront villas on Nakheel's second palm island</span></a>
-          <a href="#launches" data-area-link="Sobha Hartland 2"><b>Sobha Hartland 2</b><span>Towers and villas in Mohammed Bin Rashid City</span></a>
-          <a href="#launches" data-area-link="Dubai South"><b>Dubai South</b><span>Apartments near Al Maktoum International Airport</span></a>
-          <a href="#launches" data-area-link="Dubai Hills Estate"><b>Dubai Hills Estate</b><span>Villas and townhouses around an 18-hole golf course</span></a>
-          <a href="#launches" data-area-link="Dubai Marina"><b>Dubai Marina</b><span>Waterfront apartments along the marina walk</span></a>
+          <a href="#launches" data-area-link="Dubai Marina"><b>Dubai Marina</b><span>Waterfront towers along the marina walk</span></a>
           <a href="#launches" data-area-link="Downtown Dubai"><b>Downtown Dubai</b><span>Apartments around Burj Khalifa and Dubai Mall</span></a>
+          <a href="#launches" data-area-link="Business Bay"><b>Business Bay</b><span>Towers on the Dubai Water Canal, next to Downtown</span></a>
+          <a href="#launches" data-area-link="Palm Jumeirah"><b>Palm Jumeirah</b><span>Beachfront villas and apartments on the palm island</span></a>
+          <a href="#launches" data-area-link="Dubai Creek Harbour"><b>Dubai Creek Harbour</b><span>Waterfront homes facing the Downtown skyline</span></a>
+          <a href="#launches" data-area-link="Jumeirah Village Circle"><b>Jumeirah Village Circle</b><span>Studios and family apartments around community parks</span></a>
+          <a href="#launches" data-area-link="Jumeirah Lake Towers"><b>Jumeirah Lake Towers</b><span>Lakeside apartments beside Dubai Marina</span></a>
+          <a href="#launches" data-area-link="Dubai Land Residence Complex"><b>Dubai Land Residence Complex</b><span>New apartment launches in Dubailand</span></a>
         </div>
-        <div class="span-7 start-6"><svg class="area-map" viewBox="0 0 400 320" role="img" aria-label="Map of Dubai's coast with the eight areas marked, from Palm Jebel Ali in the south-west to Dubai Creek Harbour in the north-east">
+        <div class="span-7 start-6"><svg class="area-map" viewBox="0 0 400 320" role="img" aria-label="Map of Dubai's coast with the eight areas marked, from Dubai Marina and Palm Jumeirah to Dubai Creek Harbour">
           <path class="area-map__sea" d="M0 0H400V40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268Z"/>
           <path class="area-map__coast" d="M400 40C340 70 300 96 262 120C214 150 160 186 110 212C70 233 34 252 0 268"/>
           <path class="area-map__creek" d="M318 82C326 100 324 118 334 134C342 148 352 156 362 166"/>
-          <path class="area-map__palm" d="M54 218l-22-26M54 218l-8-32M54 218l8-30M54 218l20-24M54 218l-30-12M54 218l30-8"/>
+          <path class="area-map__palm" d="M150 176V150M150 152l-18-20M150 152l-6-24M150 152l6-24M150 152l18-20M150 152l-24-10M150 152l24-10"/>
           <g class="area-map__pins">
-            <circle class="is-launch" cx="54" cy="222" r="6"/><text x="36" y="248">Palm Jebel Ali</text>
-            <circle cx="112" cy="206" r="5"/><text x="124" y="214">Dubai Marina</text>
-            <circle class="is-launch" cx="92" cy="292" r="6"/><text x="104" y="296">Dubai South</text>
-            <circle cx="182" cy="240" r="5"/><text x="194" y="244">Dubai Hills Estate</text>
-            <circle cx="248" cy="150" r="5"/><text x="168" y="154">Downtown</text>
-            <circle class="is-launch" cx="270" cy="168" r="6"/><text x="282" y="172">Business Bay</text>
-            <circle class="is-launch" cx="290" cy="206" r="6"/><text x="302" y="210">Sobha Hartland 2</text>
-            <circle class="is-launch" cx="338" cy="136" r="6"/><text x="300" y="116">Creek Harbour</text>
+            <circle class="is-launch" cx="112" cy="208" r="6"/><text x="100" y="202" text-anchor="end">Dubai Marina</text>
+            <circle cx="138" cy="226" r="5"/><text x="150" y="232" text-anchor="start">JLT</text>
+            <circle class="is-launch" cx="150" cy="150" r="6"/><text x="134" y="146" text-anchor="end">Palm Jumeirah</text>
+            <circle class="is-launch" cx="178" cy="256" r="6"/><text x="190" y="262" text-anchor="start">JVC</text>
+            <circle class="is-launch" cx="250" cy="290" r="6"/><text x="240" y="312" text-anchor="middle">DLRC</text>
+            <circle cx="262" cy="158" r="5"/><text x="250" y="182" text-anchor="end">Downtown</text>
+            <circle cx="276" cy="170" r="5"/><text x="288" y="176" text-anchor="start">Business Bay</text>
+            <circle class="is-launch" cx="338" cy="132" r="6"/><text x="344" y="120" text-anchor="middle">Creek Harbour</text>
           </g>
         </svg></div>
       </div>
@@ -472,8 +479,8 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
   <section class="section" id="uk-desk" aria-labelledby="uk-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="uk-h">Buying in Dubai from the UK</h2>
-        <p>The UK desk at homespartner.co.uk runs the same purchase for buyers who never fly out before handover.</p>
+        <h2 id="uk-h">Buying in Dubai from the UK, Pakistan or India</h2>
+        <p>Our Sheikh Zayed Road office runs the purchase; desks in London, Karachi and Ahmedabad look after buyers abroad.</p>
       </div>
       <div class="grid grid--top">
         <ol class="steps span-5">
@@ -484,20 +491,23 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
           <li><div><p class="step__title">Handover inspection</p><p>We inspect the unit at handover and send you the snag list.</p></div></li>
         </ol>
         <div class="span-7 start-6">
-          <svg class="route" viewBox="0 0 480 260" role="img" aria-label="Route from London to Dubai: about seven hours direct; Dubai is three to four hours ahead of London">
-            <path d="M60 150C150 40 330 40 420 120" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="6 6"/>
-            <circle cx="60" cy="150" r="8" fill="#20275c"/><circle cx="420" cy="120" r="9" fill="#20275c" stroke="#e2c980" stroke-width="3"/>
-            <text class="city" x="34" y="182">London</text><text x="34" y="200">UK desk</text>
-            <text class="city" x="392" y="154">Dubai</text><text x="392" y="172">Your launch</text>
-            <path d="M232 60l14 6-14 6 3-6z" fill="#b59e5a"/>
-            <text x="188" y="40">About 7 hours direct</text>
-            <text x="34" y="240">Dubai is 3 to 4 hours ahead of London</text>
+          <svg class="route" viewBox="0 0 480 260" role="img" aria-label="HomesPartner offices: the Dubai head office, with desks in London, Karachi and Ahmedabad">
+            <path d="M50 120C120 40 230 50 300 150" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="6 6"/>
+            <path d="M300 150C330 120 360 120 386 138" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="6 6"/>
+            <path d="M300 150C350 196 410 200 440 176" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="6 6"/>
+            <circle cx="50" cy="120" r="8" fill="#20275c"/><circle cx="386" cy="138" r="7" fill="#20275c"/><circle cx="440" cy="176" r="7" fill="#20275c"/>
+            <circle cx="300" cy="150" r="10" fill="#20275c" stroke="#e2c980" stroke-width="3"/>
+            <text class="city" x="26" y="152">London</text><text x="26" y="170">UK desk</text>
+            <text class="city" x="262" y="186">Dubai</text><text x="262" y="204">Head office</text>
+            <text class="city" x="360" y="120">Karachi</text>
+            <text class="city" x="392" y="210">Ahmedabad</text>
+            <text x="26" y="244">One team across four offices, trusted since 2007</text>
           </svg>
           <dl class="figures">
-            <div><dt>Properties matched</dt><dd>500+</dd><span class="to-confirm">Figure to be confirmed</span></div>
-            <div><dt>Developer partners</dt><dd>12</dd><span class="to-confirm">Figure to be confirmed</span></div>
-            <div><dt>Transacted since 2021</dt><dd>AED 1.2B</dd><span class="to-confirm">Figure to be confirmed</span></div>
-            <div><dt>Google rating</dt><dd>4.9</dd><span class="to-confirm">Figure to be confirmed</span></div>
+            <div><dt>Global offices</dt><dd>4</dd></div>
+            <div><dt>Properties closed</dt><dd>1,200+</dd></div>
+            <div><dt>Years of combined experience</dt><dd>15+</dd></div>
+            <div><dt>Client satisfaction</dt><dd>98%</dd></div>
           </dl>
         </div>
       </div>
@@ -515,19 +525,19 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
           <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="A residence card with a 10-year term"><rect x="40" y="16" width="120" height="80" rx="8" fill="#fff" stroke="#20275c" stroke-width="1.6"/><rect x="52" y="30" width="28" height="34" rx="3" fill="#e4eaf4"/><path d="M90 34h56M90 46h44M90 58h50" stroke="#20275c" stroke-width="1.4"/><rect x="52" y="74" width="96" height="10" rx="2" fill="url(#hpg)"/></svg></div>
           <h3>Golden Visa through property</h3>
           <p>A property worth AED 2 million or more can qualify you for a 10-year UAE Golden Visa, off-plan included.</p>
-          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20Golden%20Visa%20guide." target="_blank" rel="noopener">Request the guide</a>
+          <a class="btn btn--secondary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20Golden%20Visa%20guide." target="_blank" rel="noopener">Request the guide</a>
         </article>
         <article class="guide card span-4">
           <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="Two paths: a building under construction and a finished home"><rect x="30" y="40" width="50" height="56" fill="#fff" stroke="#20275c" stroke-width="1.6" stroke-dasharray="4 3"/><path d="M30 40l25-18 25 18" fill="none" stroke="#20275c" stroke-width="1.6" stroke-dasharray="4 3"/><rect x="120" y="40" width="50" height="56" fill="#fff" stroke="#20275c" stroke-width="1.6"/><path d="M120 40l25-18 25 18" fill="none" stroke="#20275c" stroke-width="1.6"/><rect x="138" y="70" width="14" height="26" fill="#20275c"/><path d="M90 68h20" stroke="#b59e5a" stroke-width="2"/></svg></div>
           <h3>Off-plan or ready home</h3>
           <p>A payment plan spreads the cost over the build; a ready home can earn rent from the month you buy it.</p>
-          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20off-plan%20or%20ready%20guide." target="_blank" rel="noopener">Request the guide</a>
+          <a class="btn btn--secondary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20off-plan%20or%20ready%20guide." target="_blank" rel="noopener">Request the guide</a>
         </article>
         <article class="guide card span-4">
           <div class="guide__cover"><svg viewBox="0 0 200 112" role="img" aria-label="A transfer from a UK bank to a Dubai escrow account"><rect x="18" y="38" width="62" height="40" rx="6" fill="#fff" stroke="#20275c" stroke-width="1.6"/><text x="30" y="62" font-size="11" fill="#20275c">GBP</text><rect x="120" y="38" width="62" height="40" rx="6" fill="#fff" stroke="#20275c" stroke-width="1.6"/><text x="132" y="62" font-size="11" fill="#20275c">AED</text><path d="M86 58h26" stroke="#b59e5a" stroke-width="2"/><path d="M108 52l8 6-8 6" fill="none" stroke="#b59e5a" stroke-width="2"/></svg></div>
           <h3>Paying from a UK bank</h3>
           <p>What to send, what to sign, and how the deposit moves from a UK account to the developer's escrow.</p>
-          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20UK%20payments%20guide." target="_blank" rel="noopener">Request the guide</a>
+          <a class="btn btn--secondary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20please%20send%20me%20the%20UK%20payments%20guide." target="_blank" rel="noopener">Request the guide</a>
         </article>
       </div>
     </div>
@@ -541,17 +551,23 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
             <h2 id="contact-h">Contact an advisor</h2>
             <p>Tell us what you are looking for. An advisor replies by WhatsApp or email with a shortlist of launches that fit.</p>
           </div>
-          <svg class="shortlist" viewBox="0 0 420 210" role="img" aria-label="A shortlist of three launches with handover dates and payment plans">
-            <rect x="24" y="20" width="372" height="170" rx="8" fill="#fff" stroke="#d8dbe6"/>
-            <text class="t" x="44" y="50">Your shortlist</text>
-            <path d="M44 62h332" stroke="url(#hpg)" stroke-width="2"/>
-            <text x="44" y="90">Sobha One</text><text class="m" x="200" y="90">Q4 2027</text><text class="m" x="290" y="90">60/40</text>
-            <text x="44" y="120">Creek Waters 2</text><text class="m" x="200" y="120">Q1 2028</text><text class="m" x="290" y="120">90/10</text>
-            <text x="44" y="150">Azizi Venice</text><text class="m" x="200" y="150">Q4 2027</text><text class="m" x="290" y="150">50/50</text>
+          <dl class="office">
+            <div><dt>Head office</dt><dd>The Curve Building, Sheikh Zayed Road, Al Quoz 3, Dubai</dd></div>
+            <div><dt>Phone</dt><dd><a href="tel:+97144456705">+971 4 445 6705</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:info@homespartner.ae">info@homespartner.ae</a></dd></div>
+            <div><dt>Overseas desks</dt><dd>London, Karachi and Ahmedabad</dd></div>
+          </dl>
+          <svg class="shortlist" viewBox="0 0 420 170" role="img" aria-label="A shortlist of three launches with handover dates and payment plans">
+            <rect x="24" y="12" width="372" height="146" rx="8" fill="#fff" stroke="#d8dbe6"/>
+            <text class="t" x="44" y="40">Your shortlist</text>
+            <path d="M44 52h332" stroke="url(#hpg)" stroke-width="2"/>
+            <text x="44" y="80">The Archive</text><text class="m" x="230" y="80">Q3 2028</text><text class="m" x="310" y="80">50/50</text>
+            <text x="44" y="106">Creek Vista Heights</text><text class="m" x="230" y="106">Q1 2028</text><text class="m" x="310" y="106">10/90</text>
+            <text x="44" y="132">JVC Skyline Residences</text><text class="m" x="230" y="132">Q2 2027</text><text class="m" x="310" y="132">30/70</text>
           </svg>
-          <a class="btn btn--secondary" href="https://api.whatsapp.com/send?text=Hi%20HomesPartner%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor." target="_blank" rel="noopener">Ask on WhatsApp</a>
+          <a class="btn btn--secondary" href="https://wa.me/971585210926?text=Hi%20HomesPartner%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor." target="_blank" rel="noopener">Ask on WhatsApp</a>
         </div>
-        <form class="form contact-form span-7 start-6" action="mailto:hello@homespartner.example" method="post" enctype="text/plain" data-endpoint="" novalidate>
+        <form class="form contact-form span-7 start-6" action="mailto:info@homespartner.ae" method="post" enctype="text/plain" data-endpoint="" novalidate>
           <div class="field"><label for="c-name">Name</label>
             <input id="c-name" name="name" type="text" autocomplete="name" required aria-describedby="c-name-err">
             <p class="field__error" id="c-name-err" hidden>Write the name we should use.</p></div>
@@ -578,7 +594,7 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
     <div class="closing__cta close--type">
       <div class="section-head">
         <h2 id="close-h">Find a launch with one advisor</h2>
-        <p>Off-plan and ready homes across Dubai, with a UK desk for buyers abroad.</p>
+        <p>Off-plan and ready homes across Dubai, with desks in London, Karachi and Ahmedabad.</p>
       </div>
       <a class="btn btn--primary btn--xl btn--wide" href="#launches">Find a launch<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
@@ -589,16 +605,16 @@ html { scrollbar-color: color-mix(in oklab, var(--p-ink) 35%, white) transparent
             <svg viewBox="0 0 100 56" aria-hidden="true"><g fill="none" stroke-width="5.5"><path d="M38 16 30 8 10 28 30 48 38 40" stroke="#20275C"/><path d="M62 16 70 8 90 28 70 48 62 40" stroke="#20275C"/><path d="M50 8 70 28 50 48 30 28Z" stroke="url(#hpg)"/></g></svg>
             <span class="hp-logo__words" aria-hidden="true"><span class="hp-logo__name">Homes<span>Partner</span></span><span class="hp-logo__sub">REAL ESTATE</span></span>
           </a>
-          <p class="footer__lede">A Dubai real estate brokerage for off-plan launches and ready homes, with a UK desk.</p>
+          <p class="footer__lede">Your Dubai property partner since 2007, with desks in the UK, Pakistan and India. <a href="mailto:info@homespartner.ae">info@homespartner.ae</a></p>
         </div>
         <div class="span-2 footer__col"><h3>Buy</h3><ul><li><a href="#launches">Launches</a></li><li><a href="#plans">Payment plans</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Homes</h3><ul><li><a href="#homes">Ready homes</a></li><li><a href="#areas">Areas</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Abroad</h3><ul><li><a href="#uk-desk">UK desk</a></li><li><a href="#guides">Guides</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Abroad</h3><ul><li><a href="#uk-desk">Overseas desks</a></li><li><a href="#guides">Guides</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Talk to us</h3><ul><li><a href="#advisor">Your advisor</a></li><li><a href="#contact">Contact</a></li></ul></div>
       </div>
       <div class="footer__legal">
-        <span>&copy; 2026 HomesPartner Real Estate, Dubai</span>
-        <span>Projects, prices and plans shown are previews until live listings are added.</span>
+        <span>&copy; 2026 HomesPartner Real Estate, Sheikh Zayed Road, Dubai. Offices in London, Karachi and Ahmedabad.</span>
+        <span>Prices and payment plans change between launch phases; an advisor confirms the live figures in writing.</span>
       </div>
     </div>
   </div>

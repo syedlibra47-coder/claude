@@ -1,20 +1,21 @@
 // HomesPartner homepage: launch data, the plaque, the filters and the scale model.
-const WA = 'https://api.whatsapp.com/send?text=';
+const WA = 'https://wa.me/971585210926?text=';
 
+// the client's launches (homespartner.ae data); plan = [on booking, during construction, on handover]
 const LAUNCHES = {
-  'sobha-one': { name: 'Sobha One', dev: 'Sobha', area: 'Sobha Hartland 2', handover: 'Q4 2027', price: 'AED 1.65M', plan: [10, 50, 40], ref: 'HP-L01', url: 'https://homespartner.ae/sobha-hartland-2/sobha-one/', model: 'towers' },
-  'safa-two': { name: 'Safa Two', dev: 'DAMAC', area: 'Business Bay', handover: 'Q2 2028', price: 'AED 2.1M', plan: [20, 60, 20], ref: 'HP-L02', url: 'https://homespartner.ae/business-bay/safa-two/', model: 'tall' },
-  'palm-jebel-ali': { name: 'Palm Jebel Ali Beach Villas', short: 'Palm Jebel Ali', dev: 'Nakheel', area: 'Palm Jebel Ali', handover: 'Q4 2028', price: 'AED 18.5M', plan: [20, 60, 20], ref: 'HP-L03', url: 'https://homespartner.ae/palm-jebel-ali/beach-villas/', model: 'villas' },
+  'the-archive': { name: 'The Archive', dev: 'Imtiaz', area: 'Dubai Land Residence Complex', handover: 'Q3 2028', price: 'AED 666K', plan: [20, 30, 50], label: '50/50', url: 'https://homespartner.ae/offplan-detail.html?id=the-archive-dlrc', model: 'towers' },
+  'marina-gold': { name: 'Marina Gold Residences', dev: 'Meridian Developments', area: 'Dubai Marina', handover: 'Q4 2027', price: 'AED 890K', plan: [20, 0, 80], label: '20/80', url: 'https://homespartner.ae/offplan-detail.html?id=marina-gold-residences', model: 'tall' },
+  'palm-beach': { name: 'Palm Beach Collection', dev: 'Waterline Estates', area: 'Palm Jumeirah', handover: 'Q4 2028', price: 'AED 2.8M', plan: [20, 30, 50], label: '20/80', url: 'https://homespartner.ae/offplan-detail.html?id=palm-beach-collection', model: 'villas' },
 };
 
-const planLabel = p => `${p[0] + p[1]}/${p[2]}`;
-const askHref = l => WA + encodeURIComponent(`Hi HomesPartner, I'd like details on ${l.name} (ref ${l.ref}): ${l.url}`);
+const planLabel = l => l.label;
+const askHref = l => WA + encodeURIComponent(`Hi HomesPartner, I'd like details on ${l.name} (${l.dev}, ${l.area}): ${l.url}`);
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 let model = null;
-let current = 'sobha-one';
+let current = 'the-archive';
 
 function show(id, { scroll = false } = {}) {
   const l = LAUNCHES[id];
@@ -25,17 +26,20 @@ function show(id, { scroll = false } = {}) {
   $('[data-f="where"]', plaque).textContent = `${l.dev}, ${l.area}`;
   $('[data-f="handover"]', plaque).textContent = l.handover;
   $('[data-f="price"]', plaque).textContent = l.price;
-  $('[data-f="plan"]', plaque).textContent = planLabel(l.plan);
+  $('[data-f="plan"]', plaque).textContent = planLabel(l);
   $('[data-f="ask"]', plaque).href = askHref(l);
   $$('[data-pick]', plaque).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pick === id)));
   // the payment wall below follows the model on show
   $('[data-plan-name]').textContent = l.name;
   const max = Math.max(...l.plan);
   l.plan.forEach((v, i) => {
-    $(`[data-bar="${i}"]`).style.setProperty('--h', Math.round(v / max * 100) + '%');
+    const bar = $(`[data-bar="${i}"]`);
+    bar.style.setProperty('--h', Math.round(v / max * 100) + '%');
+    bar.classList.toggle('is-zero', v === 0);
     $(`[data-pct="${i}"]`).textContent = v + '%';
   });
-  $('[data-mid]').textContent = `In instalments until ${l.handover}.`;
+  $('[data-mid]').textContent = l.plan[1] ? `In instalments until ${l.handover}.` : 'Nothing is due during construction on this plan.';
+  $('[data-wall]').setAttribute('aria-label', `Payment plan for ${l.name}: ${l.plan[0]}% on booking, ${l.plan[1]}% during construction, ${l.plan[2]}% on handover`);
   if (model) model.show(l.model);
   if (scroll) $('#top').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 }

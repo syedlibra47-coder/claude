@@ -38,7 +38,7 @@ HomesPartner Real Estate (homespartner.ae) is a Dubai brokerage. The site lets v
 - Google reviews integration (client has a Google Business profile; reviews not yet supplied).
 - Achievements/awards section (client will supply).
 - Real photography not yet supplied; this environment cannot fetch stock photos, so imagery is illustrated until real photos arrive.
-- Undecided: final phone number, office address, RERA/ORN licence number, exact services list.
+- Undecided: main WhatsApp number, RERA/ORN licence number.
 
 ## Brand Commitments
 
@@ -52,8 +52,9 @@ Source: Homes Partner Brand Guidelines PDF (supplied by client).
 
 - Brand guideline PDF and logo (in conversation; logo recreated as SVG).
 - No real listing photos, testimonials, awards, or verified statistics yet.
-- Homepage statistics (500+ properties, 12 developer partners, AED 1.2B transacted, 4.9 rating) are placeholders by client decision and must stay visibly marked as placeholders until real figures are supplied.
-- Listing, project and article data in the concept are illustrative; must not be presented as real.
+- Client data taken from the client's site repo (syedlibra47-coder/homespartner-website, assets/*-data.js): head office (The Curve Building, Sheikh Zayed Road, Al Quoz 3), +971 4 445 6705, info@homespartner.ae, desks in London, Karachi and Ahmedabad, trading since 2007; figures 4 offices, 1,200+ properties closed, 15+ years combined experience, 98% client satisfaction; off-plan projects, ready listings (refs HP-xxxx) and listing photographs.
+- WhatsApp: the client's site has a placeholder number; the concept uses consultant Syed Hussain's mobile (+971 58 521 0926) until a main WhatsApp number is confirmed.
+- Still missing: Google reviews (held in the client's Supabase database, unreachable from the build environment), awards, RERA/ORN and trade licence numbers. Several developer names in the client's off-plan data (Meridian Developments, Skyline Properties, Waterline Estates, Horizon Estates) look like sample entries and need confirming.
 
 ## Product Principles
 
